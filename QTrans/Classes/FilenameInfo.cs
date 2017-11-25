@@ -6,82 +6,81 @@ using System.IO;
 
 namespace QTrans
 {
-	public class FilenameInfo
-	{
-		string filePath;
-		/// <summary>
-		/// 文件全路径，包括文件名，如：C:\abc\bbc.txt。
-		/// </summary>
-		public string FilePath
-		{
-			get { return filePath; }
-			set { filePath = value; Analyze(); }
-		}
 
-		string fileName;
-		/// <summary>
-		/// 文件的名子。
-		/// </summary>
-		public string FileName
-		{
-			get { return fileName; }
-			set { fileName = value; }
-		}
+    /// <summary>
+    /// Used to help deal with file names.  
+    /// Useage: FilenameInfo fi = FilenameInfo.Parse("c:\\data\\file1.xml");
+    /// </summary>
+    public class FilenameInfo
+    {
+        string filePath;
+        /// <summary>
+        /// 文件全路径，包括文件名，如：C:\abc\bbc.txt。
+        /// </summary>
+        public string FilePath
+        {
+            get { return filePath; }
+        }
 
-		string extention;
-		/// <summary>
-		/// 扩展名(首位为点)。
-		/// </summary>
-		public string Extention
-		{
-			get { return extention; }
-			set { extention = value; }
-		}
+        string filename;
+        /// <summary>
+        /// 文件的名子。
+        /// </summary>
+        public string Filename
+        {
+            get { return filename; }
+        }
 
-		string fullDirectory;
-		/// <summary>
-		/// 全路径名称，不包括文件名，如C:\abc
-		/// </summary>
-		public string FullDirectory
-		{
-			get { return fullDirectory; }
-			set { fullDirectory = value; }
-		}
+        string extention;
+        /// <summary>
+        /// 扩展名(首位为点)。
+        /// </summary>
+        public string Extention
+        {
+            get { return extention; }
+        }
 
-		string lastDirectoryName = string.Empty;
-		/// <summary>
-		/// 目录的最后一个名称，如C:\abc\bbc.txt，则此值为abc
-		/// </summary>
-		public string LastDirectoryName
-		{
-			get { return lastDirectoryName; }
-			set { lastDirectoryName = value; }
-		}
+        string fullDirectory;
+        /// <summary>
+        /// 全路径名称，不包括文件名，如C:\abc
+        /// </summary>
+        public string FullDirectory
+        {
+            get { return fullDirectory; }
+        }
 
+        string lastDirectoryName;
+        /// <summary>
+        /// 目录的最后一个名称，如C:\abc\bbc.txt，则此值为abc
+        /// </summary>
+        public string LastDirectoryName
+        {
+            get { return lastDirectoryName; }
+        }
 
-		public FilenameInfo(string fp)
-		{
-			FilePath = fp;
-		}
+        FilenameInfo()  { }
 
 
-		/// <summary>
-		/// 根据指定全路径，计算路径，文件名和后缀名。
-		/// </summary>
-		public void Analyze()
-		{
-			fileName = Path.GetFileNameWithoutExtension(filePath);
-			extention = Path.GetExtension(filePath);
-			fullDirectory = Path.GetDirectoryName(filePath);
+        public static FilenameInfo Parse(string filePath)
+        {
+            FilenameInfo fi = new FilenameInfo();
+            try
+            {
+                fi.filename = Path.GetFileNameWithoutExtension(filePath);
+                fi.extention = Path.GetExtension(filePath);
+                fi.fullDirectory = Path.GetDirectoryName(filePath);
+                string[] tmp = fi.fullDirectory.Split('\\');
+                fi.lastDirectoryName = tmp[tmp.Length - 1];
+            }
+            catch
+            {
+                return null;
+            }
 
-			string[] tmp = fullDirectory.Split('\\');
-
-			if (tmp != null && tmp.Length > 1)
-			{
-				lastDirectoryName = tmp[tmp.Length - 1];
-			}
-		}
+            return fi;
+        }
 
 
-	}
+
+    }
 }
