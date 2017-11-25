@@ -63,6 +63,7 @@ namespace QTrans
             FilenameInfo fi = new FilenameInfo();
             try
             {
+                fi.filePath = filePath;
                 fi.filename = Path.GetFileNameWithoutExtension(filePath);
                 fi.extention = Path.GetExtension(filePath);
                 fi.fullDirectory = Path.GetDirectoryName(filePath);
