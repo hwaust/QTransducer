@@ -32,12 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Excel">
-      <HintPath>C:\Users\Administrator\Desktop\net20\Excel.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>C:\Users\Administrator\Desktop\net20\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Deployment" />
@@ -51,7 +45,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindGoes, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Windgoes\WindGoes4\WindGoes\bin\Debug\WindGoes.dll</HintPath>
+      <HintPath>C:\data\WindGoes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

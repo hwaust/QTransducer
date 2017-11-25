@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindGoes, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Windgoes\WindGoes4\WindGoes\bin\Debug\WindGoes.dll</HintPath>
+      <HintPath>C:\data\WindGoes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
