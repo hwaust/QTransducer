@@ -31,11 +31,15 @@ namespace QTrans.Company.Y2017
     {
         public override void SetConfig(ParamaterData pd)
         {
+            TID = "201705";
             CompanyName = "智奇3D";
             VertionInfo = "1.0 beta";
             pd.SupportAutoTransducer = true;
             pd.AddExt(".xls");
-            base.SetConfig(pd);
+
+            ParamaterData.LoadParamater(common.config_folder + "\\" + TID + ".xml");
+
+            base.SetConfig(pd); 
         }
 
         public override bool TransferFile(string path)

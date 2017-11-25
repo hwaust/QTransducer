@@ -9,9 +9,7 @@ using System.Reflection;
 namespace QTrans
 {
     public class funs
-    {  
-
-
+    {
         /// <summary>
         /// 根据给定输入路径，给出输出路径，主要用于解决输入为多级目录时的目录关系。
         /// 情况1：输入C:\abc.txt， 输入目录为空，输出D:\QDas，则输出为：abc.dfq

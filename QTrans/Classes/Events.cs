@@ -6,6 +6,7 @@ using System.Text;
 namespace QTrans.Classes
 { 
 	public delegate void TransFileCompleteEventHandler(object sender, TransLog e);
+
 	public class TransFileCompleteArgs : EventArgs
 	{
 		/// <summary>

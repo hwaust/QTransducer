@@ -8,6 +8,7 @@ namespace QTrans
 {
 	class common
 	{
+        public static string config_folder= "..\\..\\..\\cfg_files";
 
 		/// <summary>
 		/// Returns a unique name with time tick added. (if still conficts, four-digit suffix will be added)
