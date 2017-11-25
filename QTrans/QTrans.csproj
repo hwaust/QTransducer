@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{564A4FB4-4B4A-4FF9-9371-A0999A092BF6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QTrans</RootNamespace>
+    <AssemblyName>QTrans</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Excel">
+      <HintPath>C:\Users\Administrator\Desktop\net20\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>C:\Users\Administrator\Desktop\net20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindGoes, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windgoes\WindGoes4\WindGoes\bin\Debug\WindGoes.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\ExcelReader.cs" />
+    <Compile Include="Classes\MSOfficeVersion.cs" />
+    <Compile Include="Classes\QLine.cs" />
+    <Compile Include="Classes\FilenameInfo.cs" />
+    <Compile Include="Classes\InputPath.cs" />
+    <Compile Include="Classes\ListViewData.cs" />
+    <Compile Include="Classes\ParamaterData.cs" />
+    <Compile Include="Classes\PDFManager.cs" />
+    <Compile Include="Classes\Session.cs" />
+    <Compile Include="common.cs" />
+    <Compile Include="Company\Y2017\DMO.cs" />
+    <Compile Include="Company\Y2017\DmoSection.cs" />
+    <Compile Include="Company\Y2017\DMOType.cs" />
+    <Compile Include="Company\Y2017\JNode.cs" />
+    <Compile Include="Company\Y2017\JValueType.cs" />
+    <Compile Include="Company\Y2017\T01_ShangHai_EnYao.cs" />
+    <Compile Include="Company\Y2017\T1702_ShenYang_Bentaler.cs" />
+    <Compile Include="Company\Y2017\T201703_Tianjin_Xiongbang.cs" />
+    <Compile Include="Company\Y2017\T201704_BMW_DMO.cs" />
+    <Compile Include="Company\Y2017\T201705_Zhiqi_3D.cs" />
+    <Compile Include="ExcelReaderOld.cs" />
+    <Compile Include="Classes\Events.cs" />
+    <Compile Include="Classes\FilePathInfo.cs" />
+    <Compile Include="Classes\TransLog.cs" />
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="Forms\BooleanInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BooleanInputForm.Designer.cs">
+      <DependentUpon>BooleanInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="funs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="QDAS\CommonData.cs" />
+    <Compile Include="QDAS\KFields.cs" />
+    <Compile Include="QDAS\KItem.cs" />
+    <Compile Include="QDAS\QBase.cs" />
+    <Compile Include="QDAS\QCharacteristic.cs" />
+    <Compile Include="QDAS\QData.cs" />
+    <Compile Include="QDAS\QDataItem.cs" />
+    <Compile Include="QDAS\QFile.cs" />
+    <Compile Include="QDAS\QFileEx.cs" />
+    <Compile Include="QDAS\QLineInfo.cs" />
+    <Compile Include="QDAS\QPart.cs" />
+    <Compile Include="StringHelper.cs" />
+    <Compile Include="TransferBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\BooleanInputForm.resx">
+      <DependentUpon>BooleanInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gif_48_006.gif" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
