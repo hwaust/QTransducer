@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DateTimeHelper.cs" />
     <Compile Include="Classes\ExcelReader.cs" />
     <Compile Include="Classes\MSOfficeVersion.cs" />
     <Compile Include="Classes\QLine.cs" />

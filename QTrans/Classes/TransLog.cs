@@ -100,7 +100,7 @@ namespace QTrans.Classes
 			{
 				string[] strs = data.Split(splitter);
 				ID = int.Parse(strs[0]);
-				date = StringHelper.GetDateFromYYYYMMDDhhmmssString(strs[1]);
+				date = DateTimeHelper.ParseYYYYMMDDhhmmssString(strs[1]);
 				LogType = (LogType)Enum.Parse(typeof(LogType), strs[2]);
 				Content = strs[3];
 				this.Remark = strs[4];

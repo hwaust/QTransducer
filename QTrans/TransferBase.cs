@@ -438,7 +438,7 @@ namespace QTrans
                         break;
 
                     case 1: //添加时间戳
-                        outputfile = common.AddTimeTick(outputfile);
+                        outputfile = DateTimeHelper.AddTimeTick(outputfile);
                         break;
 
                     case 2: //添加自增长编号。

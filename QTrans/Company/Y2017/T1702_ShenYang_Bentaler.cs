@@ -137,7 +137,7 @@ namespace QTrans.Company.Y2017
 
             string outfolder = GetOutFolder(path, pd.OutputFolder);
             string filename = Path.GetFileNameWithoutExtension(CurrentFile);
-            string timestamp = StringHelper.ToYYYYMMDDhhmmssString(DateTime.Now);
+            string timestamp = DateTimeHelper.ToYYYYMMDDhhmmssString(DateTime.Now);
             string outpath_result = string.Format("{0}\\{1}_result_{2}.dfq", outfolder, filename, timestamp);
             string outpath_line = string.Format("{0}\\{1}_torque_{2}.dfq", outfolder, filename, timestamp);
 
