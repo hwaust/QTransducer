@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 namespace QTrans
 {
-
     /// <summary>
     /// Used to help deal with file names.  
     /// Useage: FilenameInfo fi = FilenameInfo.Parse("c:\\data\\file1.xml");
@@ -58,8 +53,10 @@ namespace QTrans
             get { return lastDirectoryName; }
         }
 
-        FilenameInfo()  { }
+        FilenameInfo() { }
 
+        int depth;
+        public int Depth { get { return depth; } }
 
         public static FilenameInfo Parse(string filePath)
         {
@@ -70,6 +67,7 @@ namespace QTrans
                 fi.extention = Path.GetExtension(filePath);
                 fi.fullDirectory = Path.GetDirectoryName(filePath);
                 string[] tmp = fi.fullDirectory.Split('\\');
+                fi.depth = tmp.Length - 1;
                 fi.lastDirectoryName = tmp[tmp.Length - 1];
             }
             catch

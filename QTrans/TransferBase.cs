@@ -219,7 +219,7 @@ namespace QTrans
                 // move inputfile ==> backup folder. 
                 case 0:
                     // the fileinfo of input file.
-                    FilenameInfo fi = new FilenameInfo(inputfile);
+                    FilenameInfo fi = FilenameInfo.Parse(inputfile);
 
                     // select the backup folder according to the processing result.
                     string backupFolder = isTranSuccessful ? pd.FolderForSuccessed : pd.FolderForFailed;
@@ -229,7 +229,7 @@ namespace QTrans
                         break;
 
                     // construct outputfile with a unique file name. 
-                    string outputfile = common.AddIncreamentId(backupFolder + "\\" + fi.FileName + fi.Extention);
+                    string outputfile = common.AddIncreamentId(backupFolder + "\\" + fi.Filename + fi.Extention);
 
                     // copy file
                     copyFile(inputfile, outputfile);
