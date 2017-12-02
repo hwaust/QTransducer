@@ -43,9 +43,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindGoes, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\data\WindGoes.dll</HintPath>
+    <Reference Include="WindGoes">
+      <HintPath>..\DLLs\WindGoes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
