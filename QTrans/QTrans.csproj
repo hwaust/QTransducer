@@ -58,6 +58,7 @@
     <Compile Include="Classes\ParamaterData.cs" />
     <Compile Include="Classes\PDFManager.cs" />
     <Compile Include="Classes\Session.cs" />
+    <Compile Include="Company\Y2017\T201707_ZEISS.cs" />
     <Compile Include="common.cs" />
     <Compile Include="Company\Y2017\DMO.cs" />
     <Compile Include="Company\Y2017\DmoSection.cs" />
