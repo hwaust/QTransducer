@@ -7,7 +7,7 @@ namespace QDasTransfer.Classes
 {
     public enum MSOfficeVersion
     {
-        Office2000,
-        Office2003
+        Office2003,
+        Office2007
     }
 }

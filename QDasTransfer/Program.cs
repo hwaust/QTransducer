@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using QTrans;
-using System.IO;
-using System.Reflection; 
 
 namespace QDasTransfer
 {
-	static class Program
+    static class Program
 	{
 		/// <summary>
 		/// 应用程序的主入口点。

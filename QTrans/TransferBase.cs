@@ -115,7 +115,15 @@ namespace QTrans
             FileHelper.trans = this;
             pd = LoadParamater(Application.StartupPath + "\\config.xml");
             pd.extentions.Clear();
-            SetConfig(pd);
+            try
+            {
+                SetConfig(pd);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
 
         public virtual void SetConfig(ParamaterData pd)

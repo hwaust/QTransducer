@@ -15,6 +15,7 @@
  * 
   */
 
+using Excel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -41,7 +42,7 @@ namespace QDasTransfer.Classes
 
         public ExcelReader(string excelfile, MSOfficeVersion version = MSOfficeVersion.Office2003)
         {
-            Tables = LoadSheetsFromExcel(excelfile, version);
+            Load(excelfile, version);
         }
 
         public void showTable(int v)
@@ -60,7 +61,7 @@ namespace QDasTransfer.Classes
             for (int row = 0; row < dt.Rows.Count; row++)
             {
                 sb.Append((row + 1).ToString() + "\t");
-                for (int col = 0; col < dt.Columns.Count ; col++)
+                for (int col = 0; col < dt.Columns.Count; col++)
                 {
                     sb.Append(dt.Rows[row][col] + "\t");
                 }
@@ -70,19 +71,51 @@ namespace QDasTransfer.Classes
             Console.WriteLine(sb);
         }
 
+        public int getRowCount(int index)
+        {
+            if (index < 0 || index > Tables.Length)
+                return -1;
+
+            return Tables[index].Rows.Count;
+        }
+
+        public int geColumnCount(int index)
+        {
+            if (index < 0 || index > Tables.Length)
+                return -1;
+
+            return Tables[index].Columns.Count;
+        }
+
+
+        public void Load(string path, MSOfficeVersion versin = MSOfficeVersion.Office2003)
+        { 
+            FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read);
+            IExcelDataReader excelReader = versin == MSOfficeVersion.Office2003 ? 
+                                                            ExcelReaderFactory.CreateBinaryReader(stream) :
+                                                            ExcelReaderFactory.CreateOpenXmlReader(stream);
+            DataSet ds = excelReader.AsDataSet(); 
+
+            Tables = new DataTable[ds.Tables.Count];
+            for (int i = 0; i < ds.Tables.Count; i++)
+                Tables[i] = ds.Tables[i];
+
+            excelReader.Close();
+            stream.Close();
+        }
+
         /// <summary>
         /// 从Excel加载数据表，数据以DataSet集合的形式返回。
         /// </summary>
         /// <param name="path"></param>
         /// <param name="version"></param>
         /// <returns></returns>
-        public DataTable[] LoadSheetsFromExcel(string path, MSOfficeVersion version = MSOfficeVersion.Office2003)
+        public DataTable[] LoadSheetsFromExcel(string path, MSOfficeVersion version = MSOfficeVersion.Office2007)
         {
             if (!File.Exists(path))
                 return new DataTable[0];
 
-
-            string provider = version == MSOfficeVersion.Office2000 ?
+            string provider = version == MSOfficeVersion.Office2003 ?
                                                                 "Microsoft.Jet.OleDb.4.0" :        // offce  199x -- 2000
                                                                 "Microsoft.Ace.OLEDB.12.0";    // office 2003 -- 2016 
             string strConn = string.Format("Provider={0};Data Source={1};Extended Properties='Excel 12.0;HDR=NO;IMEX=1';", provider, path);
@@ -123,14 +156,27 @@ namespace QDasTransfer.Classes
             try
             {
                 string str = s.ToUpper();
-                int row = str[1] - 49;
+                int row = int.Parse(str.Substring(1)) - 1 ;
                 int col = str[0] - 65;
-
+                Console.WriteLine(Tables[tableindex].Rows[row][col]);
                 return Tables[tableindex].Rows[row][col].ToString();
             }
             catch { }
 
             return "";
         }
+
+
+        public string getData(int row, int column, int tableindex = 0)
+        {
+            try
+            {
+                return Tables[tableindex].Rows[row][column].ToString();
+            }
+            catch { }
+
+            return "";
+        }
+
     }
 }

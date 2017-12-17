@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>QDasTransfer</RootNamespace>
     <AssemblyName>QDasTransducer</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -24,6 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -33,6 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>QDasTransfer.Program</StartupObject>
@@ -179,6 +182,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="BinRes\trial_20160930.lic" />
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -200,12 +204,6 @@
     <None Include="Resources\Start.gif" />
     <None Include="Resources\Pause.gif" />
     <None Include="Resources\Welcome.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\QTrans\QTrans.csproj">
-      <Project>{564A4FB4-4B4A-4FF9-9371-A0999A092BF6}</Project>
-      <Name>QTrans</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
@@ -230,6 +228,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QTrans\QTrans.csproj">
+      <Project>{564a4fb4-4b4a-4ff9-9371-a0999a092bf6}</Project>
+      <Name>QTrans</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

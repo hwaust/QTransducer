@@ -14,8 +14,7 @@ namespace QTrans
         /// <summary>
         /// 用于读取时接收Excel中的表单名。
         /// </summary>
-        public static string SheetName = "";
-
+        public static string SheetName = ""; 
 
 
         /// <summary>

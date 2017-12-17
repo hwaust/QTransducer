@@ -48,7 +48,7 @@ namespace QTrans.Company.Y2017
             DateTime creationTime = fi.CreationTime;
             ExcelReader reader = new ExcelReader();
 
-            DataTable[] tbs = reader.LoadSheetsFromExcel(path, MSOfficeVersion.Office2003);
+            DataTable[] tbs = reader.LoadSheetsFromExcel(path, MSOfficeVersion.Office2007);
 
             if (tbs.Length == 0)
             {
