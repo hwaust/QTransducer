@@ -101,6 +101,7 @@
     <Compile Include="QDAS\KFields.cs" />
     <Compile Include="QDAS\KItem.cs" />
     <Compile Include="QDAS\QBase.cs" />
+    <Compile Include="QDAS\QCatalog.cs" />
     <Compile Include="QDAS\QCharacteristic.cs" />
     <Compile Include="QDAS\QData.cs" />
     <Compile Include="QDAS\QDataItem.cs" />
