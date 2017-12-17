@@ -91,8 +91,10 @@ namespace QTrans
 
         #endregion
 
-        // A unique integer ID for each tranducer. Format: YYYYXX, where YYYY is year and XX is a concecutive number. 
-        public string TID { get; set; }
+        /// <summary>
+        /// A unique integer ID for each tranducer. Format: YYYYXX, where YYYY is year and XX is a concecutive number. 
+        /// </summary>
+        public string TransducerID { get; set; }
 
         public ParamaterData LoadParamater(string path)
         {

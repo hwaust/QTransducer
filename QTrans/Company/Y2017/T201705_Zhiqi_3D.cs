@@ -31,13 +31,13 @@ namespace QTrans.Company.Y2017
     {
         public override void SetConfig(ParamaterData pd)
         {
-            TID = "201705";
+            TransducerID = "201705";
             CompanyName = "智奇3D";
             VertionInfo = "1.0 beta";
             pd.SupportAutoTransducer = true;
             pd.AddExt(".xls");
 
-            ParamaterData.LoadParamater(common.config_folder + "\\" + TID + ".xml");
+            ParamaterData.LoadParamater(common.config_folder + "\\" + TransducerID + ".xml");
 
             base.SetConfig(pd); 
         }

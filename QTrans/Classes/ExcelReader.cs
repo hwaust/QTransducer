@@ -71,7 +71,7 @@ namespace QDasTransfer.Classes
             Console.WriteLine(sb);
         }
 
-        public int getRowCount(int index)
+        public int getRowCount(int index=0)
         {
             if (index < 0 || index > Tables.Length)
                 return -1;
@@ -158,7 +158,6 @@ namespace QDasTransfer.Classes
                 string str = s.ToUpper();
                 int row = int.Parse(str.Substring(1)) - 1 ;
                 int col = str[0] - 65;
-                Console.WriteLine(Tables[tableindex].Rows[row][col]);
                 return Tables[tableindex].Rows[row][col].ToString();
             }
             catch { }
