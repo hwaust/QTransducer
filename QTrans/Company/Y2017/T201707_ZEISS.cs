@@ -96,7 +96,6 @@ namespace QTrans.Company.Y2017
                 K4272 = clog.getCatalogPID("K4272", K0061);
             }
 
-
             QDataItem qdi = new QDataItem();
             qdi[0006] = K0006;
 
