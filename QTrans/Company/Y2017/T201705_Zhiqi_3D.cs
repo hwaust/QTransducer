@@ -39,7 +39,7 @@ namespace QTrans.Company.Y2017
 
             ParamaterData.LoadParamater(common.config_folder + "\\" + TransducerID + ".xml");
 
-            base.SetConfig(pd); 
+            base.SetConfig(pd);
         }
 
         public override bool TransferFile(string path)
@@ -87,8 +87,8 @@ namespace QTrans.Company.Y2017
                 for (int j = 0; j < 3; j++)
                 {
                     QCharacteristic qsub = new QCharacteristic();
-                    qsub[2001] = XYZ[j];
-                    qsub[2002] = XYZ[j];
+                    qsub[2001] = K2001 + "." + XYZ[j];
+                    qsub[2002] = K2001 + "." + XYZ[j];
                     qsub[2004] = 0;
                     qsub[2008] = 0;
                     qsub[2101] = getCell(dt, row, k2101.col + j);
@@ -158,7 +158,7 @@ namespace QTrans.Company.Y2017
 
             try
             {
-                File.WriteAllText(outputfilenew, content);
+                File.WriteAllText(outputfilenew, content, System.Text.Encoding.Default);
                 LastDfqFile = outputfilenew;
                 AddSuccessedFile(outputfilenew);
                 return true;
