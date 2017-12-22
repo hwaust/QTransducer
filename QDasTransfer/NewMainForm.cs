@@ -458,8 +458,8 @@ namespace QDasTransfer
         {
             if (MessageBox.Show("是否重置所有配置参数？", "参数重置确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                pd = new ParamaterData();
-                trans.SetConfig(pd);
+                trans.pd = new ParamaterData();
+                trans.Initialize();
                 MessageBox.Show("配置参数已重置成功。", "重置成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 

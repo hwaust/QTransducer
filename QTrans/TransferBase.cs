@@ -1,36 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using QDAS;
 using System.Threading;
 using System.IO;
-using System.Windows.Forms;
 using QTrans.Classes;
-using System.Xml;
 using QTrans.Helpers;
 
 namespace QTrans
 {
     public class TransferBase
     {
-        public ParamaterData pd = new ParamaterData();
-
         #region 属性
+        /// <summary>
+        /// System configuration file.
+        /// </summary>
+        public ParamaterData pd = null;
+
         /// <summary>
         /// A unique integer ID for each tranducer. Format: YYYYXX, where YYYY is year and XX is a concecutive number. 
         /// </summary>
-        public string TransducerID { get; set; }
-
+        public string TransducerID;
 
         /// <summary>
         /// 显示的公司名称，这个用于显示在封面上，如Mairi。
         /// </summary>
-        public string CompanyName { get; set; }
+        public string CompanyName;
 
         /// <summary>
         /// 转换器的版本信息，每家公司使用自己的版本号，如果为空则使用转换器的版本号。(不要带V）
         /// </summary>
-        public string VertionInfo { get; set; }
+        public string VertionInfo;
 
         /// <summary>
         /// 文件日志列表，转换后可读取此列表。
@@ -40,19 +39,17 @@ namespace QTrans
         /// <summary>
         /// 转换完成的情况。
         /// </summary>
-        public double Percentage { get; set; }
+        public double Percentage = 0;
 
         /// <summary>
         /// 当前正在转换的文件。
         /// </summary>
-        public string CurrentInFile { get; set; }
+        public string CurrentInFile;
 
         /// <summary>
         /// 最后一次输出的DFQ文件。
         /// </summary>
-        public string LastDfqFile { get; set; }
-
-
+        public string LastOutputDfqFile;
 
         /// <summary>
         /// 当文件转换完成时发生此事件。
@@ -61,20 +58,17 @@ namespace QTrans
 
         #endregion
 
-
-
         public TransferBase()
         {
             //主要是为了添加操作失误信息方便。 
             pd = ParamaterData.Load(".\\config.xml");
-            SetConfig(pd);
+            Initialize();
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pd"></param>
-        public virtual void SetConfig(ParamaterData pd)
+        ///  Initialize transducer.
+        /// </summary> 
+        public virtual void Initialize()
         {
 
         }
@@ -106,7 +100,7 @@ namespace QTrans
 
         public void ProcessInput(InputPath ip)
         {
-            Thread.Sleep(200);
+            Thread.Sleep(100);
             LogList.Clear();
             try
             {
@@ -128,7 +122,6 @@ namespace QTrans
             return true;
         }
 
-
         /// <summary>
         /// 处理文件函数，包括处理前后的主要业务逻辑。
         /// </summary>
@@ -148,11 +141,11 @@ namespace QTrans
             try
             {
                 TransferFile(infile);
-                log = new TransLog(infile, LastDfqFile, "转换成功", LogType.Success);
+                log = new TransLog(infile, LastOutputDfqFile, "转换成功", LogType.Success);
             }
             catch (Exception ex)
             {
-                log = new TransLog(infile, LastDfqFile, "转换失败，原因：" + ex.Message, LogType.Fail);
+                log = new TransLog(infile, LastOutputDfqFile, "转换失败，原因：" + ex.Message, LogType.Fail);
             }
             LogList.Add(log);
 
@@ -192,7 +185,6 @@ namespace QTrans
                     {
                         LogList.Add(new TransLog(infile, outfile, String.Format("文件 {0} 删除失败。", infile), LogType.Backup));
                     }
-
                     break;
 
                 case 1: // no change.
@@ -208,10 +200,7 @@ namespace QTrans
 
             return log.LogType == LogType.Success;
         }
-
         #endregion
-
-
 
         /// <summary>
         /// 根据QFile和输入路径，自动保存DFQ文件至相应的输出路径，AppendTimeStamp属性决定是否追加时间戳。
@@ -277,12 +266,12 @@ namespace QTrans
             {
                 if (qf.SaveToFile(outfile))
                 {
-                    LastDfqFile = outfile;
+                    LastOutputDfqFile = outfile;
                     log = new TransLog(infile, outfile, "保存成功", LogType.Success);
                 }
                 else
                 {
-                    LastDfqFile = null;
+                    LastOutputDfqFile = null;
                     log = new TransLog(infile, outfile, "保存失败，原因路径不存在，或者没有写入权限。", LogType.Fail);
                 }
             }

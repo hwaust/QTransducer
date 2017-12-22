@@ -16,7 +16,7 @@ namespace QTrans.Company.Y2017
         int K4272 = -1;
         QCatalog clog = null;
 
-        public override void SetConfig(ParamaterData pd)
+        public override void Initialize()
         {
             TransducerID = "201707";
             CompanyName = "ZEISS";
@@ -50,7 +50,7 @@ namespace QTrans.Company.Y2017
             }
 
 
-            base.SetConfig(pd);
+            base.Initialize();
         }
 
         public override bool TransferFile(string infile)
