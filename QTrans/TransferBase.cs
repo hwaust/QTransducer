@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using QTrans.Classes;
 using System.Xml;
+using QTrans.Helpers;
 
 namespace QTrans
 {
@@ -113,8 +114,7 @@ namespace QTrans
             ShowFileOption = true;
             FilterIndex = 1;
             RegistryKeyName = "trial.lic";
-            //主要是为了添加操作失误信息方便。
-            FileHelper.trans = this;
+            //主要是为了添加操作失误信息方便。 
             pd = LoadParamater(Application.StartupPath + "\\config.xml");
             pd.extentions.Clear();
             try
@@ -448,7 +448,7 @@ namespace QTrans
                         break;
 
                     case 1: //添加时间戳
-                        outputfile = DateTimeHelper.AddTimeTick(outputfile);
+                        outputfile = DateTimeHelper.AppendFullDateTime(outputfile);
                         break;
 
                     case 2: //添加自增长编号。
@@ -573,7 +573,7 @@ namespace QTrans
         /// <returns></returns>
         public string GetOutputPath(string path)
         {
-            return funs.GetOutputPath(path, CurrentFolder);
+            return FileHelper.GetOutputPath(path, CurrentFolder);
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace QDasTransfer
 			Application.SetCompatibleTextRenderingDefault(false);
 			Control.CheckForIllegalCrossThreadCalls = false;
 
-            values.transducer =  new QTrans.Company.Y2017.T201705_Zhiqi_3D();
+            values.transducer =  new QTrans.Company.Y2017.T201707_ZEISS();
 
             //启动主窗体。
             NewMainForm mf = new NewMainForm();

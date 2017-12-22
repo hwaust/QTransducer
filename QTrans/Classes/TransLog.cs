@@ -94,24 +94,6 @@ namespace QTrans.Classes
 			return b.ToString();
 		}
 
-		public void FromFileString(String data)
-		{
-			try
-			{
-				string[] strs = data.Split(splitter);
-				ID = int.Parse(strs[0]);
-				date = DateTimeHelper.ParseYYYYMMDDhhmmssString(strs[1]);
-				LogType = (LogType)Enum.Parse(typeof(LogType), strs[2]);
-				Content = strs[3];
-				this.Remark = strs[4];
-				this.Input = strs[5];
-				this.Output = strs[6];
-			}
-			catch (Exception e1)
-			{
-				Console.WriteLine(e1.Message);
-			}
-		}
 
 		public string[] GetStrings()
 		{

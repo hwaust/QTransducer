@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QTrans.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -30,7 +31,7 @@ namespace QTrans.Classes
 				string input = path;
 				string outfolder = Application.StartupPath + "\\temp\\" + WindGoes.DateHelper.ToStringYYYYMMDD(DateTime.Now).Substring(0, 8) + "\\";
 				Directory.CreateDirectory(outfolder);
-				string filename = funs.StringHash(path) + ".tmp";
+				string filename = StringHelper.StringHash(path) + ".tmp";
 				string output = outfolder + filename;
 
 				Process p = new Process();

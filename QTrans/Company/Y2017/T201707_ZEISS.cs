@@ -2,6 +2,7 @@
 using QDAS;
 using QDasTransfer.Classes;
 using QTrans.Classes;
+using QTrans.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -60,8 +61,6 @@ namespace QTrans.Company.Y2017
 
         public override bool TransferFile(string path)
         {
-
-
             //K0004 D5  42839
             //K0004 F5  0.63622685185.
             //K0014 etc   B8 S171018318458A_OP70.10_300.
@@ -152,7 +151,7 @@ namespace QTrans.Company.Y2017
             qf.ToDMode();
 
             string folder = GetOutFolder(path, pd.OutputFolder);
-            string timetick = DateTimeHelper.ToYYYYMMDDhhmmssString(DateTime.Now);
+            string timetick = DateTimeHelper.ToFullDateTime(DateTime.Now);
             string filename = string.Format("{0}\\{1}_{2}.dfq", folder, allinfo, timetick);
 
             return SaveDfq(qf, filename);

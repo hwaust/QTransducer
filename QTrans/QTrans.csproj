@@ -57,10 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DateTimeHelper.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Classes\ExcelReader.cs" />
     <Compile Include="Classes\MSOfficeVersion.cs" />
-    <Compile Include="Classes\QLine.cs" />
     <Compile Include="Classes\FilenameInfo.cs" />
     <Compile Include="Classes\InputPath.cs" />
     <Compile Include="Classes\ListViewData.cs" />
@@ -69,28 +68,9 @@
     <Compile Include="Classes\Session.cs" />
     <Compile Include="Company\Y2017\T201707_ZEISS.cs" />
     <Compile Include="common.cs" />
-    <Compile Include="Company\Y2017\DMO.cs" />
-    <Compile Include="Company\Y2017\DmoSection.cs" />
-    <Compile Include="Company\Y2017\DMOType.cs" />
-    <Compile Include="Company\Y2017\JNode.cs" />
-    <Compile Include="Company\Y2017\JValueType.cs" />
-    <Compile Include="Company\Y2017\T01_ShangHai_EnYao.cs" />
-    <Compile Include="Company\Y2017\T1702_ShenYang_Bentaler.cs" />
-    <Compile Include="Company\Y2017\T201703_Tianjin_Xiongbang.cs" />
-    <Compile Include="Company\Y2017\T201704_BMW_DMO.cs" />
-    <Compile Include="Company\Y2017\T201705_Zhiqi_3D.cs" />
-    <Compile Include="ExcelReaderOld.cs" />
     <Compile Include="Classes\Events.cs" />
-    <Compile Include="Classes\FilePathInfo.cs" />
     <Compile Include="Classes\TransLog.cs" />
-    <Compile Include="FileHelper.cs" />
-    <Compile Include="Forms\BooleanInputForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\BooleanInputForm.Designer.cs">
-      <DependentUpon>BooleanInputForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="funs.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -109,13 +89,10 @@
     <Compile Include="QDAS\QFileEx.cs" />
     <Compile Include="QDAS\QLineInfo.cs" />
     <Compile Include="QDAS\QPart.cs" />
-    <Compile Include="StringHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="TransferBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\BooleanInputForm.resx">
-      <DependentUpon>BooleanInputForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
