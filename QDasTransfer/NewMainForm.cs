@@ -113,7 +113,7 @@ namespace QDasTransfer
         {
             if (e.LogType == LogType.Success)
             {
-                ListViewItem lvi = new ListViewItem(new string[] { e.Date.ToString(), e.Input, e.LogType.ToString(), e.Output, e.Content });
+                ListViewItem lvi = new ListViewItem(new string[] { e.Date.ToString(), e.Input, e.LogType.ToString(), e.Output, e.Message });
                 lvi.ImageIndex = 0;
                 lvResults.Items.Add(lvi);
                 fileCountSuccessful++;

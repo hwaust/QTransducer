@@ -17,18 +17,29 @@ namespace QTrans
 
         #region 属性
         /// <summary>
-        /// 文件日志列表，转换后可读取此列表。
+        /// A unique integer ID for each tranducer. Format: YYYYXX, where YYYY is year and XX is a concecutive number. 
         /// </summary>
-        public List<TransLog> LogList = new List<TransLog>();
-        
+        public string TransducerID { get; set; }
+
+
         /// <summary>
         /// 显示的公司名称，这个用于显示在封面上，如Mairi。
         /// </summary>
         public string CompanyName { get; set; }
- 
 
         /// <summary>
-        /// 打开文件时，选择的默认索引序号同，如“txt文件|*.txt|所有文件|*.*”，注意：此值下标从1开始，所以默认为1。
+        /// 转换器的版本信息，每家公司使用自己的版本号，如果为空则使用转换器的版本号。(不要带V）
+        /// </summary>
+        public string VertionInfo { get; set; }
+
+        /// <summary>
+        /// 文件日志列表，转换后可读取此列表。
+        /// </summary>
+        public List<TransLog> LogList = new List<TransLog>();
+
+        /// <summary>
+        /// 打开文件时，选择的默认索引序号同，如“txt文件|*.txt|所有文件|*.*”
+        /// 注意：此值下标从1开始，所以默认为1。
         /// </summary>
         public int FilterIndex { get; set; }
 
@@ -59,16 +70,6 @@ namespace QTrans
         public string LastDfqFile { get; set; }
 
 
-        /// <summary>
-        /// 用于向MainForm的菜单栏添加按键。
-        /// </summary>
-        public ToolStripButton[] tbs = null;
-
-
-        /// <summary>
-        /// 转换器的版本信息，每家公司使用自己的版本号，如果为空则使用转换器的版本号。(不要带V）
-        /// </summary>
-        public string VertionInfo { get; set; }
 
         /// <summary>
         /// 当文件转换完成时发生此事件。
@@ -77,11 +78,6 @@ namespace QTrans
 
         #endregion
 
-        /// <summary>
-        /// A unique integer ID for each tranducer. Format: YYYYXX, where YYYY is year and XX is a concecutive number. 
-        /// </summary>
-        public string TransducerID { get; set; }
-
 
 
         public TransferBase()
@@ -89,18 +85,14 @@ namespace QTrans
             ShowFileOption = true;
             FilterIndex = 1;
             //主要是为了添加操作失误信息方便。 
-            pd = ParamaterData.Load(".\\config.xml"); 
-            try
-            {
-                SetConfig(pd);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
+            pd = ParamaterData.Load(".\\config.xml");
+            SetConfig(pd);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pd"></param>
         public virtual void SetConfig(ParamaterData pd)
         {
 
@@ -159,33 +151,33 @@ namespace QTrans
         /// <summary>
         /// 处理文件函数，包括处理前后的主要业务逻辑。
         /// </summary>
-        /// <param name="inputfile"></param>
+        /// <param name="infile"></param>
         /// <returns></returns>
-        public virtual bool ProcessFile(string inputfile)
+        public virtual bool ProcessFile(string infile)
         {
             //如果后缀名不对或者文件不存在，就直接忽略，不产生任何记录。
-            if (!CheckExt(inputfile) || !File.Exists(inputfile))
+            if (!CheckExt(infile) || !File.Exists(infile))
                 return false;
 
             //这是对当前转换的文件和文件路径进行记录。
-            CurrentFile = inputfile;
+            CurrentFile = infile;
             CurrentFolder = Path.GetDirectoryName(CurrentFile);
 
             // 转换数据
-            bool isTranSuccessful = true;
+            TransLog log = null;
             try
             {
-                TransferFile(inputfile);
+                TransferFile(infile);
+                log = new TransLog(infile, LastDfqFile, "转换成功", LogType.Success);
             }
             catch (Exception ex)
             {
-                isTranSuccessful = false;
-                Console.WriteLine("Failed file: " + CurrentFile);
-                AddLog("转换未成功。", ex.Message);
+                log = new TransLog(infile, LastDfqFile, "转换失败，原因：" + ex.Message, LogType.Fail);
             }
+            LogList.Add(log);
 
             // invoke the TransFileComplete event. Note ? denotes nullable.
-            TransFileComplete.Invoke(this, GetResultLog(CurrentFile, LastDfqFile, isTranSuccessful));
+            TransFileComplete.Invoke(this, log);
 
             // Processes input file.
             switch (pd.ProcessSourceFileType)
@@ -193,23 +185,33 @@ namespace QTrans
                 // move inputfile ==> backup folder. 
                 case 0:
                     // the fileinfo of input file.
-                    FilenameInfo fi = FilenameInfo.Parse(inputfile);
+                    FilenameInfo fi = FilenameInfo.Parse(infile);
 
                     // select the backup folder according to the processing result.
-                    string backupFolder = isTranSuccessful ? pd.FolderForSuccessed : pd.FolderForFailed;
+                    string backupFolder = log.LogType == LogType.Success ? pd.FolderForSuccessed : pd.FolderForFailed;
 
                     // create backup directory.
-                    if (!createDirectory(backupFolder))
+                    Directory.CreateDirectory(backupFolder);
+                    if (!Directory.Exists(backupFolder))
+                    {
+                        LogList.Add(new TransLog(infile, backupFolder, "备份文件夹'" + backupFolder + "' 创建失败。", LogType.Backup));
                         break;
+                    }
 
                     // construct outputfile with a unique file name. 
                     string outputfile = common.AddIncreamentId(backupFolder + "\\" + fi.Filename + fi.Extention);
 
-                    // copy file
-                    copyFile(inputfile, outputfile);
+                    // copy file. If failed, add the error to logs.
+                    if (!copyFile(infile, outputfile))
+                    {
+                        LogList.Add(new TransLog(infile, outputfile, String.Format("复制文件 '{0}' 至 '{1}' 失败。", infile, outputfile), LogType.Backup));
+                    }
 
                     // delete source file.
-                    deleteFile(inputfile);
+                    if (!deleteFile(infile))
+                    {
+                        LogList.Add(new TransLog(infile, outputfile, String.Format("文件 {0} 删除失败。", infile), LogType.Backup));
+                    }
 
                     break;
 
@@ -217,34 +219,18 @@ namespace QTrans
                     break;
 
                 case 2: // delete files.
-                    deleteFile(inputfile);
+                    deleteFile(infile);
                     break;
 
                 case 3: // customed.
                     break;
             }
 
-
-            return isTranSuccessful;
+            return log.LogType == LogType.Success;
         }
 
-        private bool createDirectory(string directory)
-        {
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-                // failed to create the directory.
-                if (!Directory.Exists(directory))
-                {
-                    AddLog(directory, "备份文件夹 '" + directory + "' 创建失败。");
-                    return false;
-                }
-            }
 
-            return true;
-        }
-
-        private void copyFile(string inputfile, string outputfile)
+        private bool copyFile(string inputfile, string outputfile)
         {
             // Try 5 times at most. Note: input file should exist and outputfile should not.
             int copyTimes = 0;
@@ -256,32 +242,27 @@ namespace QTrans
                     break;
             }
 
-            // Check whether output is created. If not, add the error to logs.
-            if (!File.Exists(outputfile))
-                AddLog(inputfile, String.Format("复制文件 '{0}' 至 '{1}' 失败。", inputfile, outputfile));
-
+            return File.Exists(outputfile);
         }
 
         /// <summary>
         /// Deletes the input file when backuping. Tries 5 times and adds to logs if fails.
         /// </summary>
         /// <param name="inputfile"></param>
-        private void deleteFile(string inputfile)
+        private bool deleteFile(string inputfile)
         {
             // Delete 5 times at most.
             int deleteTimes = 0;
             while (true)
             {
-                File.Delete(inputfile); 
+                File.Delete(inputfile);
                 Thread.Sleep(100);
 
                 if (!File.Exists(inputfile) || deleteTimes++ > 5)
                     break;
             }
 
-            // Check whether input file is created. If so, add the error to logs.
-            if (File.Exists(inputfile))
-                AddLog(inputfile, String.Format("文件 {0} 删除失败。", inputfile));
+            return !File.Exists(inputfile);
         }
 
         /// <summary>
@@ -297,59 +278,23 @@ namespace QTrans
 
 
         /// <summary>
-        /// 根据输入文件和输出文件夹返回输出目录，如果需要保持路径，则返回输出+最后一级路径目录的方式。
-        /// 如：输出为 D:\Output  输入为：C:\data\file.ext 那么，如果不保持路径，返回 D:\Output,
-        /// 如果返回路径，则返回 D:\Output\data
-        /// </summary>
-        /// <param name="input">输入文件路径。</param>
-        /// <param name="outfolder">输出文件夹。</param>
-        /// <returns></returns>
-        public string GetOutFolder(string input, string outfolder)
-        {
-            string folder = outfolder;
-
-            if (pd.OriginalLevelKept > 0)
-            {
-                string[] fds = input.Split(new char[] { '\\', ':', '/' }, StringSplitOptions.RemoveEmptyEntries);
-
-                List<string> folders = new List<string>();
-                //如原目录为c:\f1\abc\d.dfq，则新结果为2个元素：[f1][abc]
-                for (int i = 0; i < fds.Length - 1; i++)
-                    folders.Add(fds[i]);
-
-                //移除前面不需要的项
-                int offet = folders.Count - pd.OriginalLevelKept;
-                while (offet-- > 0)
-                    folders.RemoveAt(0);
-
-                //进行拼接，生成新的路径
-                if (folders.Count > 0)
-                    folder = Path.Combine(folder, string.Join("\\", folders.ToArray()));
-            }
-
-            return folder;
-        }
-
-
-
-        /// <summary>
         /// 根据QFile和输入路径，自动保存DFQ文件至相应的输出路径。
         /// </summary>
         /// <param name="qf">需要保存的QFile。</param>
-        /// <param name="inpath">输入的文件路径。</param>
+        /// <param name="infile">输入的文件路径。</param>
         /// <returns></returns>
-        public bool SaveDfqByInpath(QFile qf, string inpath)
+        public bool SaveDfqByInpath(QFile qf, string infile)
         {
+            string outpath = pd.OutputFolder + "\\" + FileHelper.GetOutputPath(infile, pd.OutputFolder);
             try
             {
-                string outpath = GetOutFolder(inpath, pd.OutputFolder) + "\\" + Path.GetFileNameWithoutExtension(CurrentFile) + ".dfq";
-                return SaveDfq(qf, inpath, outpath);
+                return SaveDfq(qf, infile, outpath);
             }
             catch (Exception ex)
             {
-                AddFailedFile(inpath, "文件保存失败，原因：" + ex.Message);
-                return false;
+                LogList.Add(new TransLog(infile, outpath, "转换失败，原因：" + ex.Message, LogType.Fail));
             }
+            return false;
         }
 
 
@@ -371,66 +316,48 @@ namespace QTrans
         /// <param name="input"></param>
         /// <param name="output"></param>
         /// <returns></returns>
-        public bool SaveDfq(QFile qf, string inpath, string outputfile)
+        public bool SaveDfq(QFile qf, string infile, string outfile)
         {
-            outputfile = processOutputFile(outputfile);
-
-            bool isSaveSuccessful = false;
-            try
-            {
-                //进行保存
-                isSaveSuccessful = saveQFile(qf, outputfile);
-                if (isSaveSuccessful)
-                {
-                    LastDfqFile = outputfile;
-                    AddSuccessedFile(outputfile);
-                }
-                else
-                {
-                    LastDfqFile = null;
-                    AddFailedFile(inpath, "转换失败。");
-                }
-            }
-            catch (Exception e1)
-            {
-                AddFailedFile(inpath, e1.Message);
-                isSaveSuccessful = false;
-            }
-
-            return isSaveSuccessful;
-        }
-
-        public string processOutputFile(string outputfile)
-        {
-            if (File.Exists(outputfile))
+            if (File.Exists(outfile))
             {
                 switch (pd.DealSameOutputFileNameType)
                 {
                     case 0: // 直接覆盖。
-                        deleteFile(outputfile);
+                        deleteFile(outfile);
                         break;
 
                     case 1: //添加时间戳
-                        outputfile = DateTimeHelper.AppendFullDateTime(outputfile);
+                        outfile = DateTimeHelper.AppendFullDateTime(outfile);
                         break;
 
                     case 2: //添加自增长编号。
-                        outputfile = common.AddIncreamentId(outputfile);
-                        break;
-                    default:
+                        outfile = FileHelper.AddIncreamentId(outfile);
                         break;
                 }
-
-                //创建输出目录。
-                Directory.CreateDirectory(Path.GetDirectoryName(outputfile));
+                Directory.CreateDirectory(Path.GetDirectoryName(outfile));
             }
 
-            return outputfile;
-        }
+            TransLog log = null;
+            try
+            {
+                if (qf.SaveToFile(outfile))
+                {
+                    LastDfqFile = outfile;
+                    log = new TransLog(infile, outfile, "转换成功", LogType.Success);
+                }
+                else
+                {
+                    LastDfqFile = null;
+                    log = new TransLog(infile, outfile, "转换失败，原因：TransferBase.SaveDfq.unknown.", LogType.Fail);
+                }
+            }
+            catch (Exception ex)
+            {
+                log = new TransLog(infile, outfile, "转换失败，原因：" + ex.Message, LogType.Fail);
+            }
+            LogList.Add(log);
 
-        protected virtual bool saveQFile(QFile qf, string outpath)
-        {
-            return qf.SaveToFile(outpath);
+            return log.LogType == LogType.Success;
         }
 
         /// <summary>
@@ -442,131 +369,10 @@ namespace QTrans
         {
             try
             {
-                string ext = Path.GetExtension(path).ToLower();
-
-                if (pd.extentions.IndexOf(ext) < 0)
-                {
-                    return false;
-                }
+                return pd.extentions.IndexOf(Path.GetExtension(path).ToLower()) >= 0;
             }
-            catch { return false; }
-
-            return true;
+            catch { }
+            return false;
         }
-
-
-
-        public TransLog GetResultLog(string filename, string output, bool isSuccessful)
-        {
-            TransLog log = new TransLog();
-            log.LogType = isSuccessful ? LogType.Success : LogType.Fail;
-            log.Content = isSuccessful ? "转换成功。" : "转换失败。";
-            log.Input = filename;
-            log.Output = output;
-            return log;
-        }
-
-        /// <summary>
-        /// 添加转换成功的文件到日志列表。
-        /// </summary>
-        /// <param name="file"></param>
-        public void AddSuccessedFile(string file)
-        {
-            //string s = string.Format("{0}|DONE|转换成功。|{1}", DateTime.Now, file);
-            TransLog log = new TransLog();
-            log.LogType = LogType.Success;
-            log.Content = "转换成功。";
-            log.Output = file;
-            LogList.Add(log);
-        }
-
-        /// <summary>
-        /// 添加转换失败的文件到日志列表。
-        /// </summary>
-        /// <param name="file"></param>
-        /// <param name="reason"></param>
-        public void AddFailedFile(string file, string reason)
-        {
-            //string s = string.Format("{0}|FAIL|转换失败，原因：{1}|{2}", DateTime.Now, reason, file);
-            TransLog log = new TransLog();
-            log.LogType = LogType.Fail;
-            log.Content = "转换失败，原因：" + reason;
-            log.Input = file;
-            LogList.Add(log);
-        }
-
-        /// <summary>
-        /// 添加日志。日志格式为 时间|文件路径|日志类型|日志内容
-        /// </summary>
-        /// <param name="file">相关文件。</param>
-        /// <param name="log">日志信息</param>
-        public void AddLog(string file, string content)
-        {
-            //string s = string.Format("{0}|LOG|{1}|{2}", DateTime.Now, log, file);
-            //LogList.Add(s);
-            TransLog log = new TransLog();
-            log.LogType = LogType.Fail;
-            log.Content = content;
-            log.Input = file;
-            LogList.Add(log);
-        }
-
-        public void AddLog(string file, string content, LogType logtype)
-        {
-            //string s = string.Format("{0}|LOG|{1}|{2}", DateTime.Now, log, file);
-            //LogList.Add(s);
-            TransLog log = new TransLog();
-            log.LogType = logtype;
-            log.Content = content;
-            log.Input = file;
-            LogList.Add(log);
-        }
-
-
-
-        /// <summary>
-        /// 根据给定输入路径，给出输出路径，主要用于解决输入为多级目录时的目录关系。
-        /// 情况1：输入C:\abc.txt， 输入目录为空，输出D:\QDas，则输出为：abc.dfq
-        /// 情况2：输入C:\abc.txt， 输入目录为C:，输出D:\QDas，则输出为：abc.dfq
-        /// 情况3：输入C:\data\abc.txt， 输入目录为C:\data，输出D:\QDas，则输出为：data\abc.dfq
-        /// 情况4：输入C:\data\2012\abc.txt， 输入目录为C:\data，输出D:\QDas，则输出为：data\2012\abc.dfq
-        /// 那么输出为相对路径为： D:\QDas\abc\a.dfq，此函数返回结果为abc
-        /// </summary>
-        /// <param name="path">待检测的输入路径。</param>
-        /// <returns></returns>
-        public string GetOutputPath(string path)
-        {
-           return FileHelper.GetOutputPath(path, CurrentFolder); 
-        }
-
-        /// <summary>
-        /// 给定路径，获得下面指定层数的文件。
-        /// </summary>
-        /// <param name="dir">指定的路径。</param>
-        /// <param name="lv">子目录层数，最少为0，即只获得当前目录下文件。</param>
-        /// <returns></returns>
-        public string[] GetFile(string dir, int lv)
-        {
-            List<string> list = new List<string>();
-            list.AddRange(Directory.GetFiles(dir));
-            if (lv > 0)
-            {
-                string[] dirs = Directory.GetDirectories(dir);
-
-                foreach (string s in dirs)
-                {
-                    list.AddRange(GetFile(s, lv - 1));
-                }
-            }
-
-            return list.ToArray();
-        }
-
-
-
-
-
-
-
     }
 }

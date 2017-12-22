@@ -67,7 +67,6 @@ namespace QTrans.Classes
 
         public static ParamaterData Load(string path)
         {
-            ParamaterData pd = new ParamaterData();
             try
             {
                 XmlDocument doc = new XmlDocument();

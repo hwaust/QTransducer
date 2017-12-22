@@ -9,25 +9,22 @@ namespace QTrans.Helpers
 {
     public class FileHelper
     {
-
-        // public static TransferBase trans = null;
-
         /// <summary>
-        /// 
+        /// Return the last N levels of path. If N is larger than the number L of steps of a path, N is then set to L.
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="keptLevel"></param>
+        /// <param name="N"></param>
         /// <returns></returns>
-        public string GetDirectory(string path, int keptLevel = 0)
+        public string GetLastDirectory(string path, int N = 0)
         {
-            keptLevel = keptLevel < 0 ? 65535 : keptLevel;
+            N = N < 0 ? 65535 : N;
             if (path == null || path.Trim().Length == 0)
                 return "";
 
             string[] folders = path.Trim().Split(new char[] { '\\', ':', '/' }, StringSplitOptions.RemoveEmptyEntries);
             StringBuilder sb = new StringBuilder();
             sb.Append(folders[folders.Length - 1]);
-            for (int i = 0; i < keptLevel && i < folders.Length - 1; i++)
+            for (int i = 0; i < N && i < folders.Length - 1; i++)
             {
                 sb.Insert(0, folders[folders.Length - 2 - i] + "\\");
             }
@@ -35,6 +32,13 @@ namespace QTrans.Helpers
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Append a suffix to the path. 
+        /// <example>"C:\data\a.txt" + "_20171222" => "C:\data\a_20171222.txt"</example>
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="suffix"></param>
+        /// <returns></returns>
         public string AppendSuffix(string path, string suffix)
         {
             if (path == null || path.Trim().Length == 0)
@@ -45,6 +49,13 @@ namespace QTrans.Helpers
             return string.Format("{0}\\{1}{2}{3}", dir, name, suffix, ext);
         }
 
+        /// <summary>
+        /// Append a prefix to the path.
+        /// <example>"C:\data\a.txt" + "20171222_" => "C:\data\20171222_a.txt"</example>
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="suffix"></param>
+        /// <returns></returns>
         public string AppendPrefix(string path, string prefix)
         {
             if (path == null || path.Trim().Length == 0)
@@ -53,6 +64,27 @@ namespace QTrans.Helpers
             string name = Path.GetFileNameWithoutExtension(path);
             string ext = Path.GetExtension(path);
             return string.Format("{0}\\{1}{2}{3}", dir, prefix, name, ext);
+        }
+
+        /// <summary>
+        /// Adds a four-digit id to the filename infront of its extention.
+        /// </summary>
+        /// <param name="outputfile"></param>
+        /// <returns></returns>
+        internal static String AddIncreamentId(string outputfile)
+        {
+            int suffixid = 0;
+            string folder = Path.GetDirectoryName(outputfile);
+            string filename = Path.GetFileNameWithoutExtension(outputfile);
+            string ext = Path.GetExtension(outputfile);
+
+            while (File.Exists(outputfile))
+            {
+                suffixid++;
+                outputfile = string.Format("{0}\\{1}_{2}{3}", folder, filename, suffixid.ToString("0000"), ext);
+            }
+
+            return outputfile;
         }
 
         /// <summary>
@@ -72,6 +104,28 @@ namespace QTrans.Helpers
         }
 
 
+        /// <summary>
+        /// 给定路径，获得下面指定层数的文件。
+        /// </summary>
+        /// <param name="dir">指定的路径。</param>
+        /// <param name="lv">子目录层数，最少为0，即只获得当前目录下文件。</param>
+        /// <returns></returns>
+        public string[] GetFile(string dir, int lv)
+        {
+            List<string> list = new List<string>();
+            list.AddRange(Directory.GetFiles(dir));
+            if (lv > 0)
+            {
+                string[] dirs = Directory.GetDirectories(dir);
+
+                foreach (string s in dirs)
+                {
+                    list.AddRange(GetFile(s, lv - 1));
+                }
+            }
+
+            return list.ToArray();
+        }
 
         /// <summary>
         /// 删除指定文件夹下的所有文件，通过递归实现。
