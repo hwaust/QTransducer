@@ -64,6 +64,22 @@ namespace QTrans.Classes
         /// Immediately start transducing when this program is started.
         /// </summary>
         public bool StartTransducingWhenStartup = false;
+
+        public static ParamaterData Load(string path)
+        {
+            ParamaterData pd = new ParamaterData();
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(path);
+                ParamaterData pd = WindGoes.Data.Serializer.GetObject<ParamaterData>(doc);
+                pd.extentions.Clear();
+                return pd;
+            }
+            catch { }
+            return new ParamaterData();
+        }
+
         /// <summary>
         /// Start with windows.
         /// </summary>
@@ -122,6 +138,7 @@ namespace QTrans.Classes
             CircleValue = 10;
             CircleUnit = 1;
             TraverseSubfolders = false;
+            extentions = new List<string>();
         }
 
         public ParamaterData Clone()

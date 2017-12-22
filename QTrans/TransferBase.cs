@@ -20,27 +20,12 @@ namespace QTrans
         /// 文件日志列表，转换后可读取此列表。
         /// </summary>
         public List<TransLog> LogList = new List<TransLog>();
-
-
-        /// <summary>
-        /// 在保存时，是否添加时间戳，TRUE为添加，False直接覆盖。
-        /// </summary>
-        public bool AddTimeToNew { get; set; }
-
-        /// <summary>
-        /// 注册钥匙的名称，默认为key.lic为示区别，需要专门设置。
-        /// </summary>
-        public string RegistryKeyName { get; set; }
-
+        
         /// <summary>
         /// 显示的公司名称，这个用于显示在封面上，如Mairi。
         /// </summary>
         public string CompanyName { get; set; }
-
-        /// <summary>
-        /// 是否在输出的DFQ文件名中强制追加时间截
-        /// </summary>
-        public bool ForcedAddDateToFileName { get; set; }
+ 
 
         /// <summary>
         /// 打开文件时，选择的默认索引序号同，如“txt文件|*.txt|所有文件|*.*”，注意：此值下标从1开始，所以默认为1。
@@ -97,26 +82,14 @@ namespace QTrans
         /// </summary>
         public string TransducerID { get; set; }
 
-        public ParamaterData LoadParamater(string path)
-        {
-            try
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(path);
-                return WindGoes.Data.Serializer.GetObject<ParamaterData>(doc);
-            }
-            catch { }
-            return new ParamaterData();
-        }
+
 
         public TransferBase()
         {
             ShowFileOption = true;
             FilterIndex = 1;
-            RegistryKeyName = "trial.lic";
             //主要是为了添加操作失误信息方便。 
-            pd = LoadParamater(Application.StartupPath + "\\config.xml");
-            pd.extentions.Clear();
+            pd = ParamaterData.Load(".\\config.xml"); 
             try
             {
                 SetConfig(pd);
@@ -181,17 +154,6 @@ namespace QTrans
         {
             return true;
         }
-
-        /// <summary>
-        /// 根据指定的文件，生成唯一的DFQ的实例。
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public virtual QFile GetQFile(string path)
-        {
-            return new QFile();
-        }
-
 
 
         /// <summary>
@@ -310,8 +272,9 @@ namespace QTrans
             int deleteTimes = 0;
             while (true)
             {
-                FileHelper.DeleteFile(inputfile);
+                File.Delete(inputfile); 
                 Thread.Sleep(100);
+
                 if (!File.Exists(inputfile) || deleteTimes++ > 5)
                     break;
             }
@@ -573,7 +536,7 @@ namespace QTrans
         /// <returns></returns>
         public string GetOutputPath(string path)
         {
-            return FileHelper.GetOutputPath(path, CurrentFolder);
+           return FileHelper.GetOutputPath(path, CurrentFolder); 
         }
 
         /// <summary>
