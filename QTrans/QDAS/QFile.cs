@@ -460,6 +460,7 @@ namespace QDAS
 		{
 			try
 			{
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
 				using (StreamWriter sw = new StreamWriter(path, false, Encoding))
 					sw.Write(GetKString());
 

@@ -38,31 +38,14 @@ namespace QTrans
         public List<TransLog> LogList = new List<TransLog>();
 
         /// <summary>
-        /// 打开文件时，选择的默认索引序号同，如“txt文件|*.txt|所有文件|*.*”
-        /// 注意：此值下标从1开始，所以默认为1。
-        /// </summary>
-        public int FilterIndex { get; set; }
-
-
-        /// <summary>
-        /// 是否显示文件选项，有个别不是根据文件保存的，而是文件组，如COMAU，这样这时就不显示文件选项了。
-        /// </summary>
-        public bool ShowFileOption { get; set; }
-
-        /// <summary>
         /// 转换完成的情况。
         /// </summary>
         public double Percentage { get; set; }
 
         /// <summary>
-        /// 正在转换的目录。
-        /// </summary>
-        public string CurrentFolder { get; set; }
-
-        /// <summary>
         /// 当前正在转换的文件。
         /// </summary>
-        public string CurrentFile { get; set; }
+        public string CurrentInFile { get; set; }
 
         /// <summary>
         /// 最后一次输出的DFQ文件。
@@ -82,8 +65,6 @@ namespace QTrans
 
         public TransferBase()
         {
-            ShowFileOption = true;
-            FilterIndex = 1;
             //主要是为了添加操作失误信息方便。 
             pd = ParamaterData.Load(".\\config.xml");
             SetConfig(pd);
@@ -155,13 +136,12 @@ namespace QTrans
         /// <returns></returns>
         public virtual bool ProcessFile(string infile)
         {
-            //如果后缀名不对或者文件不存在，就直接忽略，不产生任何记录。
-            if (!CheckExt(infile) || !File.Exists(infile))
+            // 如果文件不存在或后缀名不匹配，就直接忽略，不产生任何记录。
+            if (!File.Exists(infile) || pd.extentions.IndexOf(Path.GetExtension(infile).ToLower()) < 0)
                 return false;
 
-            //这是对当前转换的文件和文件路径进行记录。
-            CurrentFile = infile;
-            CurrentFolder = Path.GetDirectoryName(CurrentFile);
+            //当前正在转换的文件。
+            CurrentInFile = infile;
 
             // 转换数据
             TransLog log = null;
@@ -199,18 +179,18 @@ namespace QTrans
                     }
 
                     // construct outputfile with a unique file name. 
-                    string outputfile = common.AddIncreamentId(backupFolder + "\\" + fi.Filename + fi.Extention);
-
+                    string outfile = FileHelper.AddIncreamentId(backupFolder + "\\" + fi.Filename + fi.Extention);
                     // copy file. If failed, add the error to logs.
-                    if (!copyFile(infile, outputfile))
+                    if (!FileHelper.CopyFile(infile, outfile))
                     {
-                        LogList.Add(new TransLog(infile, outputfile, String.Format("复制文件 '{0}' 至 '{1}' 失败。", infile, outputfile), LogType.Backup));
+                        LogList.Add(new TransLog(infile, outfile, String.Format("复制文件 '{0}' 至 '{1}' 失败。", infile, outfile), LogType.Backup));
+                        break;
                     }
 
                     // delete source file.
-                    if (!deleteFile(infile))
+                    if (!FileHelper.DeleteFile(infile))
                     {
-                        LogList.Add(new TransLog(infile, outputfile, String.Format("文件 {0} 删除失败。", infile), LogType.Backup));
+                        LogList.Add(new TransLog(infile, outfile, String.Format("文件 {0} 删除失败。", infile), LogType.Backup));
                     }
 
                     break;
@@ -219,7 +199,7 @@ namespace QTrans
                     break;
 
                 case 2: // delete files.
-                    deleteFile(infile);
+                    FileHelper.DeleteFile(infile);
                     break;
 
                 case 3: // customed.
@@ -227,50 +207,6 @@ namespace QTrans
             }
 
             return log.LogType == LogType.Success;
-        }
-
-
-        private bool copyFile(string inputfile, string outputfile)
-        {
-            // Try 5 times at most. Note: input file should exist and outputfile should not.
-            int copyTimes = 0;
-            while (true)
-            {
-                File.Copy(inputfile, outputfile);
-                Thread.Sleep(100);
-                if (File.Exists(outputfile) || copyTimes++ > 5)
-                    break;
-            }
-
-            return File.Exists(outputfile);
-        }
-
-        /// <summary>
-        /// Deletes the input file when backuping. Tries 5 times and adds to logs if fails.
-        /// </summary>
-        /// <param name="inputfile"></param>
-        private bool deleteFile(string inputfile)
-        {
-            // Delete 5 times at most.
-            int deleteTimes = 0;
-            while (true)
-            {
-                File.Delete(inputfile);
-                Thread.Sleep(100);
-
-                if (!File.Exists(inputfile) || deleteTimes++ > 5)
-                    break;
-            }
-
-            return !File.Exists(inputfile);
-        }
-
-        /// <summary>
-        /// 在开始转换以后需要做的准备工作，转换时最先执行并只执行一次。
-        /// </summary>
-        public virtual bool Initialize()
-        {
-            return true;
         }
 
         #endregion
@@ -306,7 +242,7 @@ namespace QTrans
         /// <returns></returns>
         public bool SaveDfq(QFile qf, string outpath)
         {
-            return SaveDfq(qf, CurrentFile, outpath);
+            return SaveDfq(qf, CurrentInFile, outpath);
         }
 
         /// <summary>
@@ -323,7 +259,7 @@ namespace QTrans
                 switch (pd.DealSameOutputFileNameType)
                 {
                     case 0: // 直接覆盖。
-                        deleteFile(outfile);
+                        FileHelper.DeleteFile(outfile);
                         break;
 
                     case 1: //添加时间戳
@@ -343,36 +279,23 @@ namespace QTrans
                 if (qf.SaveToFile(outfile))
                 {
                     LastDfqFile = outfile;
-                    log = new TransLog(infile, outfile, "转换成功", LogType.Success);
+                    log = new TransLog(infile, outfile, "保存成功", LogType.Success);
                 }
                 else
                 {
                     LastDfqFile = null;
-                    log = new TransLog(infile, outfile, "转换失败，原因：TransferBase.SaveDfq.unknown.", LogType.Fail);
+                    log = new TransLog(infile, outfile, "保存失败，原因路径不存在，或者没有写入权限。", LogType.Fail);
                 }
             }
             catch (Exception ex)
             {
-                log = new TransLog(infile, outfile, "转换失败，原因：" + ex.Message, LogType.Fail);
+                log = new TransLog(infile, outfile, "保存失败，原因：" + ex.Message, LogType.Fail);
             }
-            LogList.Add(log);
+            if (log.LogType != LogType.Success)
+                LogList.Add(log);
 
             return log.LogType == LogType.Success;
         }
 
-        /// <summary>
-        /// 检测文件的后缀名是否在现有后缀名列表中。
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public virtual bool CheckExt(string path)
-        {
-            try
-            {
-                return pd.extentions.IndexOf(Path.GetExtension(path).ToLower()) >= 0;
-            }
-            catch { }
-            return false;
-        }
     }
 }

@@ -47,7 +47,7 @@ namespace QDasTransfer
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.InitialDirectory = lastSelectedFolder;
             ofd.Filter = pd.GetExtFilter();
-            ofd.FilterIndex = trans.FilterIndex;
+            ofd.FilterIndex = trans.pd.FilterIndex;
             ofd.Multiselect = true;
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -323,15 +323,7 @@ namespace QDasTransfer
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-            }
-
-            //如果初始化未成功，则退出不启动。
-            if (!trans.Initialize())
-            {
-                MessageBox.Show("MainForm.tiStart_Click: 转换器初始化失败，原因请与管理员联系。");
-                return;
-            }
-
+            }  
 
             //复制PdfToTxt.exe文件过去，如果未能复制成功，则同样提示失败。
             if (pd.PdfMode)

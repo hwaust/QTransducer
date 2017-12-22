@@ -150,9 +150,9 @@ namespace QTrans.Company.Y2017
 
             qf.ToDMode();
 
-            string folder = GetOutFolder(path, pd.OutputFolder);
+            string outfolder = pd.OutputFolder + "\\" + Helpers.FileHelper.GetLastDirectory(path, pd.OriginalLevelKept);
             string timetick = DateTimeHelper.ToFullDateTime(DateTime.Now);
-            string filename = string.Format("{0}\\{1}_{2}.dfq", folder, allinfo, timetick);
+            string filename = string.Format("{0}\\{1}_{2}.dfq", outfolder, allinfo, timetick);
 
             return SaveDfq(qf, filename);
         }

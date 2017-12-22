@@ -15,7 +15,7 @@ namespace QTrans.Helpers
         /// <param name="path"></param>
         /// <param name="N"></param>
         /// <returns></returns>
-        public string GetLastDirectory(string path, int N = 0)
+        public static string GetLastDirectory(string path, int N = 0)
         {
             N = N < 0 ? 65535 : N;
             if (path == null || path.Trim().Length == 0)
@@ -71,7 +71,7 @@ namespace QTrans.Helpers
         /// </summary>
         /// <param name="outputfile"></param>
         /// <returns></returns>
-        internal static String AddIncreamentId(string outputfile)
+        public static String AddIncreamentId(string outputfile)
         {
             int suffixid = 0;
             string folder = Path.GetDirectoryName(outputfile);
@@ -85,6 +85,44 @@ namespace QTrans.Helpers
             }
 
             return outputfile;
+        }
+
+
+        public static bool CopyFile(string inputfile, string outputfile)
+        {
+            // Try 5 times at most. Note: input file should exist and outputfile should not.
+            int copyTimes = 0;
+            while (true)
+            {
+                File.Copy(inputfile, outputfile);
+                Thread.Sleep(100);
+                if (File.Exists(outputfile) || copyTimes++ > 5)
+                    break;
+            }
+
+            return File.Exists(outputfile);
+        }
+
+
+
+        /// <summary>
+        /// Deletes the input file when backuping. Tries 5 times and adds to logs if fails.
+        /// </summary>
+        /// <param name="inputfile"></param>
+        public static bool DeleteFile(string inputfile)
+        {
+            // Delete 5 times at most.
+            int deleteTimes = 0;
+            while (true)
+            {
+                File.Delete(inputfile);
+                Thread.Sleep(100);
+
+                if (!File.Exists(inputfile) || deleteTimes++ > 5)
+                    break;
+            }
+
+            return !File.Exists(inputfile);
         }
 
         /// <summary>

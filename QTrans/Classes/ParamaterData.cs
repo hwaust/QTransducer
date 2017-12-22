@@ -64,6 +64,15 @@ namespace QTrans.Classes
         /// Immediately start transducing when this program is started.
         /// </summary>
         public bool StartTransducingWhenStartup = false;
+        /// <summary>
+        /// 打开文件时，选择的默认索引序号同，如“txt文件|*.txt|所有文件|*.*”
+        /// 注意：此值下标从1开始，所以默认为1。
+        /// </summary>
+        public int FilterIndex = 1;
+        /// <summary>
+        /// 是否显示文件选项，有个别不是根据文件保存的，而是文件组，如COMAU，这样这时就不显示文件选项了。
+        /// </summary>
+        public bool ShowFileOption = true;
 
         public static ParamaterData Load(string path)
         {
