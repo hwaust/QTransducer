@@ -23,11 +23,14 @@ namespace QTrans.Helpers
 
             string[] folders = path.Trim().Split(new char[] { '\\', ':', '/' }, StringSplitOptions.RemoveEmptyEntries);
             StringBuilder sb = new StringBuilder();
-            sb.Append(folders[folders.Length - 1]);
+            // sb.Append(folders[folders.Length - 1]);
             for (int i = 0; i < N && i < folders.Length - 1; i++)
             {
                 sb.Insert(0, folders[folders.Length - 2 - i] + "\\");
             }
+
+            if (sb.Length > 0)
+                sb.Remove(sb.Length - 1, 1);
 
             return sb.ToString();
         }
@@ -39,7 +42,7 @@ namespace QTrans.Helpers
         /// <param name="path"></param>
         /// <param name="suffix"></param>
         /// <returns></returns>
-        public string AppendSuffix(string path, string suffix)
+        public static string AppendSuffix(string path, string suffix)
         {
             if (path == null || path.Trim().Length == 0)
                 return "";
@@ -56,7 +59,7 @@ namespace QTrans.Helpers
         /// <param name="path"></param>
         /// <param name="suffix"></param>
         /// <returns></returns>
-        public string AppendPrefix(string path, string prefix)
+        public static string AppendPrefix(string path, string prefix)
         {
             if (path == null || path.Trim().Length == 0)
                 return "";

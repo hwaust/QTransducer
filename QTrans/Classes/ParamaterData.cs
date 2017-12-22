@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QTrans.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -74,19 +75,14 @@ namespace QTrans.Classes
         /// </summary>
         public bool ShowFileOption = true;
 
-        public static ParamaterData Load(string path)
-        {
-            try
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(path);
-                ParamaterData pd = WindGoes.Data.Serializer.GetObject<ParamaterData>(doc);
-                pd.extentions.Clear();
-                return pd;
-            }
-            catch { }
-            return new ParamaterData();
-        }
+        /// <summary>
+        /// Whether add a time stamp when saving from input file name.
+        /// </summary>
+        public bool AppendTimeStamp = true;
+        /// <summary>
+        /// 是否遍历子目录。
+        /// </summary>
+        public bool TraverseSubfolders = false;
 
         /// <summary>
         /// Start with windows.
@@ -107,6 +103,7 @@ namespace QTrans.Classes
         /// </summary>
         public string PdfDllFolder;
 
+
         public int EncodingID = 0;
 
         /******************** Auto Transduce **********************/
@@ -124,10 +121,20 @@ namespace QTrans.Classes
         /// </summary>
         public bool SupportAutoTransducer = false;
 
-        /// <summary>
-        /// 是否遍历子目录。
-        /// </summary>
-        public bool TraverseSubfolders { get; set; }
+
+        public static ParamaterData Load(string path)
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(path);
+                ParamaterData pd = WindGoes.Data.Serializer.GetObject<ParamaterData>(doc);
+                pd.extentions.Clear();
+                return pd;
+            }
+            catch { }
+            return new ParamaterData();
+        }
 
         public ParamaterData()
         {
@@ -145,8 +152,14 @@ namespace QTrans.Classes
             EndTime = new DateTime(2000, 1, 1, 23, 59, 59);
             CircleValue = 10;
             CircleUnit = 1;
+
             TraverseSubfolders = false;
             extentions = new List<string>();
+        }
+
+        public string GetOutDirectory(string infile)
+        {
+            return Path.Combine(OutputFolder, FileHelper.GetLastDirectory(infile, OriginalLevelKept));
         }
 
         public ParamaterData Clone()
@@ -170,7 +183,9 @@ namespace QTrans.Classes
             sp.StartTransducingWhenStartup = StartTransducingWhenStartup;
             sp.StartWithWindows = StartWithWindows;
             sp.DealSameOutputFileNameType = DealSameOutputFileNameType;
-
+            sp.FilterIndex = FilterIndex;
+            sp.ShowFileOption = ShowFileOption;
+            sp.AppendTimeStamp = AppendTimeStamp;
 
             sp.AutoTransducerAvaliable = AutoTransducerAvaliable;
             sp.SupportAutoTransducer = SupportAutoTransducer;
@@ -263,6 +278,12 @@ namespace QTrans.Classes
             if (File.Exists(path))
                 File.Delete(path);
             WindGoes.Data.Serializer.GetXmlDoc(this).Save(path);
+        }
+
+        public string GetOutfileName(string infile)
+        {
+            string keptfolder = FileHelper.GetLastDirectory(infile, OriginalLevelKept);
+            return string.Format("{0}\\{1}.dfq", Path.Combine(OutputFolder, keptfolder), Path.GetFileNameWithoutExtension(infile));
         }
     }
 }

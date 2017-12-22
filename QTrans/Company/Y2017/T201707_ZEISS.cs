@@ -1,15 +1,9 @@
-﻿using Excel;
-using QDAS;
+﻿using QDAS;
 using QDasTransfer.Classes;
 using QTrans.Classes;
 using QTrans.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using WindGoes.IO;
 
 namespace QTrans.Company.Y2017
 {
@@ -30,7 +24,7 @@ namespace QTrans.Company.Y2017
             pd.SupportAutoTransducer = true;
             pd.AddExt(".xls");
 
-            IniAccess ia = new IniAccess(config);
+            WindGoes.IO.IniAccess ia = new WindGoes.IO.IniAccess(config);
             string catlog = ia.ReadValue("catalog");
 
             if (File.Exists(catlog))
@@ -59,19 +53,10 @@ namespace QTrans.Company.Y2017
             base.SetConfig(pd);
         }
 
-        public override bool TransferFile(string path)
+        public override bool TransferFile(string infile)
         {
-            //K0004 D5  42839
-            //K0004 F5  0.63622685185.
-            //K0014 etc   B8 S171018318458A_OP70.10_300.
-            //K0008 B11 ZYZ.
-            //K0012 D11 1
-            //K0010 F11 OP70.3.
-            //K0006 D8  3693953
-            //K1001 F8  ISGH - CMM - 1. 
-
             // string input = @"Z:\Projects\QTransducer\2017年\2017_07_Zeiss\sample.xls";
-            ExcelReader reader = new ExcelReader(path);
+            ExcelReader reader = new ExcelReader(infile);
 
             double days = double.Parse(reader.getData("D5"));
             double time = double.Parse(reader.getData("F5"));
@@ -98,13 +83,13 @@ namespace QTrans.Company.Y2017
             QDataItem qdi = new QDataItem();
             qdi[0006] = K0006;
 
-            if(K4092 >= 0)
-            qdi[0008] = K4092;
+            if (K4092 >= 0)
+                qdi[0008] = K4092;
 
-            if(K4062 >= 0)
-            qdi[0010] = K4062;
+            if (K4062 >= 0)
+                qdi[0010] = K4062;
 
-            if(K4072 >= 0)
+            if (K4072 >= 0)
                 qdi[0012] = K4072;
 
             qdi[0014] = K0014;
@@ -149,14 +134,11 @@ namespace QTrans.Company.Y2017
             }
 
             qf.ToDMode();
-
-            string outfolder = pd.OutputFolder + "\\" + Helpers.FileHelper.GetLastDirectory(path, pd.OriginalLevelKept);
-            string timetick = DateTimeHelper.ToFullDateTime(DateTime.Now);
-            string filename = string.Format("{0}\\{1}_{2}.dfq", outfolder, allinfo, timetick);
-
-            return SaveDfq(qf, filename);
+              
+            return SaveDfq(qf, string.Format("{0}\\{1}_{2}.dfq", 
+                pd.GetOutDirectory(infile), // output directory
+                allinfo,   // filename from all info.
+                DateTimeHelper.ToFullString(DateTime.Now))); // time stamp.
         }
-
-
     }
 }

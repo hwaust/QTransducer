@@ -16,12 +16,12 @@ namespace QTrans.Helpers
             string filename = Path.GetFileNameWithoutExtension(inputfile);
             string ext = Path.GetExtension(inputfile);
 
-            string outputfile = folder + "\\" + filename + "_" + DateTimeHelper.ToFullDateTime(DateTime.Now) + ext;
+            string outputfile = folder + "\\" + filename + "_" + DateTimeHelper.ToFullString(DateTime.Now) + ext;
 
             int suffixid = 0;
             while (File.Exists(outputfile))
             {
-                outputfile = folder + "\\" + filename + "_" + DateTimeHelper.ToFullDateTime(DateTime.Now) + "_" + suffixid.ToString("0000") + ext;
+                outputfile = folder + "\\" + filename + "_" + DateTimeHelper.ToFullString(DateTime.Now) + "_" + suffixid.ToString("0000") + ext;
                 suffixid++;
             }
 
@@ -77,18 +77,18 @@ namespace QTrans.Helpers
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public static string ToFullDateTime(DateTime dt)
+        public static string ToFullString(DateTime dt)
         {
-            return ToFullDate(dt) + ToFullTime(dt);
+            return ToDateString(dt) + ToTimeString(dt);
         }
 
 
-        public static string ToFullDate(DateTime dt)
+        public static string ToDateString(DateTime dt)
         {
             return string.Format("{0}{1}{2}", dt.Year, dt.Month.ToString("00"), dt.Day.ToString("00"));
         }
 
-        public static string ToFullTime(DateTime dt)
+        public static string ToTimeString(DateTime dt)
         {
             return string.Format("{0}{1}{2}", dt.Hour.ToString("00"), dt.Minute.ToString("00"), dt.Second.ToString("00"));
         }

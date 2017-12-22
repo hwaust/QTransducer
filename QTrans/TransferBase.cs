@@ -214,23 +214,22 @@ namespace QTrans
 
 
         /// <summary>
-        /// 根据QFile和输入路径，自动保存DFQ文件至相应的输出路径。
+        /// 根据QFile和输入路径，自动保存DFQ文件至相应的输出路径，AppendTimeStamp属性决定是否追加时间戳。
         /// </summary>
         /// <param name="qf">需要保存的QFile。</param>
         /// <param name="infile">输入的文件路径。</param>
         /// <returns></returns>
         public bool SaveDfqByInpath(QFile qf, string infile)
         {
-            string outpath = pd.OutputFolder + "\\" + FileHelper.GetOutputPath(infile, pd.OutputFolder);
-            try
+            string outdir = Path.Combine(pd.OutputFolder, FileHelper.GetOutputPath(infile, pd.OutputFolder));
+            string outfile = string.Format("{0}\\{1}.dfq", outdir, Path.GetFileNameWithoutExtension(infile));
+
+            if (pd.AppendTimeStamp)
             {
-                return SaveDfq(qf, infile, outpath);
+                outfile = FileHelper.AppendSuffix(outfile, "_" + DateTimeHelper.ToFullString(DateTime.Now));
             }
-            catch (Exception ex)
-            {
-                LogList.Add(new TransLog(infile, outpath, "转换失败，原因：" + ex.Message, LogType.Fail));
-            }
-            return false;
+
+            return SaveDfq(qf, infile, outfile);
         }
 
 
