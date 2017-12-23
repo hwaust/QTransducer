@@ -16,8 +16,7 @@ namespace QTrans.Company.Y2017
         QCatalog clog = null;
 
         public override void Initialize()
-        {
-            TransducerID = "201707";
+        { 
             CompanyName = "ZEISS";
             VertionInfo = "1.0 alpha";
             pd.SupportAutoTransducer = true;

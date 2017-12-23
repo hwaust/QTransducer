@@ -10,6 +10,7 @@ namespace QTrans.Classes
 {
     public class ParamaterData
     {
+        public string filename = ".\\config.xml";
 
         public static Encoding[] Encodings = {
             Encoding.Default,
@@ -119,30 +120,45 @@ namespace QTrans.Classes
         /// <summary>
         /// Whether this transducer supports automatic transduction.
         /// </summary>
-        public bool SupportAutoTransducer = false;
+        public bool SupportAutoTransducer = false; 
 
-
-        public static ParamaterData Load(string path)
+        public static ParamaterData Load(string infile)
         {
-            try
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(path);
-                ParamaterData pd = WindGoes.Data.Serializer.GetObject<ParamaterData>(doc);
-                pd.extentions.Clear();
-                return pd;
+            if (File.Exists(infile))
+            { 
+                try
+                { 
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(infile);
+                    ParamaterData pd = WindGoes.Data.Serializer.GetObject<ParamaterData>(doc);
+                    pd.filename = infile;
+                    return pd;
+                }
+                catch { }
             }
-            catch { }
-            return new ParamaterData();
+
+
+            return new ParamaterData(infile);
         }
 
         public ParamaterData()
         {
-            string qds = "C:\\QDAS\\";
-            OutputFolder = qds + "Output";
-            TempFolder = qds + "Temp\\";
-            FolderForSuccessed = qds + "Backups\\Success\\";
-            FolderForFailed = qds + "Backups\\Failed";
+            Initialize();
+        }
+
+        public ParamaterData(string infile)
+        {
+            filename = infile;
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            string qds = "C:\\QDAS";
+            OutputFolder = qds + "\\Output";
+            TempFolder = qds + "\\Temp";
+            FolderForSuccessed = qds + "\\Backups\\Success";
+            FolderForFailed = qds + "\\Backups\\Failed";
             OriginalLevelKept = 0;
             ProcessSourceFileType = 1;
             ConfirmWhileClosing = true;
@@ -275,9 +291,15 @@ namespace QTrans.Classes
 
         public void Save(string path)
         {
-            if (File.Exists(path))
-                File.Delete(path);
-            WindGoes.Data.Serializer.GetXmlDoc(this).Save(path);
+            filename = path;
+            Save();
+        }
+
+        public void Save()
+        {
+            if (File.Exists(filename))
+                File.Delete(filename);
+            WindGoes.Data.Serializer.GetXmlDoc(this).Save(filename);
         }
 
         public string GetOutfileName(string infile)
