@@ -30,6 +30,8 @@ namespace QDasTransfer.Classes
 
     public class ExcelReader
     {
+        public int firstRowNo = 0;
+
         public string ErrorMessage { get; internal set; }
 
         public DataTable[] Tables;
@@ -158,7 +160,7 @@ namespace QDasTransfer.Classes
                 string str = s.ToUpper();
                 int row = int.Parse(str.Substring(1)) - 1 ;
                 int col = str[0] - 65;
-                return Tables[tableindex].Rows[row][col].ToString();
+                return Tables[tableindex].Rows[row - firstRowNo][col].ToString();
             }
             catch { }
 
@@ -170,12 +172,37 @@ namespace QDasTransfer.Classes
         {
             try
             {
-                return Tables[tableindex].Rows[row][column].ToString();
+                return Tables[tableindex].Rows[row - firstRowNo][column].ToString();
             }
             catch { }
 
             return "";
         }
 
+        /// <summary>
+        /// Return a cell data by its row number and column name.
+        /// Such as: getData(0, "AA");
+        /// </summary>
+        /// <param name="rowNo"></param>
+        /// <param name="columnName"></param>
+        /// <param name="tableindex"></param>
+        /// <returns></returns>
+        public string getData(int rowNo, string columnName, int tableindex = 0)
+        {
+            try
+            {
+                int col = 0;
+                string cname = columnName.ToUpper();
+                for (int i = cname.Length - 1; i >= 0; i--)
+                {
+                    col = col * 26 + (cname[i] - 65);
+                }
+
+                return Tables[tableindex].Rows[rowNo - firstRowNo][col].ToString();
+            }
+            catch { }
+
+            return "";
+        }
     }
 }
