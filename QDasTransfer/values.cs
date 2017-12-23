@@ -10,10 +10,6 @@ namespace QDasTransfer
 	public class values
 	{
 		/// <summary>
-		/// 配置路径。
-		/// </summary>
-		public static string config_xml = Application.StartupPath + "\\config.xml";
-		/// <summary>
 		/// 配置文件全路径。
 		/// </summary>
 		public static string config_ini = Application.StartupPath + "\\Config.ini";

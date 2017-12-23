@@ -56,12 +56,14 @@ namespace QTrans
         /// </summary>
         public event TransFileCompleteEventHandler TransFileComplete;
 
+        public static string appconfig;
         #endregion
 
         public TransferBase()
         {
-            //主要是为了添加操作失误信息方便。 
-            pd = ParamaterData.Load(".\\config.xml");
+            string dir = "..\\..\\..\\config_files\\" ; 
+            appconfig = Directory.Exists(dir) ? dir + GetType().Name.Substring(0, 7) +".xml": ".\\config.xml"; 
+            pd = ParamaterData.Load(appconfig);
             Initialize();
         }
 

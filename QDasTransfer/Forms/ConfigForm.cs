@@ -27,6 +27,7 @@ namespace QDasTransfer.Forms
 
 		private void ConfigForm_Load(object sender, EventArgs e)
 		{
+            this.Text += "\t" + QTrans.TransferBase.appconfig;
 			// pgOutput
 			txtOutputFolder.Text = pd.OutputFolder;
 			txtTempFolder.Text = pd.TempFolder;

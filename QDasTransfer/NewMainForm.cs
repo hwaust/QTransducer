@@ -238,7 +238,7 @@ namespace QDasTransfer
             pd.InputListViewWidth.Add(new ListViewData(lvInputList));
             pd.InputListViewWidth.Add(new ListViewData(lvLogs));
 
-            pd.Save(values.config_xml);
+            pd.Save();
         }
 
         private void tiLock_Click(object sender, EventArgs e)
@@ -362,7 +362,7 @@ namespace QDasTransfer
             if (cf.needSave)
             {
                 setTransducer(pd);
-                pd.Save(values.config_xml);
+                pd.Save();
             }
         }
 
@@ -469,7 +469,7 @@ namespace QDasTransfer
             pd.InputListViewWidth.Add(new ListViewData(lvInputList));
             pd.InputListViewWidth.Add(new ListViewData(lvLogs));
 
-            pd.Save(values.config_xml);
+            pd.Save();
             MessageBox.Show("配置文件已经保存。", "保存成功。", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
