@@ -237,8 +237,6 @@ namespace QDasTransfer
             pd.InputListViewWidth.Clear();
             pd.InputListViewWidth.Add(new ListViewData(lvInputList));
             pd.InputListViewWidth.Add(new ListViewData(lvLogs));
-
-            pd.Save();
         }
 
         private void tiLock_Click(object sender, EventArgs e)
@@ -391,14 +389,15 @@ namespace QDasTransfer
         }
 
         private void mnDeleteItem_Click(object sender, EventArgs e)
-        { 
-           if(lvInputList.SelectedIndices.Count > 0)
+        {
+            if (lvInputList.SelectedIndices.Count > 0)
             {
                 DialogResult dr = MessageBox.Show("是否删除当前选中项？", "删除确认", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if(dr == DialogResult.Yes)
+                if (dr == DialogResult.Yes)
                 {
                     lvInputList.Items.RemoveAt(lvInputList.SelectedIndices[0]);
                 }
+                pd.Save();
             }
         }
 
@@ -504,9 +503,8 @@ namespace QDasTransfer
                     InputPath ip = new InputPath(ofd.FileNames[i], 0);
                     Funs.AddDistinctToListBox(lvInputList, ip);
                 }
+                pd.Save();
             }
-
-
         }
 
         private void tiAddFolder_Click(object sender, EventArgs e)
@@ -518,6 +516,7 @@ namespace QDasTransfer
                 lastSelectedFolder = fb.SelectedPath;
                 InputPath ip = new InputPath(lastSelectedFolder, 1);
                 Funs.AddDistinctToListBox(lvInputList, ip);
+                pd.Save();
             }
         }
 
@@ -530,6 +529,7 @@ namespace QDasTransfer
                 lastSelectedFolder = Path.GetDirectoryName(ibf.NetPath);
                 InputPath ip = new InputPath(ibf.NetPath);
                 Funs.AddDistinctToListBox(lvInputList, ip);
+                pd.Save();
             }
         }
 
@@ -585,6 +585,7 @@ namespace QDasTransfer
                     if (lvInputList.Items[i].Checked)
                         lvInputList.Items.RemoveAt(i);
                 }
+                pd.Save();
             }
         }
 
@@ -602,7 +603,7 @@ namespace QDasTransfer
 
         private void lvInputList_MouseClick(object sender, MouseEventArgs e)
         {
-            if(lvInputList.SelectedIndices.Count > 0)
+            if (lvInputList.SelectedIndices.Count > 0)
             {
                 lvInputList.SelectedItems[0].Checked = !lvInputList.SelectedItems[0].Checked;
             }
