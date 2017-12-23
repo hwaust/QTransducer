@@ -10,12 +10,8 @@ namespace QTrans.Company.Y2017
 {
     public class T201708_Antai_Density : TransferBase
     {
-        int K4092 = -1;
-        int K4062 = -1;
-        int K4072 = -1;
-        int K4272 = -1;
-        QCatalog clog = null;
-
+        WindGoes.IO.IniAccess ia = new WindGoes.IO.IniAccess("userconfig.ini");
+        QCatalog qlog = null;
         public override void Initialize()
         {
             CompanyName = "北京安泰密度转换器";
@@ -25,36 +21,30 @@ namespace QTrans.Company.Y2017
             {
                 pd.AddExt(".xlsx");
             }
+            string logfile = ia.ReadValue("catalog"); 
+            qlog = File.Exists(logfile) ? QCatalog.load(logfile) : new QCatalog();
         }
 
         public override bool TransferFile(string infile)
         {
             ExcelReader reader = new ExcelReader(infile, MSOfficeVersion.Office2007);
-            string K0012 = reader.getData(3, 'G' - 65);
-
-            WindGoes.IO.IniAccess ia = new WindGoes.IO.IniAccess("userconfig.ini");
-            string logfile = ia.ReadValue("catalog");
-
-
-            QCatalog qlog = File.Exists(logfile) ? QCatalog.load(logfile) : new QCatalog();
-
-
+            string K0012 = reader.getData(3, "G");
             List<QFile> qfs = new List<QFile>();
             for (int i = 4; i < reader.getRowCount(); i++)
             {
                 try
                 {
                     DateTime dt = DateTime.Parse(reader.getData(i, 'A' - 65));
-                    string K1002 = reader.getData(i, 'B' - 65);
-                    string K0014 = reader.getData(i, 'C' - 65);
-                    string K0016 = reader.getData(i, 'D' - 65);
-                    string K0010 = reader.getData(i, 'E' - 65);
-                    string K1001 = reader.getData(i, 'F' - 65);
-                    string K0011 = reader.getData(i, 'I' - 65) + '\\' + reader.getData(i, 'J' - 65) + '\\' + reader.getData(i, 'K' - 65) + '\\' + reader.getData(i, 'L' - 65);
-                    string K0001 = reader.getData(i, 'M' - 65);
-                    string K2112 = reader.getData(i, 'N' - 65).Split(new char[] { '-', '_' })[0];
-                    string K2113 = reader.getData(i, 'N' - 65).Split(new char[] { '-', '_' })[1];
-                    string K0008 = reader.getData(i, 'Q' - 65);
+                    string K1002 = reader.getData(i, "B");
+                    string K0014 = reader.getData(i, "C");
+                    string K0016 = reader.getData(i, "D");
+                    string K0010 = reader.getData(i, "E");
+                    string K1001 = reader.getData(i, "F");
+                    string K0011 = reader.getData(i, "I") + '\\' + reader.getData(i, "J") + '\\' + reader.getData(i, "K") + '\\' + reader.getData(i, "L");
+                    string K0001 = reader.getData(i, "M");
+                    string K2112 = reader.getData(i, "N").Split(new char[] { '-', '_' })[0];
+                    string K2113 = reader.getData(i, "N").Split(new char[] { '-', '_' })[1];
+                    string K0008 = reader.getData(i, "Q");
 
                     if (K1001 == "" && K1002 == "")
                     {
@@ -79,7 +69,6 @@ namespace QTrans.Company.Y2017
                         qc[8501] = 0;
                     }
 
-
                     QDataItem qdi = new QDataItem();
                     qdi.date = dt;
                     qdi.SetValue(K0001);
@@ -89,22 +78,18 @@ namespace QTrans.Company.Y2017
                     qdi[0012] = qlog.getCatalogPID("K4073", K0012);
                     qdi[0014] = K0014;
                     qdi[0016] = K0016;
-
                     qf.Charactericstics[0].data.Add(qdi);
-
                 }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
-
             }
-
 
             string outdir = pd.GetOutDirectory(infile);
             foreach (QFile qf in qfs)
             {
                 qf.ToDMode();
-                string outfile= outdir + "\\" + qf[1001] + "_" + qf[1002] + "_" + DateTimeHelper.ToFullString(DateTime.Now) + ".dfq";
-                bool done = SaveDfq(qf, outfile); 
-                LogList.Add(new TransLog(infile, outfile, done? "转换成功": "转换失败。", done? LogType.Success: LogType.Fail));
+                string outfile = outdir + "\\" + qf[1001] + "_" + qf[1002] + "_" + DateTimeHelper.ToFullString(DateTime.Now) + ".dfq";
+                bool done = SaveDfq(qf, outfile);
+                LogList.Add(new TransLog(infile, outfile, done ? "转换成功" : "转换失败。", done ? LogType.Success : LogType.Fail));
             }
 
             return true;
@@ -123,6 +108,6 @@ namespace QTrans.Company.Y2017
             qf[1002] = k1002;
 
             return qf;
-        } 
+        }
     }
 }
