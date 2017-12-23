@@ -8,8 +8,7 @@ using System.IO;
 namespace QTrans.Company.Y2017
 {
     public class T201707_ZEISS : TransferBase
-    {
-        string config = ".\\userconfig.ini";
+    { 
         int K4092 = -1;
         int K4062 = -1;
         int K4072 = -1;
@@ -23,34 +22,6 @@ namespace QTrans.Company.Y2017
             VertionInfo = "1.0 alpha";
             pd.SupportAutoTransducer = true;
             pd.AddExt(".xls");
-
-            WindGoes.IO.IniAccess ia = new WindGoes.IO.IniAccess(config);
-            string catlog = ia.ReadValue("catalog");
-
-            if (File.Exists(catlog))
-            {
-                clog = QCatalog.load(catlog);
-                if (clog != null)
-                {
-                    int s1 = clog.getCatalogPID("K4272", "001");
-                    int s2 = clog.getCatalogPID("K4092", "P001");
-                    int s3 = clog.getCatalogPID("K4062", "M001");
-                    int s4 = clog.getCatalogPID("K4072", "160");
-                    Console.WriteLine("{0}, {1}, {2}, {3}", s1, s2, s3, s4);
-                }
-                else
-                {
-                    Console.WriteLine("Fialed to read catlog: " + catlog);
-                }
-
-            }
-            else
-            {
-                Console.WriteLine("catlog '" + catlog + "' does not exist.");
-            }
-
-
-            base.Initialize();
         }
 
         public override bool TransferFile(string infile)
