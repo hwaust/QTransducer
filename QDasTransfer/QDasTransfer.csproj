@@ -207,6 +207,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Resources\Open.gif" />
+    <None Include="Resources\Save.gif" />
+    <None Include="Resources\ReverseAll_24.png" />
+    <None Include="Resources\SelectAll_241.png" />
+    <None Include="Resources\CancelAll_24.png" />
+    <None Include="Resources\SelectAll_24.png" />
+    <None Include="Resources\SelectReverse.png" />
+    <None Include="Resources\CancelAll.png" />
+    <None Include="Resources\SelectAll.png" />
     <None Include="Resources\clear.gif" />
     <None Include="Resources\delete.gif" />
     <None Include="Resources\AddPath.gif" />

@@ -607,25 +607,28 @@
             // 
             // tiSelectAll
             // 
+            this.tiSelectAll.Image = global::QDasTransfer.Properties.Resources.SelectAll_24;
             this.tiSelectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiSelectAll.Name = "tiSelectAll";
-            this.tiSelectAll.Size = new System.Drawing.Size(36, 28);
+            this.tiSelectAll.Size = new System.Drawing.Size(60, 28);
             this.tiSelectAll.Text = "全选";
             this.tiSelectAll.Click += new System.EventHandler(this.tiSelectAll_Click);
             // 
             // tiCancelAll
             // 
+            this.tiCancelAll.Image = global::QDasTransfer.Properties.Resources.CancelAll_24;
             this.tiCancelAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiCancelAll.Name = "tiCancelAll";
-            this.tiCancelAll.Size = new System.Drawing.Size(48, 28);
+            this.tiCancelAll.Size = new System.Drawing.Size(72, 28);
             this.tiCancelAll.Text = "全取消";
             this.tiCancelAll.Click += new System.EventHandler(this.tiCancelAll_Click);
             // 
             // tiSelectReverse
             // 
+            this.tiSelectReverse.Image = global::QDasTransfer.Properties.Resources.ReverseAll_24;
             this.tiSelectReverse.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiSelectReverse.Name = "tiSelectReverse";
-            this.tiSelectReverse.Size = new System.Drawing.Size(36, 28);
+            this.tiSelectReverse.Size = new System.Drawing.Size(60, 28);
             this.tiSelectReverse.Text = "反选";
             this.tiSelectReverse.Click += new System.EventHandler(this.tiSelectReverse_Click);
             // 
@@ -647,7 +650,7 @@
             // 
             // tiSaveResults
             // 
-            this.tiSaveResults.Image = ((System.Drawing.Image)(resources.GetObject("tiSaveResults.Image")));
+            this.tiSaveResults.Image = global::QDasTransfer.Properties.Resources.Save;
             this.tiSaveResults.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiSaveResults.Name = "tiSaveResults";
             this.tiSaveResults.Size = new System.Drawing.Size(108, 28);
@@ -664,7 +667,7 @@
             // 
             // tiOpenLogFile
             // 
-            this.tiOpenLogFile.Image = ((System.Drawing.Image)(resources.GetObject("tiOpenLogFile.Image")));
+            this.tiOpenLogFile.Image = global::QDasTransfer.Properties.Resources.Open;
             this.tiOpenLogFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiOpenLogFile.Name = "tiOpenLogFile";
             this.tiOpenLogFile.Size = new System.Drawing.Size(108, 28);
