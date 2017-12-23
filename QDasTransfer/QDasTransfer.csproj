@@ -207,6 +207,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="Resources\clear.gif" />
+    <None Include="Resources\delete.gif" />
+    <None Include="Resources\AddPath.gif" />
+    <None Include="Resources\AddFolder.gif" />
+    <None Include="Resources\AddFile.gif" />
     <None Include="Resources\Transduce24X24.png" />
     <None Include="Resources\Tranduce16X16.png" />
     <None Include="Resources\Lock48X48.png" />

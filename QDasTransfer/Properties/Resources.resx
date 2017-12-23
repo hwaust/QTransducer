@@ -127,11 +127,14 @@
   <data name="About" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\About.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Down128X128" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Down128X128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Export48X48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Export48X48.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Welcome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Welcome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SetPassword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SetPassword.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OpenAppFolder1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OpenAppFolder.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,17 +145,26 @@
   <data name="Start" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Start.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Up128X128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Up128X128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="gif_46_006" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gif_46_006.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Export48X48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Export48X48.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddFolder.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Close.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Transduce24X24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Transduce24X24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Down128X128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Down128X128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LoadConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LoadConfig.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,13 +175,16 @@
   <data name="Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Pause.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AddFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddFile.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Lock48X48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lock48X48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SetPassword" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SetPassword.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddPath" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddPath.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Transduce24X24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Transduce24X24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clear.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

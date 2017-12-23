@@ -45,54 +45,57 @@
             this.mnTranduceSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.设置OToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tiSystemConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.tiShowHideLog = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.tiClosingPassword = new System.Windows.Forms.ToolStripMenuItem();
             this.关于HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tbMain = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.lkAddManully = new System.Windows.Forms.LinkLabel();
-            this.lkCancelAllSelections = new System.Windows.Forms.LinkLabel();
-            this.lkReverseSelection = new System.Windows.Forms.LinkLabel();
-            this.lkAllSelections = new System.Windows.Forms.LinkLabel();
+            this.tpMainPage = new System.Windows.Forms.TabPage();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.lvInputList = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mnFolder = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnTransduce = new System.Windows.Forms.ToolStripMenuItem();
             this.mnOpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnOpenInputFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.mnDeleteItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.取消ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lkAddFolder = new System.Windows.Forms.LinkLabel();
-            this.lkAddLocalFile = new System.Windows.Forms.LinkLabel();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lkClearTransducedHistory = new System.Windows.Forms.LinkLabel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.tpOutputFilesPage = new System.Windows.Forms.TabPage();
             this.lvResults = new System.Windows.Forms.ListView();
             this.chTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chInput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOutput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pnLog = new System.Windows.Forms.Panel();
-            this.lkOpenLogFile = new System.Windows.Forms.LinkLabel();
             this.lvLogs = new System.Windows.Forms.ListView();
             this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colEvent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colContent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lkClearLog = new System.Windows.Forms.LinkLabel();
-            this.label7 = new System.Windows.Forms.Label();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tbLogPage = new System.Windows.Forms.TabPage();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.tiAddFile = new System.Windows.Forms.ToolStripButton();
+            this.tiAddFolder = new System.Windows.Forms.ToolStripButton();
+            this.tiAddPathManually = new System.Windows.Forms.ToolStripButton();
+            this.tiSelectAll = new System.Windows.Forms.ToolStripButton();
+            this.tiCancelAll = new System.Windows.Forms.ToolStripButton();
+            this.tiSelectReverse = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.mnTransduce = new System.Windows.Forms.ToolStripMenuItem();
+            this.tiSaveResults = new System.Windows.Forms.ToolStripButton();
+            this.tiClear = new System.Windows.Forms.ToolStripButton();
+            this.tiOpenLogFile = new System.Windows.Forms.ToolStripButton();
+            this.tiClearLogList = new System.Windows.Forms.ToolStripButton();
             this.tiStart = new System.Windows.Forms.ToolStripSplitButton();
             this.tiTranduceAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tiTransduceSelected = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,11 +106,14 @@
             this.tiConfig = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.tbMain.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tpMainPage.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.mnFolder.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.pnLog.SuspendLayout();
+            this.tpOutputFilesPage.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.tbLogPage.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
+            this.toolStrip4.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -206,7 +212,6 @@
             // 
             this.设置OToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tiSystemConfig,
-            this.tiShowHideLog,
             this.toolStripMenuItem1,
             this.tiClosingPassword});
             this.设置OToolStripMenuItem.Name = "设置OToolStripMenuItem";
@@ -216,26 +221,19 @@
             // tiSystemConfig
             // 
             this.tiSystemConfig.Name = "tiSystemConfig";
-            this.tiSystemConfig.Size = new System.Drawing.Size(167, 22);
+            this.tiSystemConfig.Size = new System.Drawing.Size(140, 22);
             this.tiSystemConfig.Text = "系统设置(&C)";
             this.tiSystemConfig.Click += new System.EventHandler(this.tiSystemConfig_Click);
-            // 
-            // tiShowHideLog
-            // 
-            this.tiShowHideLog.Name = "tiShowHideLog";
-            this.tiShowHideLog.Size = new System.Drawing.Size(167, 22);
-            this.tiShowHideLog.Text = "显示/隐藏日志(&L)";
-            this.tiShowHideLog.Click += new System.EventHandler(this.tiShowHideLog_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(164, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(137, 6);
             // 
             // tiClosingPassword
             // 
             this.tiClosingPassword.Name = "tiClosingPassword";
-            this.tiClosingPassword.Size = new System.Drawing.Size(167, 22);
+            this.tiClosingPassword.Size = new System.Drawing.Size(140, 22);
             this.tiClosingPassword.Text = "关机密码(&P)";
             // 
             // 关于HToolStripMenuItem
@@ -263,78 +261,51 @@
             // 
             // tbMain
             // 
-            this.tbMain.Controls.Add(this.tabPage1);
-            this.tbMain.Controls.Add(this.tabPage2);
+            this.tbMain.Controls.Add(this.tpMainPage);
+            this.tbMain.Controls.Add(this.tpOutputFilesPage);
+            this.tbMain.Controls.Add(this.tbLogPage);
             this.tbMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMain.Location = new System.Drawing.Point(0, 73);
+            this.tbMain.Location = new System.Drawing.Point(0, 81);
             this.tbMain.Name = "tbMain";
             this.tbMain.SelectedIndex = 0;
-            this.tbMain.Size = new System.Drawing.Size(1006, 325);
+            this.tbMain.Size = new System.Drawing.Size(1006, 458);
             this.tbMain.TabIndex = 19;
             // 
-            // tabPage1
+            // tpMainPage
             // 
-            this.tabPage1.Controls.Add(this.lkAddManully);
-            this.tabPage1.Controls.Add(this.lkCancelAllSelections);
-            this.tabPage1.Controls.Add(this.lkReverseSelection);
-            this.tabPage1.Controls.Add(this.lkAllSelections);
-            this.tabPage1.Controls.Add(this.lvInputList);
-            this.tabPage1.Controls.Add(this.lkAddFolder);
-            this.tabPage1.Controls.Add(this.lkAddLocalFile);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(998, 299);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "输入文件/目录";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tpMainPage.Controls.Add(this.toolStrip2);
+            this.tpMainPage.Controls.Add(this.lvInputList);
+            this.tpMainPage.Location = new System.Drawing.Point(4, 22);
+            this.tpMainPage.Name = "tpMainPage";
+            this.tpMainPage.Padding = new System.Windows.Forms.Padding(3);
+            this.tpMainPage.Size = new System.Drawing.Size(998, 432);
+            this.tpMainPage.TabIndex = 0;
+            this.tpMainPage.Text = "输入配置";
+            this.tpMainPage.UseVisualStyleBackColor = true;
             // 
-            // lkAddManully
+            // toolStrip2
             // 
-            this.lkAddManully.AutoSize = true;
-            this.lkAddManully.Location = new System.Drawing.Point(272, 11);
-            this.lkAddManully.Name = "lkAddManully";
-            this.lkAddManully.Size = new System.Drawing.Size(77, 12);
-            this.lkAddManully.TabIndex = 28;
-            this.lkAddManully.TabStop = true;
-            this.lkAddManully.Text = "手工添加路径";
-            this.lkAddManully.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkAddManully_LinkClicked);
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tiAddFile,
+            this.tiAddFolder,
+            this.tiAddPathManually,
+            this.toolStripSeparator3,
+            this.tiSelectAll,
+            this.tiCancelAll,
+            this.tiSelectReverse,
+            this.toolStripSeparator5,
+            this.toolStripButton1});
+            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(992, 31);
+            this.toolStrip2.TabIndex = 29;
+            this.toolStrip2.Text = "toolStrip2";
             // 
-            // lkCancelAllSelections
+            // toolStripSeparator3
             // 
-            this.lkCancelAllSelections.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lkCancelAllSelections.AutoSize = true;
-            this.lkCancelAllSelections.Location = new System.Drawing.Point(79, 11);
-            this.lkCancelAllSelections.Name = "lkCancelAllSelections";
-            this.lkCancelAllSelections.Size = new System.Drawing.Size(41, 12);
-            this.lkCancelAllSelections.TabIndex = 27;
-            this.lkCancelAllSelections.TabStop = true;
-            this.lkCancelAllSelections.Text = "全取消";
-            this.lkCancelAllSelections.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkCancelAllSelections_LinkClicked);
-            // 
-            // lkReverseSelection
-            // 
-            this.lkReverseSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lkReverseSelection.AutoSize = true;
-            this.lkReverseSelection.Location = new System.Drawing.Point(43, 11);
-            this.lkReverseSelection.Name = "lkReverseSelection";
-            this.lkReverseSelection.Size = new System.Drawing.Size(29, 12);
-            this.lkReverseSelection.TabIndex = 26;
-            this.lkReverseSelection.TabStop = true;
-            this.lkReverseSelection.Text = "反选";
-            this.lkReverseSelection.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkReverseSelection_LinkClicked);
-            // 
-            // lkAllSelections
-            // 
-            this.lkAllSelections.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lkAllSelections.AutoSize = true;
-            this.lkAllSelections.Location = new System.Drawing.Point(8, 11);
-            this.lkAllSelections.Name = "lkAllSelections";
-            this.lkAllSelections.Size = new System.Drawing.Size(29, 12);
-            this.lkAllSelections.TabIndex = 25;
-            this.lkAllSelections.TabStop = true;
-            this.lkAllSelections.Text = "全选";
-            this.lkAllSelections.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkAllSelections_LinkClicked);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // lvInputList
             // 
@@ -356,10 +327,10 @@
             this.lvInputList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2});
-            this.lvInputList.Location = new System.Drawing.Point(8, 28);
+            this.lvInputList.Location = new System.Drawing.Point(8, 37);
             this.lvInputList.MultiSelect = false;
             this.lvInputList.Name = "lvInputList";
-            this.lvInputList.Size = new System.Drawing.Size(981, 265);
+            this.lvInputList.Size = new System.Drawing.Size(981, 389);
             this.lvInputList.SmallImageList = this.imageList1;
             this.lvInputList.TabIndex = 21;
             this.lvInputList.UseCompatibleStateImageBehavior = false;
@@ -401,14 +372,6 @@
             this.mnFolder.Name = "mnFolder";
             this.mnFolder.Size = new System.Drawing.Size(183, 140);
             // 
-            // mnTransduce
-            // 
-            this.mnTransduce.Image = global::QDasTransfer.Properties.Resources.Tranduce16X16;
-            this.mnTransduce.Name = "mnTransduce";
-            this.mnTransduce.Size = new System.Drawing.Size(182, 26);
-            this.mnTransduce.Text = "转换选中项(&V)";
-            this.mnTransduce.Click += new System.EventHandler(this.mnTransduce_Click);
-            // 
             // mnOpenFile
             // 
             this.mnOpenFile.Name = "mnOpenFile";
@@ -441,72 +404,17 @@
             this.取消ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.取消ToolStripMenuItem.Text = "取消(&X)";
             // 
-            // lkAddFolder
+            // tpOutputFilesPage
             // 
-            this.lkAddFolder.AutoSize = true;
-            this.lkAddFolder.Location = new System.Drawing.Point(216, 11);
-            this.lkAddFolder.Name = "lkAddFolder";
-            this.lkAddFolder.Size = new System.Drawing.Size(53, 12);
-            this.lkAddFolder.TabIndex = 24;
-            this.lkAddFolder.TabStop = true;
-            this.lkAddFolder.Text = "添加目录";
-            this.lkAddFolder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkAddFolder_LinkClicked);
-            // 
-            // lkAddLocalFile
-            // 
-            this.lkAddLocalFile.AutoSize = true;
-            this.lkAddLocalFile.Location = new System.Drawing.Point(160, 11);
-            this.lkAddLocalFile.Name = "lkAddLocalFile";
-            this.lkAddLocalFile.Size = new System.Drawing.Size(53, 12);
-            this.lkAddLocalFile.TabIndex = 23;
-            this.lkAddLocalFile.TabStop = true;
-            this.lkAddLocalFile.Text = "添加文件";
-            this.lkAddLocalFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkAddFile_LinkClicked);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.lkClearTransducedHistory);
-            this.tabPage2.Controls.Add(this.linkLabel2);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.lvResults);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(998, 299);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "输出文件列表";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // lkClearTransducedHistory
-            // 
-            this.lkClearTransducedHistory.AutoSize = true;
-            this.lkClearTransducedHistory.Location = new System.Drawing.Point(162, 8);
-            this.lkClearTransducedHistory.Name = "lkClearTransducedHistory";
-            this.lkClearTransducedHistory.Size = new System.Drawing.Size(53, 12);
-            this.lkClearTransducedHistory.TabIndex = 27;
-            this.lkClearTransducedHistory.TabStop = true;
-            this.lkClearTransducedHistory.Text = "清空列表";
-            this.lkClearTransducedHistory.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkClearTransducedHistory_LinkClicked);
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(79, 8);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(77, 12);
-            this.linkLabel2.TabIndex = 26;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "保存转换状态";
-            this.linkLabel2.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 25;
-            this.label2.Text = "转换结果";
+            this.tpOutputFilesPage.Controls.Add(this.toolStrip4);
+            this.tpOutputFilesPage.Controls.Add(this.lvResults);
+            this.tpOutputFilesPage.Location = new System.Drawing.Point(4, 22);
+            this.tpOutputFilesPage.Name = "tpOutputFilesPage";
+            this.tpOutputFilesPage.Padding = new System.Windows.Forms.Padding(3);
+            this.tpOutputFilesPage.Size = new System.Drawing.Size(998, 432);
+            this.tpOutputFilesPage.TabIndex = 1;
+            this.tpOutputFilesPage.Text = "输出列表";
+            this.tpOutputFilesPage.UseVisualStyleBackColor = true;
             // 
             // lvResults
             // 
@@ -522,9 +430,9 @@
             this.lvResults.FullRowSelect = true;
             this.lvResults.GridLines = true;
             this.lvResults.HideSelection = false;
-            this.lvResults.Location = new System.Drawing.Point(8, 23);
+            this.lvResults.Location = new System.Drawing.Point(8, 37);
             this.lvResults.Name = "lvResults";
-            this.lvResults.Size = new System.Drawing.Size(984, 283);
+            this.lvResults.Size = new System.Drawing.Size(982, 389);
             this.lvResults.SmallImageList = this.imageList1;
             this.lvResults.TabIndex = 22;
             this.lvResults.UseCompatibleStateImageBehavior = false;
@@ -534,7 +442,7 @@
             // 
             this.chTime.DisplayIndex = 3;
             this.chTime.Text = "时间";
-            this.chTime.Width = 115;
+            this.chTime.Width = 103;
             // 
             // chInput
             // 
@@ -552,29 +460,7 @@
             // 
             this.chOutput.DisplayIndex = 2;
             this.chOutput.Text = "输出文件";
-            this.chOutput.Width = 480;
-            // 
-            // pnLog
-            // 
-            this.pnLog.Controls.Add(this.lkOpenLogFile);
-            this.pnLog.Controls.Add(this.lvLogs);
-            this.pnLog.Controls.Add(this.lkClearLog);
-            this.pnLog.Controls.Add(this.label7);
-            this.pnLog.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnLog.Location = new System.Drawing.Point(0, 398);
-            this.pnLog.Name = "pnLog";
-            this.pnLog.Size = new System.Drawing.Size(1006, 141);
-            this.pnLog.TabIndex = 20;
-            // 
-            // lkOpenLogFile
-            // 
-            this.lkOpenLogFile.AutoSize = true;
-            this.lkOpenLogFile.Location = new System.Drawing.Point(128, 9);
-            this.lkOpenLogFile.Name = "lkOpenLogFile";
-            this.lkOpenLogFile.Size = new System.Drawing.Size(77, 12);
-            this.lkOpenLogFile.TabIndex = 22;
-            this.lkOpenLogFile.TabStop = true;
-            this.lkOpenLogFile.Text = "打开日志文件";
+            this.chOutput.Width = 424;
             // 
             // lvLogs
             // 
@@ -590,9 +476,9 @@
             this.lvLogs.FullRowSelect = true;
             this.lvLogs.GridLines = true;
             this.lvLogs.HideSelection = false;
-            this.lvLogs.Location = new System.Drawing.Point(8, 24);
+            this.lvLogs.Location = new System.Drawing.Point(8, 37);
             this.lvLogs.Name = "lvLogs";
-            this.lvLogs.Size = new System.Drawing.Size(995, 114);
+            this.lvLogs.Size = new System.Drawing.Size(982, 389);
             this.lvLogs.TabIndex = 20;
             this.lvLogs.UseCompatibleStateImageBehavior = false;
             this.lvLogs.View = System.Windows.Forms.View.Details;
@@ -622,40 +508,20 @@
             this.colFile.Text = "相关文件";
             this.colFile.Width = 499;
             // 
-            // lkClearLog
-            // 
-            this.lkClearLog.AutoSize = true;
-            this.lkClearLog.Location = new System.Drawing.Point(69, 9);
-            this.lkClearLog.Name = "lkClearLog";
-            this.lkClearLog.Size = new System.Drawing.Size(53, 12);
-            this.lkClearLog.TabIndex = 21;
-            this.lkClearLog.TabStop = true;
-            this.lkClearLog.Text = "清除日志";
-            this.lkClearLog.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lkClearLog_LinkClicked);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 9);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "日志信息";
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 48);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 56);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 48);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 56);
             // 
             // toolStrip1
             // 
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tiStart,
             this.tiStop,
@@ -667,9 +533,151 @@
             this.tiConfig});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1006, 48);
+            this.toolStrip1.Size = new System.Drawing.Size(1006, 56);
             this.toolStrip1.TabIndex = 17;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
+            // 
+            // tbLogPage
+            // 
+            this.tbLogPage.Controls.Add(this.toolStrip3);
+            this.tbLogPage.Controls.Add(this.lvLogs);
+            this.tbLogPage.Location = new System.Drawing.Point(4, 22);
+            this.tbLogPage.Name = "tbLogPage";
+            this.tbLogPage.Padding = new System.Windows.Forms.Padding(3);
+            this.tbLogPage.Size = new System.Drawing.Size(998, 432);
+            this.tbLogPage.TabIndex = 2;
+            this.tbLogPage.Text = "系统日志";
+            this.tbLogPage.UseVisualStyleBackColor = true;
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tiOpenLogFile,
+            this.tiClearLogList});
+            this.toolStrip3.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(992, 31);
+            this.toolStrip3.TabIndex = 23;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // toolStrip4
+            // 
+            this.toolStrip4.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tiSaveResults,
+            this.tiClear});
+            this.toolStrip4.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip4.Name = "toolStrip4";
+            this.toolStrip4.Size = new System.Drawing.Size(992, 31);
+            this.toolStrip4.TabIndex = 28;
+            this.toolStrip4.Text = "toolStrip4";
+            // 
+            // tiAddFile
+            // 
+            this.tiAddFile.Image = ((System.Drawing.Image)(resources.GetObject("tiAddFile.Image")));
+            this.tiAddFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiAddFile.Name = "tiAddFile";
+            this.tiAddFile.Size = new System.Drawing.Size(84, 28);
+            this.tiAddFile.Text = "添加文件";
+            this.tiAddFile.Click += new System.EventHandler(this.tiAddFile_Click);
+            // 
+            // tiAddFolder
+            // 
+            this.tiAddFolder.Image = global::QDasTransfer.Properties.Resources.AddFolder;
+            this.tiAddFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiAddFolder.Name = "tiAddFolder";
+            this.tiAddFolder.Size = new System.Drawing.Size(96, 28);
+            this.tiAddFolder.Text = "添加文件夹";
+            this.tiAddFolder.Click += new System.EventHandler(this.tiAddFolder_Click);
+            // 
+            // tiAddPathManually
+            // 
+            this.tiAddPathManually.Image = global::QDasTransfer.Properties.Resources.AddPath;
+            this.tiAddPathManually.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiAddPathManually.Name = "tiAddPathManually";
+            this.tiAddPathManually.Size = new System.Drawing.Size(84, 28);
+            this.tiAddPathManually.Text = "手工添加";
+            this.tiAddPathManually.Click += new System.EventHandler(this.tiAddPathManually_Click);
+            // 
+            // tiSelectAll
+            // 
+            this.tiSelectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiSelectAll.Name = "tiSelectAll";
+            this.tiSelectAll.Size = new System.Drawing.Size(36, 28);
+            this.tiSelectAll.Text = "全选";
+            this.tiSelectAll.Click += new System.EventHandler(this.tiSelectAll_Click);
+            // 
+            // tiCancelAll
+            // 
+            this.tiCancelAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiCancelAll.Name = "tiCancelAll";
+            this.tiCancelAll.Size = new System.Drawing.Size(48, 28);
+            this.tiCancelAll.Text = "全取消";
+            this.tiCancelAll.Click += new System.EventHandler(this.tiCancelAll_Click);
+            // 
+            // tiSelectReverse
+            // 
+            this.tiSelectReverse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiSelectReverse.Name = "tiSelectReverse";
+            this.tiSelectReverse.Size = new System.Drawing.Size(36, 28);
+            this.tiSelectReverse.Text = "反选";
+            this.tiSelectReverse.Click += new System.EventHandler(this.tiSelectReverse_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = global::QDasTransfer.Properties.Resources.delete;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(96, 28);
+            this.toolStripButton1.Text = "删除选中项";
+            // 
+            // mnTransduce
+            // 
+            this.mnTransduce.Image = global::QDasTransfer.Properties.Resources.Tranduce16X16;
+            this.mnTransduce.Name = "mnTransduce";
+            this.mnTransduce.Size = new System.Drawing.Size(182, 26);
+            this.mnTransduce.Text = "转换选中项(&V)";
+            this.mnTransduce.Click += new System.EventHandler(this.mnTransduce_Click);
+            // 
+            // tiSaveResults
+            // 
+            this.tiSaveResults.Image = ((System.Drawing.Image)(resources.GetObject("tiSaveResults.Image")));
+            this.tiSaveResults.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiSaveResults.Name = "tiSaveResults";
+            this.tiSaveResults.Size = new System.Drawing.Size(108, 28);
+            this.tiSaveResults.Text = "保存转换结果";
+            // 
+            // tiClear
+            // 
+            this.tiClear.Image = global::QDasTransfer.Properties.Resources.clear;
+            this.tiClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiClear.Name = "tiClear";
+            this.tiClear.Size = new System.Drawing.Size(84, 28);
+            this.tiClear.Text = "清空列表";
+            this.tiClear.Click += new System.EventHandler(this.tiClear_Click);
+            // 
+            // tiOpenLogFile
+            // 
+            this.tiOpenLogFile.Image = ((System.Drawing.Image)(resources.GetObject("tiOpenLogFile.Image")));
+            this.tiOpenLogFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiOpenLogFile.Name = "tiOpenLogFile";
+            this.tiOpenLogFile.Size = new System.Drawing.Size(108, 28);
+            this.tiOpenLogFile.Text = "打开日志文件";
+            // 
+            // tiClearLogList
+            // 
+            this.tiClearLogList.Image = global::QDasTransfer.Properties.Resources.clear;
+            this.tiClearLogList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiClearLogList.Name = "tiClearLogList";
+            this.tiClearLogList.Size = new System.Drawing.Size(108, 28);
+            this.tiClearLogList.Text = "清除日志列表";
+            this.tiClearLogList.Click += new System.EventHandler(this.tiClearLogList_Click);
             // 
             // tiStart
             // 
@@ -679,7 +687,7 @@
             this.tiStart.Image = global::QDasTransfer.Properties.Resources.Transduce24X24;
             this.tiStart.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiStart.Name = "tiStart";
-            this.tiStart.Size = new System.Drawing.Size(87, 45);
+            this.tiStart.Size = new System.Drawing.Size(87, 53);
             this.tiStart.Text = "转换全部(&T)";
             this.tiStart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tiStart.ButtonClick += new System.EventHandler(this.tiStart_ButtonClick);
@@ -705,7 +713,7 @@
             this.tiStop.Image = global::QDasTransfer.Properties.Resources.Stop;
             this.tiStop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiStop.Name = "tiStop";
-            this.tiStop.Size = new System.Drawing.Size(75, 45);
+            this.tiStop.Size = new System.Drawing.Size(75, 53);
             this.tiStop.Text = "停止转换(&S)";
             this.tiStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tiStop.Click += new System.EventHandler(this.tiStop_Click);
@@ -715,7 +723,7 @@
             this.tiOpenAppFolder.Image = global::QDasTransfer.Properties.Resources.OpenAppFolder1;
             this.tiOpenAppFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiOpenAppFolder.Name = "tiOpenAppFolder";
-            this.tiOpenAppFolder.Size = new System.Drawing.Size(99, 45);
+            this.tiOpenAppFolder.Size = new System.Drawing.Size(99, 53);
             this.tiOpenAppFolder.Text = "打开程序目录(&P)";
             this.tiOpenAppFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tiOpenAppFolder.ToolTipText = "打开程序目录";
@@ -725,7 +733,7 @@
             this.tiOpenOutputFolder.Image = global::QDasTransfer.Properties.Resources.OpenAppFolder1;
             this.tiOpenOutputFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiOpenOutputFolder.Name = "tiOpenOutputFolder";
-            this.tiOpenOutputFolder.Size = new System.Drawing.Size(102, 45);
+            this.tiOpenOutputFolder.Size = new System.Drawing.Size(102, 53);
             this.tiOpenOutputFolder.Text = "打开输出目录(&O)";
             this.tiOpenOutputFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tiOpenOutputFolder.Click += new System.EventHandler(this.tiOpenOutputFolder_Click);
@@ -735,7 +743,7 @@
             this.tiLock.Image = global::QDasTransfer.Properties.Resources.Lock48X48;
             this.tiLock.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiLock.Name = "tiLock";
-            this.tiLock.Size = new System.Drawing.Size(74, 45);
+            this.tiLock.Size = new System.Drawing.Size(74, 53);
             this.tiLock.Text = "锁定窗口(&L)";
             this.tiLock.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tiLock.Click += new System.EventHandler(this.tiLock_Click);
@@ -745,7 +753,7 @@
             this.tiConfig.Image = global::QDasTransfer.Properties.Resources.gif_46_006;
             this.tiConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tiConfig.Name = "tiConfig";
-            this.tiConfig.Size = new System.Drawing.Size(52, 45);
+            this.tiConfig.Size = new System.Drawing.Size(52, 53);
             this.tiConfig.Text = "配置(&C)";
             this.tiConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tiConfig.Click += new System.EventHandler(this.tiConfig_Click);
@@ -758,7 +766,6 @@
             this.Controls.Add(this.tbMain);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnLog);
             this.Controls.Add(this.statusStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1022, 596);
@@ -770,15 +777,21 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tbMain.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tpMainPage.ResumeLayout(false);
+            this.tpMainPage.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.mnFolder.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.pnLog.ResumeLayout(false);
-            this.pnLog.PerformLayout();
+            this.tpOutputFilesPage.ResumeLayout(false);
+            this.tpOutputFilesPage.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.tbLogPage.ResumeLayout(false);
+            this.tbLogPage.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
+            this.toolStrip4.ResumeLayout(false);
+            this.toolStrip4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -803,21 +816,14 @@
 		private System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.TabControl tbMain;
-		private System.Windows.Forms.TabPage tabPage1;
-		private System.Windows.Forms.TabPage tabPage2;
-		private System.Windows.Forms.Panel pnLog;
-		private System.Windows.Forms.LinkLabel lkOpenLogFile;
+		private System.Windows.Forms.TabPage tpMainPage;
+		private System.Windows.Forms.TabPage tpOutputFilesPage;
 		private System.Windows.Forms.ListView lvLogs;
 		private System.Windows.Forms.ColumnHeader colID;
 		private System.Windows.Forms.ColumnHeader colTime;
 		private System.Windows.Forms.ColumnHeader colEvent;
 		private System.Windows.Forms.ColumnHeader colContent;
 		private System.Windows.Forms.ColumnHeader colFile;
-		private System.Windows.Forms.LinkLabel lkClearLog;
-		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.ToolStripMenuItem tiShowHideLog;
-		private System.Windows.Forms.LinkLabel lkAddFolder;
-		private System.Windows.Forms.LinkLabel lkAddLocalFile;
 		private System.Windows.Forms.ListView lvInputList;
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -828,9 +834,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem 取消ToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem mnTransduce;
-        private System.Windows.Forms.LinkLabel lkClearTransducedHistory;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView lvResults;
         private System.Windows.Forms.ColumnHeader chInput;
         private System.Windows.Forms.ColumnHeader chState;
@@ -848,11 +851,24 @@
 		private System.Windows.Forms.ToolStripButton tiConfig;
 		private System.Windows.Forms.ToolStrip toolStrip1;
 		private System.Windows.Forms.ToolStripMenuItem mnTranduceSelected;
-		private System.Windows.Forms.LinkLabel lkCancelAllSelections;
-		private System.Windows.Forms.LinkLabel lkReverseSelection;
-		private System.Windows.Forms.LinkLabel lkAllSelections;
 		private System.Windows.Forms.ToolStripMenuItem mnOpenFile;
 		private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.LinkLabel lkAddManully;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton tiAddFile;
+        private System.Windows.Forms.ToolStripButton tiAddFolder;
+        private System.Windows.Forms.ToolStripButton tiAddPathManually;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton tiSelectAll;
+        private System.Windows.Forms.ToolStripButton tiCancelAll;
+        private System.Windows.Forms.ToolStripButton tiSelectReverse;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.TabPage tbLogPage;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton tiOpenLogFile;
+        private System.Windows.Forms.ToolStripButton tiClearLogList;
+        private System.Windows.Forms.ToolStrip toolStrip4;
+        private System.Windows.Forms.ToolStripButton tiSaveResults;
+        private System.Windows.Forms.ToolStripButton tiClear;
     }
 }

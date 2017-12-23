@@ -36,28 +36,11 @@ namespace QDasTransfer
         {
 
         }
-
-        private void tiShowHideLog_Click(object sender, EventArgs e)
-        {
-            pnLog.Visible = !pnLog.Visible;
-        }
+ 
 
         private void lkAddFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = lastSelectedFolder;
-            ofd.Filter = pd.GetExtFilter();
-            ofd.FilterIndex = trans.pd.FilterIndex;
-            ofd.Multiselect = true;
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                lastSelectedFolder = Path.GetDirectoryName(ofd.FileNames[0]);
-                for (int i = 0; i < ofd.FileNames.Length; i++)
-                {
-                    InputPath ip = new InputPath(ofd.FileNames[i], 0);
-                    Funs.AddDistinctToListBox(lvInputList, ip);
-                }
-            }
+   
         }
 
         private void lkAddFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -500,6 +483,86 @@ namespace QDasTransfer
                 InputPath ip = new InputPath(ibf.NetPath);
                 Funs.AddDistinctToListBox(lvInputList, ip);
             }
+        }
+
+        private void tiAddFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = lastSelectedFolder;
+            ofd.Filter = pd.GetExtFilter();
+            ofd.FilterIndex = trans.pd.FilterIndex;
+            ofd.Multiselect = true;
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                lastSelectedFolder = Path.GetDirectoryName(ofd.FileNames[0]);
+                for (int i = 0; i < ofd.FileNames.Length; i++)
+                {
+                    InputPath ip = new InputPath(ofd.FileNames[i], 0);
+                    Funs.AddDistinctToListBox(lvInputList, ip);
+                }
+            }
+        }
+
+        private void tiAddFolder_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fb = new FolderBrowserDialog();
+            fb.SelectedPath = lastSelectedFolder;
+            if (fb.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                lastSelectedFolder = fb.SelectedPath;
+                InputPath ip = new InputPath(lastSelectedFolder, 1);
+                Funs.AddDistinctToListBox(lvInputList, ip);
+            }
+        }
+
+        private void tiAddPathManually_Click(object sender, EventArgs e)
+        {
+            NetpathInputForm ibf = new NetpathInputForm();
+            ibf.ShowDialog();
+            if (ibf.Confirmed)
+            {
+                lastSelectedFolder = Path.GetDirectoryName(ibf.NetPath);
+                InputPath ip = new InputPath(ibf.NetPath);
+                Funs.AddDistinctToListBox(lvInputList, ip);
+            }
+        }
+
+        private void tiSelectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvInputList.Items.Count; i++)
+                lvInputList.Items[i].Checked = true;
+        }
+
+        private void tiCancelAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvInputList.Items.Count; i++)
+                lvInputList.Items[i].Checked = false;
+        }
+
+        private void tiSelectReverse_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvInputList.Items.Count; i++)
+                lvInputList.Items[i].Checked = !lvInputList.Items[i].Checked;
+        }
+
+        private void tiClearLogList_Click(object sender, EventArgs e)
+        {
+            lvLogs.Items.Clear();
+        }
+
+        private void lkOpenLogFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void tiClear_Click(object sender, EventArgs e)
+        {
+            lvResults.Items.Clear();
         }
     }
 }
