@@ -3,12 +3,13 @@ using QDasTransfer.Classes;
 using QTrans.Classes;
 using QTrans.Helpers;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace QTrans.Company.Y2017
 {
     public class T201708_Antai_Density : TransferBase
-    { 
+    {
         int K4092 = -1;
         int K4062 = -1;
         int K4072 = -1;
@@ -20,14 +21,30 @@ namespace QTrans.Company.Y2017
             CompanyName = "北京安泰密度转换器";
             VertionInfo = "1.0 alpha";
             pd.SupportAutoTransducer = true;
-            pd.AddExt(".xlsx");
+            if (pd.extentions.Count == 0)
+            {
+                pd.AddExt(".xlsx");
+            }
         }
 
         public override bool TransferFile(string infile)
         {
             // string input = @"Z:\Projects\QTransducer\2017年\2017_07_Zeiss\sample.xls";
-            ExcelReader reader = new ExcelReader(infile);
+            ExcelReader reader = new ExcelReader(infile, MSOfficeVersion.Office2003);
 
+            List<QFile> qfs = new List<QFile>();
+
+            for (int i = 4; i < reader.getRowCount(); i++)
+            {
+                Console.WriteLine(reader.getData(i, 0));
+            }
+
+            return true;
+        }
+
+        public void test(string infile)
+        {
+            ExcelReader reader = new ExcelReader(infile);
             double days = double.Parse(reader.getData("D5"));
             double time = double.Parse(reader.getData("F5"));
             DateTime dt = new DateTime(1900, 1, 1).AddDays(-2).AddDays(days + time);
@@ -104,11 +121,11 @@ namespace QTrans.Company.Y2017
             }
 
             qf.ToDMode();
-              
-            return SaveDfq(qf, string.Format("{0}\\{1}_{2}.dfq", 
-                pd.GetOutDirectory(infile), // output directory
-                allinfo,   // filename from all info.
-                DateTimeHelper.ToFullString(DateTime.Now))); // time stamp.
+
+            //return SaveDfq(qf, string.Format("{0}\\{1}_{2}.dfq", 
+            //    pd.GetOutDirectory(infile), // output directory
+            //    allinfo,   // filename from all info.
+            //    DateTimeHelper.ToFullString(DateTime.Now))); // time stamp.
         }
     }
 }
