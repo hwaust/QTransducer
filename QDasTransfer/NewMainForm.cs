@@ -391,11 +391,14 @@ namespace QDasTransfer
         }
 
         private void mnDeleteItem_Click(object sender, EventArgs e)
-        {
-            for (int i = lvInputList.Items.Count - 1; i >= 0; i--)
+        { 
+           if(lvInputList.SelectedIndices.Count > 0)
             {
-                if (lvInputList.Items[i].Checked)
-                    lvInputList.Items.RemoveAt(i);
+                DialogResult dr = MessageBox.Show("是否删除当前选中项？", "删除确认", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if(dr == DialogResult.Yes)
+                {
+                    lvInputList.Items.RemoveAt(lvInputList.SelectedIndices[0]);
+                }
             }
         }
 
