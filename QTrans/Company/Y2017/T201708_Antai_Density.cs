@@ -56,6 +56,12 @@ namespace QTrans.Company.Y2017
                     string K2113 = reader.getData(i, 'N' - 65).Split(new char[] { '-', '_' })[1];
                     string K0008 = reader.getData(i, 'Q' - 65);
 
+                    if (K1001 == "" && K1002 == "")
+                    {
+                        LogList.Add(new TransLog(infile, "", "K1001 和 K1002 均为空。", LogType.Fail));
+                        break;
+                    }
+
                     QFile qf = getQFile(qfs, K1001, K1002);
 
                     if (qf.Charactericstics.Count == 0)
@@ -96,8 +102,9 @@ namespace QTrans.Company.Y2017
             foreach (QFile qf in qfs)
             {
                 qf.ToDMode();
-                string filename = outdir + "\\" + qf[1001] + "_" + qf[1002] + "_" + DateTimeHelper.ToFullString(DateTime.Now) + ".dfq";
-                SaveDfq(qf, filename);
+                string outfile= outdir + "\\" + qf[1001] + "_" + qf[1002] + "_" + DateTimeHelper.ToFullString(DateTime.Now) + ".dfq";
+                bool done = SaveDfq(qf, outfile); 
+                LogList.Add(new TransLog(infile, outfile, done? "转换成功": "转换失败。", done? LogType.Success: LogType.Fail));
             }
 
             return true;
