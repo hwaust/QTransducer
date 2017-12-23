@@ -1,5 +1,6 @@
 ﻿using QTrans.Classes;
 using System;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -27,7 +28,7 @@ namespace QDasTransfer.Forms
 
 		private void ConfigForm_Load(object sender, EventArgs e)
 		{
-            this.Text += "\t" + QTrans.TransferBase.appconfig;
+            this.Text += "  (当前配置文件: " + new FileInfo(QTrans.TransferBase.appconfig).FullName + ")";
 			// pgOutput
 			txtOutputFolder.Text = pd.OutputFolder;
 			txtTempFolder.Text = pd.TempFolder;

@@ -63,11 +63,6 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tiDeletePathes = new System.Windows.Forms.ToolStripButton();
             this.tiDeleteUnexisted = new System.Windows.Forms.ToolStripButton();
-            this.lvInputList = new QDasTransfer.Classes.MyListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mnFolder = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnTransduce = new System.Windows.Forms.ToolStripMenuItem();
             this.mnOpenFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,21 +74,10 @@
             this.tiSaveOutputFiles = new System.Windows.Forms.ToolStrip();
             this.tiSaveResults = new System.Windows.Forms.ToolStripButton();
             this.tiClear = new System.Windows.Forms.ToolStripButton();
-            this.lvResults = new QDasTransfer.Classes.MyListView();
-            this.chTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chInput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chOutput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tbLogPage = new System.Windows.Forms.TabPage();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.tiOpenLogFile = new System.Windows.Forms.ToolStripButton();
             this.tiClearLogList = new System.Windows.Forms.ToolStripButton();
-            this.lvLogs = new QDasTransfer.Classes.MyListView();
-            this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colEvent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colContent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -105,6 +89,22 @@
             this.tiOpenOutputFolder = new System.Windows.Forms.ToolStripButton();
             this.tiLock = new System.Windows.Forms.ToolStripButton();
             this.tiConfig = new System.Windows.Forms.ToolStripButton();
+            this.lvInputList = new QDasTransfer.Classes.MyListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvResults = new QDasTransfer.Classes.MyListView();
+            this.chTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chInput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chOutput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvLogs = new QDasTransfer.Classes.MyListView();
+            this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colEvent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colContent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.tbMain.SuspendLayout();
             this.tpMainPage.SuspendLayout();
@@ -386,58 +386,6 @@
             this.tiDeleteUnexisted.Size = new System.Drawing.Size(108, 28);
             this.tiDeleteUnexisted.Text = "移除已转换项";
             // 
-            // lvInputList
-            // 
-            this.lvInputList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvInputList.CheckBoxes = true;
-            this.lvInputList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.lvInputList.ContextMenuStrip = this.mnFolder;
-            this.lvInputList.FullRowSelect = true;
-            this.lvInputList.GridLines = true;
-            this.lvInputList.HideSelection = false;
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.StateImageIndex = 0;
-            this.lvInputList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-            this.lvInputList.Location = new System.Drawing.Point(8, 37);
-            this.lvInputList.MultiSelect = false;
-            this.lvInputList.Name = "lvInputList";
-            this.lvInputList.Size = new System.Drawing.Size(981, 389);
-            this.lvInputList.SmallImageList = this.imageList1;
-            this.lvInputList.TabIndex = 21;
-            this.lvInputList.UseCompatibleStateImageBehavior = false;
-            this.lvInputList.View = System.Windows.Forms.View.Details;
-            this.lvInputList.DoubleClick += new System.EventHandler(this.lvInputList_DoubleClick);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "输入路径";
-            this.columnHeader1.Width = 492;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "文件个数";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 76;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "上次转换时间";
-            this.columnHeader3.Width = 173;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "文件是否存在";
-            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader4.Width = 135;
-            // 
             // mnFolder
             // 
             this.mnFolder.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -533,52 +481,6 @@
             this.tiClear.Text = "清空列表";
             this.tiClear.Click += new System.EventHandler(this.tiClear_Click);
             // 
-            // lvResults
-            // 
-            this.lvResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chTime,
-            this.chInput,
-            this.chState,
-            this.chOutput});
-            this.lvResults.ContextMenuStrip = this.mnFolder;
-            this.lvResults.FullRowSelect = true;
-            this.lvResults.GridLines = true;
-            this.lvResults.HideSelection = false;
-            this.lvResults.Location = new System.Drawing.Point(8, 37);
-            this.lvResults.Name = "lvResults";
-            this.lvResults.Size = new System.Drawing.Size(982, 389);
-            this.lvResults.SmallImageList = this.imageList1;
-            this.lvResults.TabIndex = 22;
-            this.lvResults.UseCompatibleStateImageBehavior = false;
-            this.lvResults.View = System.Windows.Forms.View.Details;
-            // 
-            // chTime
-            // 
-            this.chTime.DisplayIndex = 3;
-            this.chTime.Text = "时间";
-            this.chTime.Width = 103;
-            // 
-            // chInput
-            // 
-            this.chInput.DisplayIndex = 0;
-            this.chInput.Text = "输入文件";
-            this.chInput.Width = 318;
-            // 
-            // chState
-            // 
-            this.chState.DisplayIndex = 1;
-            this.chState.Text = "状态";
-            this.chState.Width = 92;
-            // 
-            // chOutput
-            // 
-            this.chOutput.DisplayIndex = 2;
-            this.chOutput.Text = "输出文件";
-            this.chOutput.Width = 424;
-            // 
             // tbLogPage
             // 
             this.tbLogPage.Controls.Add(this.toolStrip3);
@@ -620,52 +522,6 @@
             this.tiClearLogList.Size = new System.Drawing.Size(108, 28);
             this.tiClearLogList.Text = "清除日志列表";
             this.tiClearLogList.Click += new System.EventHandler(this.tiClearLogList_Click);
-            // 
-            // lvLogs
-            // 
-            this.lvLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvLogs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colID,
-            this.colTime,
-            this.colEvent,
-            this.colContent,
-            this.colFile});
-            this.lvLogs.FullRowSelect = true;
-            this.lvLogs.GridLines = true;
-            this.lvLogs.HideSelection = false;
-            this.lvLogs.Location = new System.Drawing.Point(8, 37);
-            this.lvLogs.Name = "lvLogs";
-            this.lvLogs.Size = new System.Drawing.Size(982, 389);
-            this.lvLogs.TabIndex = 20;
-            this.lvLogs.UseCompatibleStateImageBehavior = false;
-            this.lvLogs.View = System.Windows.Forms.View.Details;
-            // 
-            // colID
-            // 
-            this.colID.Text = "编号";
-            this.colID.Width = 63;
-            // 
-            // colTime
-            // 
-            this.colTime.Text = "时间";
-            this.colTime.Width = 138;
-            // 
-            // colEvent
-            // 
-            this.colEvent.Text = "事件";
-            this.colEvent.Width = 47;
-            // 
-            // colContent
-            // 
-            this.colContent.Text = "说明";
-            this.colContent.Width = 212;
-            // 
-            // colFile
-            // 
-            this.colFile.Text = "相关文件";
-            this.colFile.Width = 499;
             // 
             // toolStripSeparator1
             // 
@@ -774,6 +630,151 @@
             this.tiConfig.Text = "配置(&C)";
             this.tiConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tiConfig.Click += new System.EventHandler(this.tiConfig_Click);
+            // 
+            // lvInputList
+            // 
+            this.lvInputList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvInputList.CheckBoxes = true;
+            this.lvInputList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.lvInputList.ContextMenuStrip = this.mnFolder;
+            this.lvInputList.FullRowSelect = true;
+            this.lvInputList.GridLines = true;
+            this.lvInputList.HideSelection = false;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
+            this.lvInputList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2});
+            this.lvInputList.Location = new System.Drawing.Point(8, 37);
+            this.lvInputList.MultiSelect = false;
+            this.lvInputList.Name = "lvInputList";
+            this.lvInputList.Size = new System.Drawing.Size(981, 389);
+            this.lvInputList.SmallImageList = this.imageList1;
+            this.lvInputList.TabIndex = 21;
+            this.lvInputList.UseCompatibleStateImageBehavior = false;
+            this.lvInputList.View = System.Windows.Forms.View.Details;
+            this.lvInputList.DoubleClick += new System.EventHandler(this.lvInputList_DoubleClick);
+            this.lvInputList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvInputList_MouseClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "输入路径";
+            this.columnHeader1.Width = 492;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "文件个数";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 76;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "上次转换时间";
+            this.columnHeader3.Width = 173;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "文件是否存在";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 135;
+            // 
+            // lvResults
+            // 
+            this.lvResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chTime,
+            this.chInput,
+            this.chState,
+            this.chOutput});
+            this.lvResults.ContextMenuStrip = this.mnFolder;
+            this.lvResults.FullRowSelect = true;
+            this.lvResults.GridLines = true;
+            this.lvResults.HideSelection = false;
+            this.lvResults.Location = new System.Drawing.Point(8, 37);
+            this.lvResults.Name = "lvResults";
+            this.lvResults.Size = new System.Drawing.Size(982, 389);
+            this.lvResults.SmallImageList = this.imageList1;
+            this.lvResults.TabIndex = 22;
+            this.lvResults.UseCompatibleStateImageBehavior = false;
+            this.lvResults.View = System.Windows.Forms.View.Details;
+            // 
+            // chTime
+            // 
+            this.chTime.DisplayIndex = 3;
+            this.chTime.Text = "时间";
+            this.chTime.Width = 103;
+            // 
+            // chInput
+            // 
+            this.chInput.DisplayIndex = 0;
+            this.chInput.Text = "输入文件";
+            this.chInput.Width = 318;
+            // 
+            // chState
+            // 
+            this.chState.DisplayIndex = 1;
+            this.chState.Text = "状态";
+            this.chState.Width = 92;
+            // 
+            // chOutput
+            // 
+            this.chOutput.DisplayIndex = 2;
+            this.chOutput.Text = "输出文件";
+            this.chOutput.Width = 424;
+            // 
+            // lvLogs
+            // 
+            this.lvLogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvLogs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colID,
+            this.colTime,
+            this.colEvent,
+            this.colContent,
+            this.colFile});
+            this.lvLogs.FullRowSelect = true;
+            this.lvLogs.GridLines = true;
+            this.lvLogs.HideSelection = false;
+            this.lvLogs.Location = new System.Drawing.Point(8, 37);
+            this.lvLogs.Name = "lvLogs";
+            this.lvLogs.Size = new System.Drawing.Size(982, 389);
+            this.lvLogs.TabIndex = 20;
+            this.lvLogs.UseCompatibleStateImageBehavior = false;
+            this.lvLogs.View = System.Windows.Forms.View.Details;
+            // 
+            // colID
+            // 
+            this.colID.Text = "编号";
+            this.colID.Width = 63;
+            // 
+            // colTime
+            // 
+            this.colTime.Text = "时间";
+            this.colTime.Width = 138;
+            // 
+            // colEvent
+            // 
+            this.colEvent.Text = "事件";
+            this.colEvent.Width = 47;
+            // 
+            // colContent
+            // 
+            this.colContent.Text = "说明";
+            this.colContent.Width = 212;
+            // 
+            // colFile
+            // 
+            this.colFile.Text = "相关文件";
+            this.colFile.Width = 499;
             // 
             // NewMainForm
             // 

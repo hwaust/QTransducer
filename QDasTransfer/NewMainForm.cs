@@ -599,5 +599,13 @@ namespace QDasTransfer
         {
 
         }
+
+        private void lvInputList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(lvInputList.SelectedIndices.Count > 0)
+            {
+                lvInputList.SelectedItems[0].Checked = !lvInputList.SelectedItems[0].Checked;
+            }
+        }
     }
 }
