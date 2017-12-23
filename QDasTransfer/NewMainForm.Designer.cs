@@ -30,8 +30,8 @@
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewMainForm));
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("C:\\Qdas\\data\\201502232", "Folder16X16.png");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("D:\\text.txt", 0);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("C:\\Qdas\\data\\201502232", "Folder16X16.png");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("D:\\text.txt", 0);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,24 +53,41 @@
             this.tbMain = new System.Windows.Forms.TabControl();
             this.tpMainPage = new System.Windows.Forms.TabPage();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tiAddFile = new System.Windows.Forms.ToolStripButton();
+            this.tiAddFolder = new System.Windows.Forms.ToolStripButton();
+            this.tiAddPathManually = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tiSelectAll = new System.Windows.Forms.ToolStripButton();
+            this.tiCancelAll = new System.Windows.Forms.ToolStripButton();
+            this.tiSelectReverse = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tiDeletePathes = new System.Windows.Forms.ToolStripButton();
+            this.tiDeleteUnexisted = new System.Windows.Forms.ToolStripButton();
             this.lvInputList = new QDasTransfer.Classes.MyListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mnFolder = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnTransduce = new System.Windows.Forms.ToolStripMenuItem();
             this.mnOpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnOpenInputFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.mnDeleteItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.取消ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tpOutputFilesPage = new System.Windows.Forms.TabPage();
+            this.tiSaveOutputFiles = new System.Windows.Forms.ToolStrip();
+            this.tiSaveResults = new System.Windows.Forms.ToolStripButton();
+            this.tiClear = new System.Windows.Forms.ToolStripButton();
             this.lvResults = new QDasTransfer.Classes.MyListView();
             this.chTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chInput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOutput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tbLogPage = new System.Windows.Forms.TabPage();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.tiOpenLogFile = new System.Windows.Forms.ToolStripButton();
+            this.tiClearLogList = new System.Windows.Forms.ToolStripButton();
             this.lvLogs = new QDasTransfer.Classes.MyListView();
             this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -80,22 +97,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tbLogPage = new System.Windows.Forms.TabPage();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-            this.tiAddFile = new System.Windows.Forms.ToolStripButton();
-            this.tiAddFolder = new System.Windows.Forms.ToolStripButton();
-            this.tiAddPathManually = new System.Windows.Forms.ToolStripButton();
-            this.tiSelectAll = new System.Windows.Forms.ToolStripButton();
-            this.tiCancelAll = new System.Windows.Forms.ToolStripButton();
-            this.tiSelectReverse = new System.Windows.Forms.ToolStripButton();
-            this.tiDeletePathes = new System.Windows.Forms.ToolStripButton();
-            this.mnTransduce = new System.Windows.Forms.ToolStripMenuItem();
-            this.tiSaveResults = new System.Windows.Forms.ToolStripButton();
-            this.tiClear = new System.Windows.Forms.ToolStripButton();
-            this.tiOpenLogFile = new System.Windows.Forms.ToolStripButton();
-            this.tiClearLogList = new System.Windows.Forms.ToolStripButton();
             this.tiStart = new System.Windows.Forms.ToolStripSplitButton();
             this.tiTranduceAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tiTransduceSelected = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,10 +111,10 @@
             this.toolStrip2.SuspendLayout();
             this.mnFolder.SuspendLayout();
             this.tpOutputFilesPage.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.tiSaveOutputFiles.SuspendLayout();
             this.tbLogPage.SuspendLayout();
             this.toolStrip3.SuspendLayout();
-            this.toolStrip4.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -155,33 +156,33 @@
             // mnNewConfig
             // 
             this.mnNewConfig.Name = "mnNewConfig";
-            this.mnNewConfig.Size = new System.Drawing.Size(152, 22);
+            this.mnNewConfig.Size = new System.Drawing.Size(142, 22);
             this.mnNewConfig.Text = "重置配置(&N)";
             this.mnNewConfig.Click += new System.EventHandler(this.mnNewConfig_Click);
             // 
             // mnSaveConfig
             // 
             this.mnSaveConfig.Name = "mnSaveConfig";
-            this.mnSaveConfig.Size = new System.Drawing.Size(152, 22);
+            this.mnSaveConfig.Size = new System.Drawing.Size(142, 22);
             this.mnSaveConfig.Text = "保存配置(&S)";
             this.mnSaveConfig.Click += new System.EventHandler(this.mnSaveConfig_Click);
             // 
             // mnExportConfig
             // 
             this.mnExportConfig.Name = "mnExportConfig";
-            this.mnExportConfig.Size = new System.Drawing.Size(152, 22);
+            this.mnExportConfig.Size = new System.Drawing.Size(142, 22);
             this.mnExportConfig.Text = "导出配置(A)";
             this.mnExportConfig.Click += new System.EventHandler(this.mnExportConfig_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(139, 6);
             // 
             // mnExit
             // 
             this.mnExit.Name = "mnExit";
-            this.mnExit.Size = new System.Drawing.Size(152, 22);
+            this.mnExit.Size = new System.Drawing.Size(142, 22);
             this.mnExit.Text = "退出(&X)";
             // 
             // 生成RToolStripMenuItem
@@ -222,19 +223,19 @@
             // tiSystemConfig
             // 
             this.tiSystemConfig.Name = "tiSystemConfig";
-            this.tiSystemConfig.Size = new System.Drawing.Size(152, 22);
+            this.tiSystemConfig.Size = new System.Drawing.Size(140, 22);
             this.tiSystemConfig.Text = "系统设置(&C)";
             this.tiSystemConfig.Click += new System.EventHandler(this.tiSystemConfig_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(137, 6);
             // 
             // tiClosingPassword
             // 
             this.tiClosingPassword.Name = "tiClosingPassword";
-            this.tiClosingPassword.Size = new System.Drawing.Size(152, 22);
+            this.tiClosingPassword.Size = new System.Drawing.Size(140, 22);
             this.tiClosingPassword.Text = "关机密码(&P)";
             // 
             // 关于HToolStripMenuItem
@@ -248,7 +249,7 @@
             // 关于AToolStripMenuItem
             // 
             this.关于AToolStripMenuItem.Name = "关于AToolStripMenuItem";
-            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.关于AToolStripMenuItem.Text = "关于(&A)";
             // 
             // statusStrip1
@@ -296,17 +297,94 @@
             this.tiCancelAll,
             this.tiSelectReverse,
             this.toolStripSeparator5,
-            this.tiDeletePathes});
+            this.tiDeletePathes,
+            this.tiDeleteUnexisted});
             this.toolStrip2.Location = new System.Drawing.Point(3, 3);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(992, 31);
             this.toolStrip2.TabIndex = 29;
             this.toolStrip2.Text = "toolStrip2";
             // 
+            // tiAddFile
+            // 
+            this.tiAddFile.Image = ((System.Drawing.Image)(resources.GetObject("tiAddFile.Image")));
+            this.tiAddFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiAddFile.Name = "tiAddFile";
+            this.tiAddFile.Size = new System.Drawing.Size(84, 28);
+            this.tiAddFile.Text = "添加文件";
+            this.tiAddFile.Click += new System.EventHandler(this.tiAddFile_Click);
+            // 
+            // tiAddFolder
+            // 
+            this.tiAddFolder.Image = global::QDasTransfer.Properties.Resources.AddFolder;
+            this.tiAddFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiAddFolder.Name = "tiAddFolder";
+            this.tiAddFolder.Size = new System.Drawing.Size(96, 28);
+            this.tiAddFolder.Text = "添加文件夹";
+            this.tiAddFolder.Click += new System.EventHandler(this.tiAddFolder_Click);
+            // 
+            // tiAddPathManually
+            // 
+            this.tiAddPathManually.Image = global::QDasTransfer.Properties.Resources.AddPath;
+            this.tiAddPathManually.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiAddPathManually.Name = "tiAddPathManually";
+            this.tiAddPathManually.Size = new System.Drawing.Size(84, 28);
+            this.tiAddPathManually.Text = "手工添加";
+            this.tiAddPathManually.Click += new System.EventHandler(this.tiAddPathManually_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
+            // 
+            // tiSelectAll
+            // 
+            this.tiSelectAll.Image = global::QDasTransfer.Properties.Resources.SelectAll_24;
+            this.tiSelectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiSelectAll.Name = "tiSelectAll";
+            this.tiSelectAll.Size = new System.Drawing.Size(60, 28);
+            this.tiSelectAll.Text = "全选";
+            this.tiSelectAll.Click += new System.EventHandler(this.tiSelectAll_Click);
+            // 
+            // tiCancelAll
+            // 
+            this.tiCancelAll.Image = global::QDasTransfer.Properties.Resources.CancelAll_24;
+            this.tiCancelAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiCancelAll.Name = "tiCancelAll";
+            this.tiCancelAll.Size = new System.Drawing.Size(72, 28);
+            this.tiCancelAll.Text = "全取消";
+            this.tiCancelAll.Click += new System.EventHandler(this.tiCancelAll_Click);
+            // 
+            // tiSelectReverse
+            // 
+            this.tiSelectReverse.Image = global::QDasTransfer.Properties.Resources.ReverseAll_24;
+            this.tiSelectReverse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiSelectReverse.Name = "tiSelectReverse";
+            this.tiSelectReverse.Size = new System.Drawing.Size(60, 28);
+            this.tiSelectReverse.Text = "反选";
+            this.tiSelectReverse.Click += new System.EventHandler(this.tiSelectReverse_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
+            // 
+            // tiDeletePathes
+            // 
+            this.tiDeletePathes.Image = global::QDasTransfer.Properties.Resources.delete;
+            this.tiDeletePathes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiDeletePathes.Name = "tiDeletePathes";
+            this.tiDeletePathes.Size = new System.Drawing.Size(96, 28);
+            this.tiDeletePathes.Text = "删除选中项";
+            this.tiDeletePathes.Click += new System.EventHandler(this.tiDeletePathes_Click);
+            // 
+            // tiDeleteUnexisted
+            // 
+            this.tiDeleteUnexisted.Image = global::QDasTransfer.Properties.Resources.clear;
+            this.tiDeleteUnexisted.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiDeleteUnexisted.Name = "tiDeleteUnexisted";
+            this.tiDeleteUnexisted.Size = new System.Drawing.Size(108, 28);
+            this.tiDeleteUnexisted.Text = "移除已转换项";
             // 
             // lvInputList
             // 
@@ -323,11 +401,11 @@
             this.lvInputList.FullRowSelect = true;
             this.lvInputList.GridLines = true;
             this.lvInputList.HideSelection = false;
-            listViewItem3.StateImageIndex = 0;
-            listViewItem4.StateImageIndex = 0;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.lvInputList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
             this.lvInputList.Location = new System.Drawing.Point(8, 37);
             this.lvInputList.MultiSelect = false;
             this.lvInputList.Name = "lvInputList";
@@ -373,6 +451,14 @@
             this.mnFolder.Name = "mnFolder";
             this.mnFolder.Size = new System.Drawing.Size(183, 140);
             // 
+            // mnTransduce
+            // 
+            this.mnTransduce.Image = global::QDasTransfer.Properties.Resources.Tranduce16X16;
+            this.mnTransduce.Name = "mnTransduce";
+            this.mnTransduce.Size = new System.Drawing.Size(182, 26);
+            this.mnTransduce.Text = "转换选中项(&V)";
+            this.mnTransduce.Click += new System.EventHandler(this.mnTransduce_Click);
+            // 
             // mnOpenFile
             // 
             this.mnOpenFile.Name = "mnOpenFile";
@@ -407,7 +493,7 @@
             // 
             // tpOutputFilesPage
             // 
-            this.tpOutputFilesPage.Controls.Add(this.toolStrip4);
+            this.tpOutputFilesPage.Controls.Add(this.tiSaveOutputFiles);
             this.tpOutputFilesPage.Controls.Add(this.lvResults);
             this.tpOutputFilesPage.Location = new System.Drawing.Point(4, 22);
             this.tpOutputFilesPage.Name = "tpOutputFilesPage";
@@ -416,6 +502,36 @@
             this.tpOutputFilesPage.TabIndex = 1;
             this.tpOutputFilesPage.Text = "输出列表";
             this.tpOutputFilesPage.UseVisualStyleBackColor = true;
+            // 
+            // tiSaveOutputFiles
+            // 
+            this.tiSaveOutputFiles.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.tiSaveOutputFiles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tiSaveResults,
+            this.tiClear});
+            this.tiSaveOutputFiles.Location = new System.Drawing.Point(3, 3);
+            this.tiSaveOutputFiles.Name = "tiSaveOutputFiles";
+            this.tiSaveOutputFiles.Size = new System.Drawing.Size(992, 31);
+            this.tiSaveOutputFiles.TabIndex = 28;
+            this.tiSaveOutputFiles.Text = "toolStrip4";
+            // 
+            // tiSaveResults
+            // 
+            this.tiSaveResults.Image = global::QDasTransfer.Properties.Resources.Save;
+            this.tiSaveResults.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiSaveResults.Name = "tiSaveResults";
+            this.tiSaveResults.Size = new System.Drawing.Size(108, 28);
+            this.tiSaveResults.Text = "保存转换结果";
+            this.tiSaveResults.Click += new System.EventHandler(this.tiSaveResults_Click);
+            // 
+            // tiClear
+            // 
+            this.tiClear.Image = global::QDasTransfer.Properties.Resources.clear;
+            this.tiClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiClear.Name = "tiClear";
+            this.tiClear.Size = new System.Drawing.Size(84, 28);
+            this.tiClear.Text = "清空列表";
+            this.tiClear.Click += new System.EventHandler(this.tiClear_Click);
             // 
             // lvResults
             // 
@@ -462,6 +578,48 @@
             this.chOutput.DisplayIndex = 2;
             this.chOutput.Text = "输出文件";
             this.chOutput.Width = 424;
+            // 
+            // tbLogPage
+            // 
+            this.tbLogPage.Controls.Add(this.toolStrip3);
+            this.tbLogPage.Controls.Add(this.lvLogs);
+            this.tbLogPage.Location = new System.Drawing.Point(4, 22);
+            this.tbLogPage.Name = "tbLogPage";
+            this.tbLogPage.Padding = new System.Windows.Forms.Padding(3);
+            this.tbLogPage.Size = new System.Drawing.Size(998, 432);
+            this.tbLogPage.TabIndex = 2;
+            this.tbLogPage.Text = "系统日志";
+            this.tbLogPage.UseVisualStyleBackColor = true;
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tiOpenLogFile,
+            this.tiClearLogList});
+            this.toolStrip3.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(992, 31);
+            this.toolStrip3.TabIndex = 23;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // tiOpenLogFile
+            // 
+            this.tiOpenLogFile.Image = global::QDasTransfer.Properties.Resources.Open;
+            this.tiOpenLogFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiOpenLogFile.Name = "tiOpenLogFile";
+            this.tiOpenLogFile.Size = new System.Drawing.Size(108, 28);
+            this.tiOpenLogFile.Text = "打开日志文件";
+            this.tiOpenLogFile.Click += new System.EventHandler(this.tiOpenLogFile_Click);
+            // 
+            // tiClearLogList
+            // 
+            this.tiClearLogList.Image = global::QDasTransfer.Properties.Resources.clear;
+            this.tiClearLogList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiClearLogList.Name = "tiClearLogList";
+            this.tiClearLogList.Size = new System.Drawing.Size(108, 28);
+            this.tiClearLogList.Text = "清除日志列表";
+            this.tiClearLogList.Click += new System.EventHandler(this.tiClearLogList_Click);
             // 
             // lvLogs
             // 
@@ -537,153 +695,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(1006, 56);
             this.toolStrip1.TabIndex = 17;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
-            // 
-            // tbLogPage
-            // 
-            this.tbLogPage.Controls.Add(this.toolStrip3);
-            this.tbLogPage.Controls.Add(this.lvLogs);
-            this.tbLogPage.Location = new System.Drawing.Point(4, 22);
-            this.tbLogPage.Name = "tbLogPage";
-            this.tbLogPage.Padding = new System.Windows.Forms.Padding(3);
-            this.tbLogPage.Size = new System.Drawing.Size(998, 432);
-            this.tbLogPage.TabIndex = 2;
-            this.tbLogPage.Text = "系统日志";
-            this.tbLogPage.UseVisualStyleBackColor = true;
-            // 
-            // toolStrip3
-            // 
-            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tiOpenLogFile,
-            this.tiClearLogList});
-            this.toolStrip3.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(992, 31);
-            this.toolStrip3.TabIndex = 23;
-            this.toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStrip4
-            // 
-            this.toolStrip4.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tiSaveResults,
-            this.tiClear});
-            this.toolStrip4.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(992, 31);
-            this.toolStrip4.TabIndex = 28;
-            this.toolStrip4.Text = "toolStrip4";
-            // 
-            // tiAddFile
-            // 
-            this.tiAddFile.Image = ((System.Drawing.Image)(resources.GetObject("tiAddFile.Image")));
-            this.tiAddFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiAddFile.Name = "tiAddFile";
-            this.tiAddFile.Size = new System.Drawing.Size(84, 28);
-            this.tiAddFile.Text = "添加文件";
-            this.tiAddFile.Click += new System.EventHandler(this.tiAddFile_Click);
-            // 
-            // tiAddFolder
-            // 
-            this.tiAddFolder.Image = global::QDasTransfer.Properties.Resources.AddFolder;
-            this.tiAddFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiAddFolder.Name = "tiAddFolder";
-            this.tiAddFolder.Size = new System.Drawing.Size(96, 28);
-            this.tiAddFolder.Text = "添加文件夹";
-            this.tiAddFolder.Click += new System.EventHandler(this.tiAddFolder_Click);
-            // 
-            // tiAddPathManually
-            // 
-            this.tiAddPathManually.Image = global::QDasTransfer.Properties.Resources.AddPath;
-            this.tiAddPathManually.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiAddPathManually.Name = "tiAddPathManually";
-            this.tiAddPathManually.Size = new System.Drawing.Size(84, 28);
-            this.tiAddPathManually.Text = "手工添加";
-            this.tiAddPathManually.Click += new System.EventHandler(this.tiAddPathManually_Click);
-            // 
-            // tiSelectAll
-            // 
-            this.tiSelectAll.Image = global::QDasTransfer.Properties.Resources.SelectAll_24;
-            this.tiSelectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiSelectAll.Name = "tiSelectAll";
-            this.tiSelectAll.Size = new System.Drawing.Size(60, 28);
-            this.tiSelectAll.Text = "全选";
-            this.tiSelectAll.Click += new System.EventHandler(this.tiSelectAll_Click);
-            // 
-            // tiCancelAll
-            // 
-            this.tiCancelAll.Image = global::QDasTransfer.Properties.Resources.CancelAll_24;
-            this.tiCancelAll.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiCancelAll.Name = "tiCancelAll";
-            this.tiCancelAll.Size = new System.Drawing.Size(72, 28);
-            this.tiCancelAll.Text = "全取消";
-            this.tiCancelAll.Click += new System.EventHandler(this.tiCancelAll_Click);
-            // 
-            // tiSelectReverse
-            // 
-            this.tiSelectReverse.Image = global::QDasTransfer.Properties.Resources.ReverseAll_24;
-            this.tiSelectReverse.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiSelectReverse.Name = "tiSelectReverse";
-            this.tiSelectReverse.Size = new System.Drawing.Size(60, 28);
-            this.tiSelectReverse.Text = "反选";
-            this.tiSelectReverse.Click += new System.EventHandler(this.tiSelectReverse_Click);
-            // 
-            // tiDeletePathes
-            // 
-            this.tiDeletePathes.Image = global::QDasTransfer.Properties.Resources.delete;
-            this.tiDeletePathes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiDeletePathes.Name = "tiDeletePathes";
-            this.tiDeletePathes.Size = new System.Drawing.Size(96, 28);
-            this.tiDeletePathes.Text = "删除选中项";
-            this.tiDeletePathes.Click += new System.EventHandler(this.tiDeletePathes_Click);
-            // 
-            // mnTransduce
-            // 
-            this.mnTransduce.Image = global::QDasTransfer.Properties.Resources.Tranduce16X16;
-            this.mnTransduce.Name = "mnTransduce";
-            this.mnTransduce.Size = new System.Drawing.Size(182, 26);
-            this.mnTransduce.Text = "转换选中项(&V)";
-            this.mnTransduce.Click += new System.EventHandler(this.mnTransduce_Click);
-            // 
-            // tiSaveResults
-            // 
-            this.tiSaveResults.Image = global::QDasTransfer.Properties.Resources.Save;
-            this.tiSaveResults.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiSaveResults.Name = "tiSaveResults";
-            this.tiSaveResults.Size = new System.Drawing.Size(108, 28);
-            this.tiSaveResults.Text = "保存转换结果";
-            // 
-            // tiClear
-            // 
-            this.tiClear.Image = global::QDasTransfer.Properties.Resources.clear;
-            this.tiClear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiClear.Name = "tiClear";
-            this.tiClear.Size = new System.Drawing.Size(84, 28);
-            this.tiClear.Text = "清空列表";
-            this.tiClear.Click += new System.EventHandler(this.tiClear_Click);
-            // 
-            // tiOpenLogFile
-            // 
-            this.tiOpenLogFile.Image = global::QDasTransfer.Properties.Resources.Open;
-            this.tiOpenLogFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiOpenLogFile.Name = "tiOpenLogFile";
-            this.tiOpenLogFile.Size = new System.Drawing.Size(108, 28);
-            this.tiOpenLogFile.Text = "打开日志文件";
-            this.tiOpenLogFile.Click += new System.EventHandler(this.tiOpenLogFile_Click);
-            // 
-            // tiClearLogList
-            // 
-            this.tiClearLogList.Image = global::QDasTransfer.Properties.Resources.clear;
-            this.tiClearLogList.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tiClearLogList.Name = "tiClearLogList";
-            this.tiClearLogList.Size = new System.Drawing.Size(108, 28);
-            this.tiClearLogList.Text = "清除日志列表";
-            this.tiClearLogList.Click += new System.EventHandler(this.tiClearLogList_Click);
             // 
             // tiStart
             // 
@@ -790,14 +801,14 @@
             this.mnFolder.ResumeLayout(false);
             this.tpOutputFilesPage.ResumeLayout(false);
             this.tpOutputFilesPage.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.tiSaveOutputFiles.ResumeLayout(false);
+            this.tiSaveOutputFiles.PerformLayout();
             this.tbLogPage.ResumeLayout(false);
             this.tbLogPage.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
-            this.toolStrip4.ResumeLayout(false);
-            this.toolStrip4.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -824,13 +835,11 @@
 		private System.Windows.Forms.TabControl tbMain;
 		private System.Windows.Forms.TabPage tpMainPage;
 		private System.Windows.Forms.TabPage tpOutputFilesPage;
-		private System.Windows.Forms.ListView lvLogs;
 		private System.Windows.Forms.ColumnHeader colID;
 		private System.Windows.Forms.ColumnHeader colTime;
 		private System.Windows.Forms.ColumnHeader colEvent;
 		private System.Windows.Forms.ColumnHeader colContent;
 		private System.Windows.Forms.ColumnHeader colFile;
-		private System.Windows.Forms.ListView lvInputList;
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader3;
@@ -840,7 +849,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem 取消ToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem mnTransduce;
-        private System.Windows.Forms.ListView lvResults;
         private System.Windows.Forms.ColumnHeader chInput;
         private System.Windows.Forms.ColumnHeader chState;
         private System.Windows.Forms.ColumnHeader chOutput;
@@ -873,8 +881,12 @@
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton tiOpenLogFile;
         private System.Windows.Forms.ToolStripButton tiClearLogList;
-        private System.Windows.Forms.ToolStrip toolStrip4;
+        private System.Windows.Forms.ToolStrip tiSaveOutputFiles;
         private System.Windows.Forms.ToolStripButton tiSaveResults;
         private System.Windows.Forms.ToolStripButton tiClear;
+        private Classes.MyListView lvLogs;
+        private Classes.MyListView lvInputList;
+        private Classes.MyListView lvResults;
+        private System.Windows.Forms.ToolStripButton tiDeleteUnexisted;
     }
 }

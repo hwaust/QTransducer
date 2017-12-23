@@ -575,10 +575,13 @@ namespace QDasTransfer
 
         private void tiDeletePathes_Click(object sender, EventArgs e)
         {
-            for (int i = lvInputList.Items.Count - 1; i >= 0; i--)
+            if (MessageBox.Show("是否删除已选中项？", "删除确认", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (lvInputList.Items[i].Checked)
-                    lvInputList.Items.RemoveAt(i);
+                for (int i = lvInputList.Items.Count - 1; i >= 0; i--)
+                {
+                    if (lvInputList.Items[i].Checked)
+                        lvInputList.Items.RemoveAt(i);
+                }
             }
         }
 
@@ -587,6 +590,11 @@ namespace QDasTransfer
             tiOpenLogFile.Enabled = false;
             Process.Start("notepad.exe", ".\\runtime.log");
             tiOpenLogFile.Enabled = true;
+        }
+
+        private void tiSaveResults_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
