@@ -116,23 +116,7 @@ namespace QDasTransfer
 				return true;
 			}
 			return false;
-		}
-
-		public static void AddDistinctToListBox(ListView lv, InputPath ip)
-		{
-			string[] strs = ip.ToStrings();
-			foreach (ListViewItem item in lv.Items)
-			{
-				if (item.Text == ip.path)
-					return;
-			}
-
-
-			ListViewItem lvi = new ListViewItem(strs);
-			lvi.Tag = ip;
-			lvi.ImageIndex = ip.Type;
-			lv.Items.Add(lvi);
-		}
+		} 
 
 		/// <summary>
 		/// 设置应用程序开机自动运行

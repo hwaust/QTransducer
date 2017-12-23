@@ -53,7 +53,7 @@ namespace QDasTransfer
             {
                 lastSelectedFolder = fb.SelectedPath;
                 InputPath ip = new InputPath(lastSelectedFolder, 1);
-                Funs.AddDistinctToListBox(lvInputList, ip);
+                AddDistinctToListBox(ip);
             }
         }
 
@@ -186,6 +186,24 @@ namespace QDasTransfer
                 Application.DoEvents();
                 Thread.Sleep(pd.getCircleInterval() * 1000);
             }
+        }
+
+        public  void AddDistinctToListBox(InputPath ip)
+        {
+            ListView lv = this.lvInputList;
+            string[] strs = ip.ToStrings();
+            foreach (ListViewItem item in lv.Items)
+            {
+                if (item.Text == ip.path)
+                    return;
+            }
+
+            ListViewItem lvi = new ListViewItem(strs);
+            lvi.Tag = ip;
+            lvi.ImageIndex = ip.Type;
+            lv.Items.Add(lvi);
+
+            pd.InputPaths.Add(ip);
         }
 
         private void Reset()
@@ -396,6 +414,7 @@ namespace QDasTransfer
                 DialogResult dr = MessageBox.Show("是否删除当前选中项？", "删除确认", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
+                    pd.InputPaths.RemoveAt(lvInputList.SelectedIndices[0]);
                     lvInputList.Items.RemoveAt(lvInputList.SelectedIndices[0]);
                 }
                 pd.Save();
@@ -485,7 +504,7 @@ namespace QDasTransfer
             {
                 lastSelectedFolder = Path.GetDirectoryName(ibf.NetPath);
                 InputPath ip = new InputPath(ibf.NetPath);
-                Funs.AddDistinctToListBox(lvInputList, ip);
+                AddDistinctToListBox(ip);
             }
         }
 
@@ -502,7 +521,7 @@ namespace QDasTransfer
                 for (int i = 0; i < ofd.FileNames.Length; i++)
                 {
                     InputPath ip = new InputPath(ofd.FileNames[i], 0);
-                    Funs.AddDistinctToListBox(lvInputList, ip);
+                    AddDistinctToListBox(ip);
                 }
                 pd.Save();
             }
@@ -516,7 +535,7 @@ namespace QDasTransfer
             {
                 lastSelectedFolder = fb.SelectedPath;
                 InputPath ip = new InputPath(lastSelectedFolder, 1);
-                Funs.AddDistinctToListBox(lvInputList, ip);
+                AddDistinctToListBox(ip);
                 pd.Save();
             }
         }
@@ -529,7 +548,7 @@ namespace QDasTransfer
             {
                 lastSelectedFolder = Path.GetDirectoryName(ibf.NetPath);
                 InputPath ip = new InputPath(ibf.NetPath);
-                Funs.AddDistinctToListBox(lvInputList, ip);
+                AddDistinctToListBox(ip);
                 pd.Save();
             }
         }
@@ -557,16 +576,6 @@ namespace QDasTransfer
             lvLogs.Items.Clear();
         }
 
-        private void lkOpenLogFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
         private void tiClear_Click(object sender, EventArgs e)
         {
             lvResults.Items.Clear();
@@ -583,8 +592,10 @@ namespace QDasTransfer
             {
                 for (int i = lvInputList.Items.Count - 1; i >= 0; i--)
                 {
-                    if (lvInputList.Items[i].Checked)
+                    if (lvInputList.Items[i].Checked) {
+                        pd.InputPaths.RemoveAt(i);
                         lvInputList.Items.RemoveAt(i);
+                    }
                 }
                 pd.Save();
             }
