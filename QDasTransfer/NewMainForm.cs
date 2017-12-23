@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -598,7 +599,23 @@ namespace QDasTransfer
 
         private void tiSaveResults_Click(object sender, EventArgs e)
         {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "text文档|*.txt";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < lvResults.Items.Count; i++)
+                {
+                    sb.Append(lvResults.Items[i].Text + "\t");
+                    for (int j = 0; j < lvResults.Items[i].SubItems.Count; j++)
+                    {
+                        sb.Append(lvResults.Items[i].SubItems[j].Text + "\t");
+                    }
+                    sb.AppendLine();
+                }
 
+                File.WriteAllText(sfd.FileName, sb.ToString());
+            }
         }
 
         private void lvInputList_MouseClick(object sender, MouseEventArgs e)
