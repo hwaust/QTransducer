@@ -17,11 +17,10 @@ namespace QTrans.Company.Y2017
 
         public override void Initialize()
         {
-            TransducerID = "201707";
-            CompanyName = "ZEISS";
+            CompanyName = "北京安泰密度转换器";
             VertionInfo = "1.0 alpha";
             pd.SupportAutoTransducer = true;
-            pd.AddExt(".xls");
+            pd.AddExt(".xlsx");
         }
 
         public override bool TransferFile(string infile)
