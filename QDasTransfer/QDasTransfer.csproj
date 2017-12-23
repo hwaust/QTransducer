@@ -67,6 +67,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\MyListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\ConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>

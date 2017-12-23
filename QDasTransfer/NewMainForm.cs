@@ -3,6 +3,7 @@ using QDasTransfer.Forms;
 using QTrans;
 using QTrans.Classes;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -36,11 +37,11 @@ namespace QDasTransfer
         {
 
         }
- 
+
 
         private void lkAddFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-   
+
         }
 
         private void lkAddFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -79,7 +80,7 @@ namespace QDasTransfer
 
 
             tiLock.Visible = false;
-            tiOpenAppFolder.Visible = false;
+            // tiOpenAppFolder.Visible = false;
 
             trans = values.transducer;
 
@@ -306,7 +307,7 @@ namespace QDasTransfer
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-            }  
+            }
 
             //复制PdfToTxt.exe文件过去，如果未能复制成功，则同样提示失败。
             if (pd.PdfMode)
@@ -501,6 +502,8 @@ namespace QDasTransfer
                     Funs.AddDistinctToListBox(lvInputList, ip);
                 }
             }
+
+
         }
 
         private void tiAddFolder_Click(object sender, EventArgs e)
@@ -563,6 +566,27 @@ namespace QDasTransfer
         private void tiClear_Click(object sender, EventArgs e)
         {
             lvResults.Items.Clear();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void tiDeletePathes_Click(object sender, EventArgs e)
+        {
+            for (int i = lvInputList.Items.Count - 1; i >= 0; i--)
+            {
+                if (lvInputList.Items[i].Checked)
+                    lvInputList.Items.RemoveAt(i);
+            }
+        }
+
+        private void tiOpenLogFile_Click(object sender, EventArgs e)
+        {
+            tiOpenLogFile.Enabled = false;
+            Process.Start("notepad.exe", ".\\runtime.log");
+            tiOpenLogFile.Enabled = true;
         }
     }
 }

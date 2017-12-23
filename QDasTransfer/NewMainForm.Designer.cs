@@ -30,8 +30,8 @@
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewMainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("C:\\Qdas\\data\\201502232", "Folder16X16.png");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("D:\\text.txt", 0);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("C:\\Qdas\\data\\201502232", "Folder16X16.png");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("D:\\text.txt", 0);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +54,7 @@
             this.tpMainPage = new System.Windows.Forms.TabPage();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.lvInputList = new System.Windows.Forms.ListView();
+            this.lvInputList = new QDasTransfer.Classes.MyListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -66,12 +66,12 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.取消ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tpOutputFilesPage = new System.Windows.Forms.TabPage();
-            this.lvResults = new System.Windows.Forms.ListView();
+            this.lvResults = new QDasTransfer.Classes.MyListView();
             this.chTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chInput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOutput = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvLogs = new System.Windows.Forms.ListView();
+            this.lvLogs = new QDasTransfer.Classes.MyListView();
             this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colEvent = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -90,7 +90,7 @@
             this.tiSelectAll = new System.Windows.Forms.ToolStripButton();
             this.tiCancelAll = new System.Windows.Forms.ToolStripButton();
             this.tiSelectReverse = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.tiDeletePathes = new System.Windows.Forms.ToolStripButton();
             this.mnTransduce = new System.Windows.Forms.ToolStripMenuItem();
             this.tiSaveResults = new System.Windows.Forms.ToolStripButton();
             this.tiClear = new System.Windows.Forms.ToolStripButton();
@@ -138,6 +138,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1006, 25);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // 文件FToolStripMenuItem
             // 
@@ -154,33 +155,33 @@
             // mnNewConfig
             // 
             this.mnNewConfig.Name = "mnNewConfig";
-            this.mnNewConfig.Size = new System.Drawing.Size(142, 22);
+            this.mnNewConfig.Size = new System.Drawing.Size(152, 22);
             this.mnNewConfig.Text = "重置配置(&N)";
             this.mnNewConfig.Click += new System.EventHandler(this.mnNewConfig_Click);
             // 
             // mnSaveConfig
             // 
             this.mnSaveConfig.Name = "mnSaveConfig";
-            this.mnSaveConfig.Size = new System.Drawing.Size(142, 22);
+            this.mnSaveConfig.Size = new System.Drawing.Size(152, 22);
             this.mnSaveConfig.Text = "保存配置(&S)";
             this.mnSaveConfig.Click += new System.EventHandler(this.mnSaveConfig_Click);
             // 
             // mnExportConfig
             // 
             this.mnExportConfig.Name = "mnExportConfig";
-            this.mnExportConfig.Size = new System.Drawing.Size(142, 22);
+            this.mnExportConfig.Size = new System.Drawing.Size(152, 22);
             this.mnExportConfig.Text = "导出配置(A)";
             this.mnExportConfig.Click += new System.EventHandler(this.mnExportConfig_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(139, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
             // 
             // mnExit
             // 
             this.mnExit.Name = "mnExit";
-            this.mnExit.Size = new System.Drawing.Size(142, 22);
+            this.mnExit.Size = new System.Drawing.Size(152, 22);
             this.mnExit.Text = "退出(&X)";
             // 
             // 生成RToolStripMenuItem
@@ -221,19 +222,19 @@
             // tiSystemConfig
             // 
             this.tiSystemConfig.Name = "tiSystemConfig";
-            this.tiSystemConfig.Size = new System.Drawing.Size(140, 22);
+            this.tiSystemConfig.Size = new System.Drawing.Size(152, 22);
             this.tiSystemConfig.Text = "系统设置(&C)";
             this.tiSystemConfig.Click += new System.EventHandler(this.tiSystemConfig_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(137, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // tiClosingPassword
             // 
             this.tiClosingPassword.Name = "tiClosingPassword";
-            this.tiClosingPassword.Size = new System.Drawing.Size(140, 22);
+            this.tiClosingPassword.Size = new System.Drawing.Size(152, 22);
             this.tiClosingPassword.Text = "关机密码(&P)";
             // 
             // 关于HToolStripMenuItem
@@ -247,7 +248,7 @@
             // 关于AToolStripMenuItem
             // 
             this.关于AToolStripMenuItem.Name = "关于AToolStripMenuItem";
-            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.关于AToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.关于AToolStripMenuItem.Text = "关于(&A)";
             // 
             // statusStrip1
@@ -295,7 +296,7 @@
             this.tiCancelAll,
             this.tiSelectReverse,
             this.toolStripSeparator5,
-            this.toolStripButton1});
+            this.tiDeletePathes});
             this.toolStrip2.Location = new System.Drawing.Point(3, 3);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(992, 31);
@@ -322,11 +323,11 @@
             this.lvInputList.FullRowSelect = true;
             this.lvInputList.GridLines = true;
             this.lvInputList.HideSelection = false;
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.StateImageIndex = 0;
+            listViewItem3.StateImageIndex = 0;
+            listViewItem4.StateImageIndex = 0;
             this.lvInputList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
             this.lvInputList.Location = new System.Drawing.Point(8, 37);
             this.lvInputList.MultiSelect = false;
             this.lvInputList.Name = "lvInputList";
@@ -632,13 +633,14 @@
             this.tiSelectReverse.Text = "反选";
             this.tiSelectReverse.Click += new System.EventHandler(this.tiSelectReverse_Click);
             // 
-            // toolStripButton1
+            // tiDeletePathes
             // 
-            this.toolStripButton1.Image = global::QDasTransfer.Properties.Resources.delete;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(96, 28);
-            this.toolStripButton1.Text = "删除选中项";
+            this.tiDeletePathes.Image = global::QDasTransfer.Properties.Resources.delete;
+            this.tiDeletePathes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tiDeletePathes.Name = "tiDeletePathes";
+            this.tiDeletePathes.Size = new System.Drawing.Size(96, 28);
+            this.tiDeletePathes.Text = "删除选中项";
+            this.tiDeletePathes.Click += new System.EventHandler(this.tiDeletePathes_Click);
             // 
             // mnTransduce
             // 
@@ -672,6 +674,7 @@
             this.tiOpenLogFile.Name = "tiOpenLogFile";
             this.tiOpenLogFile.Size = new System.Drawing.Size(108, 28);
             this.tiOpenLogFile.Text = "打开日志文件";
+            this.tiOpenLogFile.Click += new System.EventHandler(this.tiOpenLogFile_Click);
             // 
             // tiClearLogList
             // 
@@ -865,7 +868,7 @@
         private System.Windows.Forms.ToolStripButton tiCancelAll;
         private System.Windows.Forms.ToolStripButton tiSelectReverse;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton tiDeletePathes;
         private System.Windows.Forms.TabPage tbLogPage;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton tiOpenLogFile;
