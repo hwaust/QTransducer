@@ -64,6 +64,7 @@ namespace QTrans
             string dir = "..\\..\\..\\config_files\\" ; 
             appconfig = Directory.Exists(dir) ? dir + GetType().Name.Substring(0, 7) +".xml": ".\\config.xml"; 
             pd = ParamaterData.Load(appconfig);
+            pd.extentions.Clear();
             Initialize();
         }
 
