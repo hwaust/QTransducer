@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Company\Y2017\T201708_Antai_Density.cs" />
+    <Compile Include="Company\Y2017\T201709.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Classes\ExcelReader.cs" />
     <Compile Include="Classes\MSOfficeVersion.cs" />
