@@ -636,5 +636,10 @@ namespace QDasTransfer
                 lvInputList.SelectedItems[0].Checked = !lvInputList.SelectedItems[0].Checked;
             }
         }
+
+        private void tiOpenAppFolder_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", ".");
+        }
     }
 }
