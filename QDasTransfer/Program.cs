@@ -13,9 +13,9 @@ namespace QDasTransfer
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Control.CheckForIllegalCrossThreadCalls = false;
+			Control.CheckForIllegalCrossThreadCalls = false; 
 
-            values.transducer =  new QTrans.Company.Y2017.T201708_Antai_Density();
+            values.initialize(); 
 
             //启动主窗体。
             NewMainForm mf = new NewMainForm();

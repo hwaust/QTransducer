@@ -21,22 +21,13 @@ namespace QDasTransfer
         /// </summary>
         string lastSelectedFolder;
         ParamaterData pd;
+        int fileCountSuccessful = 0;
 
         public NewMainForm()
         {
             InitializeComponent();
             trans = values.transducer;
             pd = trans.pd;
-        }
-
-        private void setTransducer(ParamaterData p)
-        {
-
-        }
-
-        private void setParamater(ParamaterData p)
-        {
-
         }
 
 
@@ -76,23 +67,15 @@ namespace QDasTransfer
                     pd.InputListViewWidth[1].SetData(lvLogs);
                 }
             }
-            catch { }
+            catch { } 
 
-
-
-            tiLock.Visible = false;
-            // tiOpenAppFolder.Visible = false;
-
-            trans = values.transducer;
-
-            setTransducer(pd);
+            tiLock.Visible = false; 
+             
             trans.TransFileComplete += Trans_TransFileComplete;
 
             this.Text += " " + trans.CompanyName;
             Reset();
         }
-
-        int fileCountSuccessful = 0;
 
         private void Trans_TransFileComplete(object sender, QTrans.Classes.TransLog e)
         {
@@ -242,8 +225,7 @@ namespace QDasTransfer
             cf.ShowDialog();
             if (cf.needSave)
             {
-                pd = cf.pd;
-                setTransducer(pd);
+                pd = cf.pd; 
             }
         }
 
@@ -378,7 +360,6 @@ namespace QDasTransfer
             cf.ShowDialog();
             if (cf.needSave)
             {
-                setTransducer(pd);
                 pd.Save();
             }
         }
