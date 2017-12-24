@@ -26,15 +26,12 @@ namespace QTrans
         public static TransferBase getTransducer()
         {
             // Return the latest transducer ordered by name 
-            Assembly asm = Assembly.LoadFile(Application.StartupPath + "\\QTrans.dll");
-            List<Type> types = new List<Type>();
-            foreach (Type t in asm.GetTypes())
-                if (t.FullName.StartsWith("QTrans.Company."))
-                    types.Add(t);
+            var types = from t in Assembly.LoadFile(Application.StartupPath + "\\QTrans.dll").GetTypes()
+                        where t.FullName.StartsWith("QTrans.Company.")
+                        orderby t.Name descending
+                        select t;
 
-            TransferBase tb = (TransferBase) Activator.CreateInstance(types[0]);
-
-            return tb;
+            return (TransferBase)Activator.CreateInstance(types.First());
         }
 
         /// <summary>
