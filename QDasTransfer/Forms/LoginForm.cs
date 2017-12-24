@@ -11,6 +11,7 @@ namespace QDasTransfer
 {
 	public partial class LoginForm : Form
 	{
+        
 		public LoginForm()
 		{
 			InitializeComponent();
@@ -36,7 +37,7 @@ namespace QDasTransfer
 			}
 		}
 
-		Font font = new Font("微软雅黑", 16);//, FontStyle.Bold);
+		Font font = new Font("微软雅黑", 16);
 		SolidBrush brush = new SolidBrush(Color.Gray); 
 
 		private void LoginForm_Paint(object sender, PaintEventArgs e)

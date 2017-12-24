@@ -1,6 +1,7 @@
 ﻿
 using QTrans;
-using QTrans.Classes; 
+using QTrans.Classes;
+using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -18,5 +19,9 @@ namespace QDasTransfer
 		/// </summary>
 		public static TransferBase transducer;
 
-	}
+        internal static void initialize()
+        {
+            transducer = TransferBase.getTransducer();
+        }
+    }
 }

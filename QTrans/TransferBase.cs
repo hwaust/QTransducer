@@ -5,6 +5,8 @@ using System.Threading;
 using System.IO;
 using QTrans.Classes;
 using QTrans.Helpers;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace QTrans
 {
@@ -20,6 +22,19 @@ namespace QTrans
         /// A unique integer ID for each tranducer. Format: YYYYXX, where YYYY is year and XX is a concecutive number. 
         /// </summary>
         public string TransducerID;
+
+        public static TransferBase getTransducer()
+        {
+            // Return the latest transducer ordered by name 
+            Assembly asm = Assembly.LoadFile(Application.StartupPath + "\\QTrans.dll");
+            List<Type> types = new List<Type>();
+            foreach (Type t in asm.GetTypes())
+                if (t.FullName.StartsWith("QTrans.Company."))
+                    types.Add(t);
+            TransferBase tb = (TransferBase) Activator.CreateInstance(types[types.Count - 1]);
+
+            return tb;
+        }
 
         /// <summary>
         /// 显示的公司名称，这个用于显示在封面上，如Mairi。
@@ -61,8 +76,8 @@ namespace QTrans
 
         public TransferBase()
         {
-            string dir = "..\\..\\..\\config_files\\" ; 
-            appconfig = Directory.Exists(dir) ? dir + GetType().Name.Substring(0, 7) +".xml": ".\\config.xml"; 
+            string dir = "..\\..\\..\\config_files\\";
+            appconfig = Directory.Exists(dir) ? dir + GetType().Name.Substring(0, 7) + ".xml" : ".\\config.xml";
             pd = ParamaterData.Load(appconfig);
             pd.extentions.Clear();
             Initialize();
