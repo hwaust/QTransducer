@@ -14,11 +14,10 @@ namespace QTrans.Company.Y2017
     {
         public override void Initialize()
         {
-            base.Initialize(); 
-            CompanyName = "北京安泰密度转换器";
+            base.Initialize();
+            CompanyName = "北京安泰Zeiss转换器";
             VertionInfo = "1.0 alpha";
             pd.SupportAutoTransducer = true;
-            pd.extentions.Clear();
             pd.AddExt(".xls");
         }
 
@@ -41,8 +40,8 @@ namespace QTrans.Company.Y2017
 
         public override bool TransferFile(string infile)
         {
-            ExcelReader reader = new ExcelReader(infile, MSOfficeVersion.Office2007);
-             
+            ExcelReader reader = new ExcelReader(infile);
+
             string K1900 = reader.getData("B5");//
             string K1041 = reader.getData("B8");//
             string K0008 = reader.getData("B11");
@@ -53,7 +52,7 @@ namespace QTrans.Company.Y2017
             string K1001 = reader.getData("F8");//
             string K0014 = reader.getData("F11");
 
-
+            reader.showTable(0);
 
             QCatalog qlog = getCatlog();
 
