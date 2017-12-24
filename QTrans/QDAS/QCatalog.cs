@@ -9,7 +9,7 @@ namespace QDAS
 {
     public class QCatalog
     {
-        public List<QLineInfo> qlines;
+        public List<QLineInfo> qlines = new List<QLineInfo>();
 
         public static QCatalog load(string file)
         {

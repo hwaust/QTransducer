@@ -86,7 +86,7 @@ namespace QDAS
 
         public static List<QLineInfo> read(string file)
         {
-            string[] lines = File.ReadAllLines(file);
+            string[] lines = File.ReadAllLines(file, Encoding.Default);
             List<QLineInfo> qlines = new List<QLineInfo>();
             for (int i = 0; i < lines.Length; i++)
             {
