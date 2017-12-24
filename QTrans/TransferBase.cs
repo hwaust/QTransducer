@@ -31,7 +31,8 @@ namespace QTrans
             foreach (Type t in asm.GetTypes())
                 if (t.FullName.StartsWith("QTrans.Company."))
                     types.Add(t);
-            TransferBase tb = (TransferBase) Activator.CreateInstance(types[types.Count - 1]);
+
+            TransferBase tb = (TransferBase) Activator.CreateInstance(types[0]);
 
             return tb;
         }
