@@ -10,26 +10,38 @@ namespace QTrans.Company.Y2017
 {
     public class T201708_Antai_Density : TransferBase
     {
-        WindGoes.IO.IniAccess ia = new WindGoes.IO.IniAccess("userconfig.ini");
-        QCatalog qlog = null;
         public override void Initialize()
         {
             CompanyName = "北京安泰密度转换器";
             VertionInfo = "1.0 alpha";
             pd.SupportAutoTransducer = true;
-            if (pd.extentions.Count == 0)
+            pd.AddExt(".xlsx"); 
+        }
+
+        public QCatalog getCatlog()
+        {
+            QCatalog qlog = null;
+            string logfile = ".\\catlog.dfd";
+            if (File.Exists(logfile))
             {
-                pd.AddExt(".xlsx");
+                qlog = QCatalog.load(logfile);
             }
-            string logfile = ia.ReadValue("catalog"); 
-            qlog = File.Exists(logfile) ? QCatalog.load(logfile) : new QCatalog();
+            else
+            {
+                WindGoes.IO.IniAccess ia = new WindGoes.IO.IniAccess(".\\userconfig.ini");
+                logfile = ia.ReadValue("catalog");
+                qlog = File.Exists(logfile) ? QCatalog.load(logfile) : new QCatalog();
+            }
+            return qlog;
         }
 
         public override bool TransferFile(string infile)
         {
             ExcelReader reader = new ExcelReader(infile, MSOfficeVersion.Office2007);
             string K0012 = reader.getData(3, "G");
+            QCatalog qlog = getCatlog();
             List<QFile> qfs = new List<QFile>();
+
             for (int i = 4; i < reader.getRowCount(); i++)
             {
                 try
@@ -69,8 +81,10 @@ namespace QTrans.Company.Y2017
                         qc[8501] = 0;
                     }
 
-                    QDataItem qdi = new QDataItem();
-                    qdi.date = dt;
+                    QDataItem qdi = new QDataItem
+                    {
+                        date = dt
+                    };
                     qdi.SetValue(K0001);
                     qdi[0008] = qlog.getCatalogPID("K4093", K0008);
                     qdi[0010] = qlog.getCatalogPID("K4063", K0010);
@@ -79,6 +93,8 @@ namespace QTrans.Company.Y2017
                     qdi[0014] = K0014;
                     qdi[0016] = K0016;
                     qf.Charactericstics[0].data.Add(qdi);
+
+                    Console.WriteLine("K0008({0})->K4093={1}", K0008, qlog.getCatalogPID("K4093", K0008));
                 }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
