@@ -7,6 +7,7 @@ using QTrans.Classes;
 using QTrans.Helpers;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace QTrans
 {
