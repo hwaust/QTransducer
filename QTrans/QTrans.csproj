@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Company\Y2017\T201708_Antai_Density.cs" />
     <Compile Include="Company\Y2017\T201709.cs" />
+    <Compile Include="Company\Y2017\T201710.cs" />
     <Compile Include="Excel\Cell.cs" />
     <Compile Include="Excel\COMReader.cs" />
     <Compile Include="Excel\ExcelReaderBase.cs" />
