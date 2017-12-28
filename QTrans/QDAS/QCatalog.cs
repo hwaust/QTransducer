@@ -45,6 +45,42 @@ namespace QDAS
             return -1;
         }
 
+        public string GetCatalogPIDString(string key, string value)
+        {
+            foreach (QLineInfo qline in qlines)
+            {
+                if (qline.key == key && qline.value == value)
+                {
+                    return qline.pid.ToString();
+                }
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// 默认从当前程序目录下读取catlog.dfd。
+        /// 如果不存在，则从同目录下读取配置文件userconfig.ini的others.catlog字段。
+        /// 此字段用于指示Catalog文件的位置。
+        /// </summary>
+        /// <param name="catlogfile">缺省的catalog文件。</param>
+        /// <param name="configfile">配置文件。</param>
+        /// <returns></returns>
+        public static QCatalog GetCatlog(string catlogfile = ".\\catalog.dfd", string configfile = ".\\userconfig.ini")
+        {
+            QCatalog qlog = null;
+            if (File.Exists(catlogfile))
+            {
+                qlog = QCatalog.load(catlogfile);
+            }
+            else
+            {
+                WindGoes.IO.IniAccess ia = new WindGoes.IO.IniAccess(configfile);
+                catlogfile = ia.ReadValue("catalog");
+                qlog = File.Exists(catlogfile) ? QCatalog.load(catlogfile) : new QCatalog();
+            }
+            return qlog;
+        }
 
     }
 }
