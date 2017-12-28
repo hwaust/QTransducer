@@ -34,8 +34,8 @@ namespace QTrans.Excel
             };
             object missing = System.Reflection.Missing.Value;
 
-            Workbook wb = excel.Application.Workbooks.Open(path, missing, true, missing, missing, missing,
-                                        missing, missing, missing, true, missing, missing, missing, missing, missing);
+            Workbook wb = excel.Application.Workbooks.Open(path, missing, missing, missing, missing, missing,
+                                        missing, missing, missing, missing, missing, missing, missing, missing, missing);
             tables = new List<object[,]>();
             for (int i = 0; i < wb.Worksheets.Count; i++)
             {
@@ -47,8 +47,8 @@ namespace QTrans.Excel
                 string rightbottom = new Cell(rows, columns).ToString();
                 tables.Add((object[,])ws.Cells.get_Range(lefttop, rightbottom).Value2);
             }
+            wb.Save();
             wb.Close();
-
             return true;
         }
 
