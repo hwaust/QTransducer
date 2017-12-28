@@ -45,6 +45,7 @@ namespace QTrans.Excel
 
         void cellToInt(string s)
         {
+            s = s.ToUpper();
             int col = 0;
             int row = 0;
             int p = 0;
