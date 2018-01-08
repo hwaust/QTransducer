@@ -51,9 +51,7 @@ namespace QTrans.Company.Y2017
             DateTime K0004 = new DateTime(1900, 1, 1).AddDays(-2).AddDays(days + time);
             string K0012 = reader.GetCell("D11");
             string K1001 = reader.GetCell("F8");//
-            string K0014 = reader.GetCell("F11");
-
-            reader.ShowTable();
+            string K0014 = reader.GetCell("F11"); 
 
             QCatalog qlog = getCatlog();
 
@@ -94,6 +92,7 @@ namespace QTrans.Company.Y2017
                 di.SetValue(K0001);
                 di[0008] = qlog.getCatalogPID("K4093", K0008);
                 di[0012] = qlog.getCatalogPID("K4073", K0012);
+                di[0014] = K0014;
                 qc.data.Add(di);
 
                 qf.Charactericstics.Add(qc);

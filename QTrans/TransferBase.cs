@@ -13,6 +13,18 @@ namespace QTrans
 {
     public class TransferBase
     {
+        public static TransferBase getTransducer()
+        {
+            // Return the latest transducer ordered by name 
+            var types = from t in Assembly.LoadFile(Application.StartupPath + "\\QTrans.dll").GetTypes()
+                        where t.FullName.StartsWith("QTrans.Company.")
+                        orderby t.Name descending
+                        select t;
+
+            // return (TransferBase)Activator.CreateInstance(types.First());
+            return new Company.Y2017.T201709();
+        }
+
         #region 属性
         /// <summary>
         /// System configuration file.
@@ -23,17 +35,6 @@ namespace QTrans
         /// A unique integer ID for each tranducer. Format: YYYYXX, where YYYY is year and XX is a concecutive number. 
         /// </summary>
         public string TransducerID;
-
-        public static TransferBase getTransducer()
-        {
-            // Return the latest transducer ordered by name 
-            var types = from t in Assembly.LoadFile(Application.StartupPath + "\\QTrans.dll").GetTypes()
-                        where t.FullName.StartsWith("QTrans.Company.")
-                        orderby t.Name descending
-                        select t;
-
-            return (TransferBase)Activator.CreateInstance(types.First());
-        }
 
         /// <summary>
         /// 显示的公司名称，这个用于显示在封面上，如Mairi。
