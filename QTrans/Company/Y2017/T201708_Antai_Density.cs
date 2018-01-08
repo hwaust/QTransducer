@@ -6,6 +6,13 @@ using QTrans.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+
+/*
+1. K2110 和 K2111的分隔符有问题。
+2. M列的值有无效的，如：
+3. 文件名无效，如A9246:  216751_螺检3/809"
+*/
 
 namespace QTrans.Company.Y2017
 {
@@ -44,24 +51,26 @@ namespace QTrans.Company.Y2017
             List<QFile> qfs = new List<QFile>();
 
             DateTime date = new DateTime(1900, 1, 1);
-            for (int i = 5; i < reader.GetRowCount(); i++)
+            for (int row = 5; row < reader.GetRowCount(); row++)
             {
                 try
                 {
-                    DateTime dt = date.AddDays(int.Parse(reader.GetCell("A" + i)) - 2);
-                    string K1002 = reader.GetCell("B" + i);
-                    string K0014 = reader.GetCell("C" + i);
-                    string K0016 = reader.GetCell("D" + i);
-                    string K0010 = reader.GetCell("E" + i);
-                    string K1001 = reader.GetCell("F" + i);
-                    string K0011 = reader.GetCell("I" + i) + '\\' + reader.GetCell("J" + i) + '\\' + reader.GetCell("K" + i) + '\\' + reader.GetCell("L" + i);
-                    string K0001 = reader.GetCell("M" + i);
+                    DateTime dt = date.AddDays(int.Parse(reader.GetCell("A" + row)) - 2);
+                    string K1002 = reader.GetCell("B" + row);
+                    string K0014 = reader.GetCell("C" + row);
+                    string K0016 = reader.GetCell("D" + row);
+                    string K0010 = reader.GetCell("E" + row);
+                    string K1001 = reader.GetCell("F" + row);
+                    string K0011 = reader.GetCell("I" + row) + '\\' + reader.GetCell("J" + row) + '\\' + reader.GetCell("K" + row) + '\\' + reader.GetCell("L" + row);
+                    string K0001 = reader.GetCell("M" + row);
 
+                    double value = double.Parse(K0001);
+                    
                     string K2110 = "";
                     string K2111 = "";
                     string K2120 = "";
 
-                    string colN = reader.GetCell(i, "N");
+                    string colN = reader.GetCell(row, "N");
                     // 上下限写入同一单元格并用 "-"间隔，即：下限-上限。
                     // 将中横杠前的数据写入K2110，中横杠后的数据写入K2111。
                     if (colN.Contains("-"))
@@ -89,7 +98,7 @@ namespace QTrans.Company.Y2017
                         K2120 = "2";
                     }
 
-                    string K0008 = reader.GetCell("Q" + i);
+                    string K0008 = reader.GetCell("Q" + row);
 
                     if (K1001 == "" && K1002 == "")
                     {
@@ -105,8 +114,10 @@ namespace QTrans.Company.Y2017
                         qf.Charactericstics.Add(qc);
                         qc[2002] = "密度g/cm³";
                         qc[2022] = 8;
-                        qc[2110] = K2110;
-                        qc[2111] = K2111;
+                        if (K2110.Length > 0)
+                            qc[2110] = K2110;
+                        if (K2111.Length > 0)
+                            qc[2111] = K2111;
                         qc[2120] = 1;
                         qc[2121] = 1;
                         if (K2120.Length > 0)
@@ -116,10 +127,7 @@ namespace QTrans.Company.Y2017
                         qc[8501] = 0;
                     }
 
-                    QDataItem qdi = new QDataItem
-                    {
-                        date = dt
-                    };
+                    QDataItem qdi = new QDataItem { date = dt };
                     qdi.SetValue(K0001);
                     qdi[0008] = qlog.getCatalogPID("K4093", K0008);
                     qdi[0010] = qlog.getCatalogPID("K4063", K0010);
@@ -133,10 +141,17 @@ namespace QTrans.Company.Y2017
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("i = " + i + ", error: " + ex.Message);
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Row " + row + ": ");
+                    for (int col = 0; col < reader.GetColumnCount(); col++)
+                    {
+                        sb.Append(reader.GetCell(row, col) + ", ");
+                    }
+                    Console.WriteLine(sb.ToString() + ". Error message: " + ex.Message);
                 }
             }
 
+            Console.WriteLine("Begin output...");
             string outdir = pd.GetOutDirectory(infile);
             foreach (QFile qf in qfs)
             {
@@ -145,7 +160,7 @@ namespace QTrans.Company.Y2017
                 bool done = SaveDfq(qf, outfile);
                 LogList.Add(new TransLog(infile, outfile, done ? "转换成功" : "转换失败。", done ? LogType.Success : LogType.Fail));
             }
-
+            Console.WriteLine("Complete output...");
             return true;
         }
 
