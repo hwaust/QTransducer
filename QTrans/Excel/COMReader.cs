@@ -47,7 +47,9 @@ namespace QTrans.Excel
             Application excel = new Application
             {
                 Visible = false,
-                UserControl = true
+                UserControl = true,
+                DisplayAlerts = false,
+                AlertBeforeOverwriting = false
             };
             object missing = System.Reflection.Missing.Value;
 
