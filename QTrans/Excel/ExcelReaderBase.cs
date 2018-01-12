@@ -17,9 +17,25 @@ namespace QTrans.Excel
             return tables[tableIndex][row, column] + "";
         }
 
+        public virtual string GetCell(int row, char column, int tableIndex = 0)
+        {
+            return tables[tableIndex][row, column] + "";
+        }
+
+        public virtual string GetCell(int row, string column, int tableIndex = 0)
+        {
+            int col = 0;
+            for (int i = column.Length - 1; i >= 0; i--)
+            {
+                col = col * 26 + i;
+            }
+
+            return tables[tableIndex][row, (int)col] + "";
+        }
+
         public virtual string GetCell(string cname, int tableIndex = 0)
         {
-            Cell cell= new Cell(cname);
+            Cell cell = new Cell(cname);
             return tables[tableIndex][cell.Row, cell.Column] + "";
         }
 

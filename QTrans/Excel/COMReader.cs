@@ -19,6 +19,23 @@ namespace QTrans.Excel
             return tables[tableIndex][row + 1, column + 1] + "";
         }
 
+        public override string GetCell(int row, char column, int tableIndex = 0)
+        {
+            return tables[tableIndex][row + 1, (int)column + 1] + "";
+        }
+
+        public override string GetCell(int row, string column, int tableIndex = 0)
+        {
+            int col = 0;
+            for (int i = column.Length - 1; i >= 0; i--)
+            {
+                col = col * 26 + i;
+            }
+
+            return tables[tableIndex][row + 1, col + 1] + "";
+        }
+
+
         public override string GetCell(string cellName, int tableIndex = 0)
         {
             Cell cell = new Cell(cellName);
@@ -46,8 +63,7 @@ namespace QTrans.Excel
                 string lefttop = "A1";
                 string rightbottom = new Cell(rows, columns).ToString();
                 tables.Add((object[,])ws.Cells.get_Range(lefttop, rightbottom).Value2);
-            }
-            wb.Save();
+            } 
             wb.Close();
             return true;
         }
