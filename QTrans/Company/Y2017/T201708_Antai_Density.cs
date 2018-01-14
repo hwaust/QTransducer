@@ -65,7 +65,7 @@ namespace QTrans.Company.Y2017
                     string K0001 = reader.GetCell("M" + row);
 
                     double value = double.Parse(K0001);
-                    
+
                     string K2110 = "";
                     string K2111 = "";
                     string K2120 = "";
@@ -73,16 +73,16 @@ namespace QTrans.Company.Y2017
                     string colN = reader.GetCell(row, "N");
                     // 上下限写入同一单元格并用 "-"间隔，即：下限-上限。
                     // 将中横杠前的数据写入K2110，中横杠后的数据写入K2111。
-                    if (colN.Contains("-"))
+                    // 1、当密度要求值出现中横杠"_"时，代表该行信息不需要输出 
+                    if (colN == null || colN.Trim().Length == 1)
+                    {
+                        continue;
+                    }
+                    else if (colN.Contains("-"))
                     {
                         K2110 = colN.Split('-')[0];
                         K2111 = colN.Split('-')[1];
-                    }
-                    // 1、当密度要求值出现中横杠"_"时，代表该行信息不需要输出 
-                    else if (colN.Contains("_"))
-                    {
-
-                    }
+                    } 
                     // 2、当密度要求值出现中横杠”≥”时,该参数只有下限K2110，
                     // 例如≥30，输出K2110 = 30，K2111为空，K2120 = 1
                     else if (colN.Contains("≥"))
@@ -92,9 +92,9 @@ namespace QTrans.Company.Y2017
                     }
                     // 3、当密度要求值出现中横杠” >”时，该参数只有下限，且为下自然界线。
                     // 例如 > 30，输出K2110 = 30，K2111为空，K2120 = 2
-                    else if (colN.Contains("＞"))
+                    else if (colN.Contains(">"))
                     {
-                        K2110 = colN.Split('＞')[1];
+                        K2110 = colN.Split('>')[1];
                         K2120 = "2";
                     }
 
@@ -151,12 +151,22 @@ namespace QTrans.Company.Y2017
                 }
             }
 
+            string illegals = "\\/:?\"<>|";
             Console.WriteLine("Begin output...");
             string outdir = pd.GetOutDirectory(infile);
             foreach (QFile qf in qfs)
             {
                 qf.ToDMode();
-                string outfile = outdir + "\\" + qf[1001] + "_" + qf[1002] + "_" + DateTimeHelper.ToFullString(DateTime.Now) + ".dfq";
+
+                string outfile = qf[1001] + "_" + qf[1002] ; 
+                for (int i = 0; i < illegals.Length; i++)
+                {
+                    outfile = outfile.Replace(illegals[i], '_');
+                } 
+                outfile = outdir + "\\" + outfile + "_" + DateTimeHelper.ToFullString(DateTime.Now) + ".dfq";
+
+                Console.WriteLine(outfile);
+
                 bool done = SaveDfq(qf, outfile);
                 LogList.Add(new TransLog(infile, outfile, done ? "转换成功" : "转换失败。", done ? LogType.Success : LogType.Fail));
             }
