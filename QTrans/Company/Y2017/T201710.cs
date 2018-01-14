@@ -22,7 +22,7 @@ namespace QTrans.Company.Y2017
 
         public override bool TransferFile(string infile)
         {
-            QCatalog qlog = QCatalog.GetCatlog();
+            QCatalog qlog = QCatalog.GetCatlog(@"Z:\Projects\QTransducer\2017年\2017_10_重庆_Nemak\20180112_Problems");
             COMReader reader = new COMReader(infile);
 
             /************ 从Excel文件读取标题K域 **************/
@@ -104,7 +104,7 @@ namespace QTrans.Company.Y2017
 
                 QDataItem di = qdi.Clone();
                 di.SetValue(K0001);
-                di.date = DateTime.Now; // 根据20180112 问题 第3条 修改。
+                di.date = dt; // DateTime.Now; // 根据20180112 问题 第3条 修改。
                 qc.data.Add(di);
 
                 qf.Charactericstics.Add(qc);
