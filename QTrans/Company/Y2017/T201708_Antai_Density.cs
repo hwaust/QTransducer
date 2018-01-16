@@ -26,28 +26,11 @@ namespace QTrans.Company.Y2017
             pd.AddExt(".xlsx");
         }
 
-        public QCatalog getCatlog()
-        {
-            QCatalog qlog = null;
-            string logfile = ".\\catlog.dfd";
-            if (File.Exists(logfile))
-            {
-                qlog = QCatalog.load(logfile);
-            }
-            else
-            {
-                WindGoes.IO.IniAccess ia = new WindGoes.IO.IniAccess(".\\userconfig.ini");
-                logfile = ia.ReadValue("catalog");
-                qlog = File.Exists(logfile) ? QCatalog.load(logfile) : new QCatalog();
-            }
-            return qlog;
-        }
-
         public override bool TransferFile(string infile)
         {
             COMReader reader = new COMReader(infile, ExcelVersion.Excel2003);
             string K0012 = reader.GetCell("G3");
-            QCatalog qlog = getCatlog();
+            QCatalog qlog = QCatalog.GetCatlog(@"Z:\Projects\QTransducer\2017年\2017_08_Antai_密度\P180116\CATALOG.dfd");
             List<QFile> qfs = new List<QFile>();
 
             DateTime date = new DateTime(1900, 1, 1);
@@ -164,8 +147,7 @@ namespace QTrans.Company.Y2017
                     outfile = outfile.Replace(illegals[i], '_');
                 } 
                 outfile = outdir + "\\" + outfile + "_" + DateTimeHelper.ToFullString(DateTime.Now) + ".dfq";
-
-                Console.WriteLine(outfile);
+                //Console.WriteLine(outfile); 
 
                 bool done = SaveDfq(qf, outfile);
                 LogList.Add(new TransLog(infile, outfile, done ? "转换成功" : "转换失败。", done ? LogType.Success : LogType.Fail));
