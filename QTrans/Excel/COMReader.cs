@@ -29,7 +29,7 @@ namespace QTrans.Excel
             int col = 0;
             for (int i = column.Length - 1; i >= 0; i--)
             {
-                col = col * 26 + i;
+                col = col * 26 + (column[i] - 65);
             }
 
             return tables[tableIndex][row + 1, col + 1] + "";
