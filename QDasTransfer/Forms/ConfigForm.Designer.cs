@@ -40,10 +40,8 @@
             this.numlblKeepFolderLevel = new System.Windows.Forms.NumericUpDown();
             this.lblKeepFolderStruct = new System.Windows.Forms.Label();
             this.ckKeepFolderStruct = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.txtTempFolder = new System.Windows.Forms.TextBox();
             this.btnTempFolder = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtOutputFolder = new System.Windows.Forms.TextBox();
             this.btOutputFolder = new System.Windows.Forms.Button();
             this.pgBackups = new System.Windows.Forms.TabPage();
@@ -80,7 +78,13 @@
             this.ckConfirmClose = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.pgOutput.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -92,6 +96,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCircleValue)).BeginInit();
             this.pgEncoding.SuspendLayout();
             this.pgOthers.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -107,26 +113,18 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(690, 308);
+            this.tabControl1.Size = new System.Drawing.Size(642, 332);
             this.tabControl1.TabIndex = 0;
             // 
             // pgOutput
             // 
-            this.pgOutput.Controls.Add(this.label13);
+            this.pgOutput.Controls.Add(this.groupBox3);
+            this.pgOutput.Controls.Add(this.groupBox1);
             this.pgOutput.Controls.Add(this.groupBox2);
-            this.pgOutput.Controls.Add(this.numlblKeepFolderLevel);
-            this.pgOutput.Controls.Add(this.lblKeepFolderStruct);
-            this.pgOutput.Controls.Add(this.ckKeepFolderStruct);
-            this.pgOutput.Controls.Add(this.label2);
-            this.pgOutput.Controls.Add(this.txtTempFolder);
-            this.pgOutput.Controls.Add(this.btnTempFolder);
-            this.pgOutput.Controls.Add(this.label1);
-            this.pgOutput.Controls.Add(this.txtOutputFolder);
-            this.pgOutput.Controls.Add(this.btOutputFolder);
             this.pgOutput.Location = new System.Drawing.Point(4, 22);
             this.pgOutput.Name = "pgOutput";
             this.pgOutput.Padding = new System.Windows.Forms.Padding(3);
-            this.pgOutput.Size = new System.Drawing.Size(682, 282);
+            this.pgOutput.Size = new System.Drawing.Size(634, 306);
             this.pgOutput.TabIndex = 0;
             this.pgOutput.Text = "输出选项";
             this.pgOutput.UseVisualStyleBackColor = true;
@@ -141,9 +139,9 @@
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.rbReplaceOld);
             this.groupBox2.Controls.Add(this.rbAddTimeToNew);
-            this.groupBox2.Location = new System.Drawing.Point(22, 131);
+            this.groupBox2.Location = new System.Drawing.Point(12, 194);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(638, 63);
+            this.groupBox2.Size = new System.Drawing.Size(616, 63);
             this.groupBox2.TabIndex = 49;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "存在同名文件的处理方式";
@@ -153,7 +151,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("宋体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(459, 39);
+            this.label10.Location = new System.Drawing.Point(428, 39);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(136, 11);
             this.label10.TabIndex = 5;
@@ -162,7 +160,7 @@
             // rbIncrementIndex
             // 
             this.rbIncrementIndex.AutoSize = true;
-            this.rbIncrementIndex.Location = new System.Drawing.Point(450, 20);
+            this.rbIncrementIndex.Location = new System.Drawing.Point(419, 20);
             this.rbIncrementIndex.Name = "rbIncrementIndex";
             this.rbIncrementIndex.Size = new System.Drawing.Size(83, 16);
             this.rbIncrementIndex.TabIndex = 4;
@@ -174,7 +172,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("宋体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(210, 39);
+            this.label8.Location = new System.Drawing.Point(198, 39);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(202, 11);
             this.label8.TabIndex = 3;
@@ -184,7 +182,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("宋体", 8F);
-            this.label11.Location = new System.Drawing.Point(28, 39);
+            this.label11.Location = new System.Drawing.Point(36, 39);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(143, 11);
             this.label11.TabIndex = 2;
@@ -194,7 +192,7 @@
             // 
             this.rbReplaceOld.AutoSize = true;
             this.rbReplaceOld.Checked = true;
-            this.rbReplaceOld.Location = new System.Drawing.Point(16, 20);
+            this.rbReplaceOld.Location = new System.Drawing.Point(24, 20);
             this.rbReplaceOld.Name = "rbReplaceOld";
             this.rbReplaceOld.Size = new System.Drawing.Size(71, 16);
             this.rbReplaceOld.TabIndex = 0;
@@ -205,7 +203,7 @@
             // rbAddTimeToNew
             // 
             this.rbAddTimeToNew.AutoSize = true;
-            this.rbAddTimeToNew.Location = new System.Drawing.Point(201, 20);
+            this.rbAddTimeToNew.Location = new System.Drawing.Point(189, 20);
             this.rbAddTimeToNew.Name = "rbAddTimeToNew";
             this.rbAddTimeToNew.Size = new System.Drawing.Size(71, 16);
             this.rbAddTimeToNew.TabIndex = 1;
@@ -215,7 +213,7 @@
             // numlblKeepFolderLevel
             // 
             this.numlblKeepFolderLevel.Enabled = false;
-            this.numlblKeepFolderLevel.Location = new System.Drawing.Point(95, 236);
+            this.numlblKeepFolderLevel.Location = new System.Drawing.Point(201, 46);
             this.numlblKeepFolderLevel.Maximum = new decimal(new int[] {
             255,
             0,
@@ -235,50 +233,43 @@
             0,
             0,
             0});
+            this.numlblKeepFolderLevel.Visible = false;
             // 
             // lblKeepFolderStruct
             // 
             this.lblKeepFolderStruct.AutoSize = true;
-            this.lblKeepFolderStruct.Location = new System.Drawing.Point(36, 240);
+            this.lblKeepFolderStruct.Location = new System.Drawing.Point(142, 49);
             this.lblKeepFolderStruct.Name = "lblKeepFolderStruct";
             this.lblKeepFolderStruct.Size = new System.Drawing.Size(53, 12);
             this.lblKeepFolderStruct.TabIndex = 47;
             this.lblKeepFolderStruct.Text = "保持级数";
+            this.lblKeepFolderStruct.Visible = false;
             // 
             // ckKeepFolderStruct
             // 
             this.ckKeepFolderStruct.AutoSize = true;
-            this.ckKeepFolderStruct.Location = new System.Drawing.Point(22, 209);
+            this.ckKeepFolderStruct.Location = new System.Drawing.Point(19, 48);
             this.ckKeepFolderStruct.Name = "ckKeepFolderStruct";
-            this.ckKeepFolderStruct.Size = new System.Drawing.Size(324, 16);
+            this.ckKeepFolderStruct.Size = new System.Drawing.Size(108, 16);
             this.ckKeepFolderStruct.TabIndex = 46;
-            this.ckKeepFolderStruct.Text = "是否保留原目录结构（同时作用于输出目录和备份目录）";
+            this.ckKeepFolderStruct.Text = "保留原目录结构";
             this.ckKeepFolderStruct.UseVisualStyleBackColor = true;
             this.ckKeepFolderStruct.Click += new System.EventHandler(this.ckKeepFolderStruct_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 77);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(239, 12);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "临时文件夹 （用于保存转换时的临时数据）";
             // 
             // txtTempFolder
             // 
             this.txtTempFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTempFolder.Location = new System.Drawing.Point(24, 92);
+            this.txtTempFolder.Location = new System.Drawing.Point(14, 20);
             this.txtTempFolder.Name = "txtTempFolder";
-            this.txtTempFolder.Size = new System.Drawing.Size(569, 21);
+            this.txtTempFolder.Size = new System.Drawing.Size(529, 21);
             this.txtTempFolder.TabIndex = 14;
             this.txtTempFolder.Text = "D:\\QDAS\\Temp";
             // 
             // btnTempFolder
             // 
             this.btnTempFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTempFolder.Location = new System.Drawing.Point(599, 92);
+            this.btnTempFolder.Location = new System.Drawing.Point(549, 20);
             this.btnTempFolder.Name = "btnTempFolder";
             this.btnTempFolder.Size = new System.Drawing.Size(61, 21);
             this.btnTempFolder.TabIndex = 15;
@@ -286,29 +277,20 @@
             this.btnTempFolder.UseVisualStyleBackColor = true;
             this.btnTempFolder.Click += new System.EventHandler(this.btnTempFolder_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(215, 12);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "输出文件夹 （转换好的文件输出位置）";
-            // 
             // txtOutputFolder
             // 
             this.txtOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutputFolder.Location = new System.Drawing.Point(24, 38);
+            this.txtOutputFolder.Location = new System.Drawing.Point(14, 19);
             this.txtOutputFolder.Name = "txtOutputFolder";
-            this.txtOutputFolder.Size = new System.Drawing.Size(569, 21);
+            this.txtOutputFolder.Size = new System.Drawing.Size(529, 21);
             this.txtOutputFolder.TabIndex = 11;
             this.txtOutputFolder.Text = "D:\\QDAS\\Output";
             // 
             // btOutputFolder
             // 
             this.btOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btOutputFolder.Location = new System.Drawing.Point(599, 37);
+            this.btOutputFolder.Location = new System.Drawing.Point(549, 18);
             this.btOutputFolder.Name = "btOutputFolder";
             this.btOutputFolder.Size = new System.Drawing.Size(61, 21);
             this.btOutputFolder.TabIndex = 12;
@@ -327,7 +309,7 @@
             this.pgBackups.Location = new System.Drawing.Point(4, 22);
             this.pgBackups.Name = "pgBackups";
             this.pgBackups.Padding = new System.Windows.Forms.Padding(3);
-            this.pgBackups.Size = new System.Drawing.Size(682, 282);
+            this.pgBackups.Size = new System.Drawing.Size(634, 306);
             this.pgBackups.TabIndex = 1;
             this.pgBackups.Text = "原文件处理方式";
             this.pgBackups.UseVisualStyleBackColor = true;
@@ -335,25 +317,27 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(40, 228);
+            this.label9.Font = new System.Drawing.Font("宋体", 8F);
+            this.label9.Location = new System.Drawing.Point(40, 255);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(401, 12);
+            this.label9.Size = new System.Drawing.Size(368, 11);
             this.label9.TabIndex = 45;
             this.label9.Text = "转换后直接删除原文件。主要用于一些程序产生的重要性不高的过程文件。";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(40, 175);
+            this.label7.Font = new System.Drawing.Font("宋体", 8F);
+            this.label7.Location = new System.Drawing.Point(40, 31);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(233, 12);
+            this.label7.Size = new System.Drawing.Size(258, 11);
             this.label7.TabIndex = 44;
-            this.label7.Text = "不对原文件进行处理。主要用于增量转换。";
+            this.label7.Text = "不对原文件进行处理。此选项主要用于增量转换器。";
             // 
             // rbDelete
             // 
             this.rbDelete.AutoSize = true;
-            this.rbDelete.Location = new System.Drawing.Point(22, 208);
+            this.rbDelete.Location = new System.Drawing.Point(22, 235);
             this.rbDelete.Name = "rbDelete";
             this.rbDelete.Size = new System.Drawing.Size(71, 16);
             this.rbDelete.TabIndex = 43;
@@ -365,7 +349,7 @@
             // 
             this.rbBackup.AutoSize = true;
             this.rbBackup.Checked = true;
-            this.rbBackup.Location = new System.Drawing.Point(22, 6);
+            this.rbBackup.Location = new System.Drawing.Point(22, 52);
             this.rbBackup.Name = "rbBackup";
             this.rbBackup.Size = new System.Drawing.Size(119, 16);
             this.rbBackup.TabIndex = 42;
@@ -377,7 +361,7 @@
             // rbNoChange
             // 
             this.rbNoChange.AutoSize = true;
-            this.rbNoChange.Location = new System.Drawing.Point(22, 156);
+            this.rbNoChange.Location = new System.Drawing.Point(22, 12);
             this.rbNoChange.Name = "rbNoChange";
             this.rbNoChange.Size = new System.Drawing.Size(71, 16);
             this.rbNoChange.TabIndex = 41;
@@ -387,6 +371,10 @@
             // 
             // gbBackupFolders
             // 
+            this.gbBackupFolders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBackupFolders.Controls.Add(this.label14);
+            this.gbBackupFolders.Controls.Add(this.checkBox1);
             this.gbBackupFolders.Controls.Add(this.label4);
             this.gbBackupFolders.Controls.Add(this.label3);
             this.gbBackupFolders.Controls.Add(this.btnSuccessfulFolder);
@@ -394,9 +382,9 @@
             this.gbBackupFolders.Controls.Add(this.txtSuccessfulFolder);
             this.gbBackupFolders.Controls.Add(this.btnFailedFolder);
             this.gbBackupFolders.Enabled = false;
-            this.gbBackupFolders.Location = new System.Drawing.Point(42, 28);
+            this.gbBackupFolders.Location = new System.Drawing.Point(42, 74);
             this.gbBackupFolders.Name = "gbBackupFolders";
-            this.gbBackupFolders.Size = new System.Drawing.Size(640, 122);
+            this.gbBackupFolders.Size = new System.Drawing.Size(586, 148);
             this.gbBackupFolders.TabIndex = 39;
             this.gbBackupFolders.TabStop = false;
             this.gbBackupFolders.Text = "移动输入文件至以下文件夹";
@@ -404,7 +392,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 22);
+            this.label4.Location = new System.Drawing.Point(14, 20);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(239, 12);
             this.label4.TabIndex = 19;
@@ -413,7 +401,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 77);
+            this.label3.Location = new System.Drawing.Point(14, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(239, 12);
             this.label3.TabIndex = 22;
@@ -422,7 +410,7 @@
             // btnSuccessfulFolder
             // 
             this.btnSuccessfulFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSuccessfulFolder.Location = new System.Drawing.Point(562, 37);
+            this.btnSuccessfulFolder.Location = new System.Drawing.Point(508, 37);
             this.btnSuccessfulFolder.Name = "btnSuccessfulFolder";
             this.btnSuccessfulFolder.Size = new System.Drawing.Size(61, 21);
             this.btnSuccessfulFolder.TabIndex = 18;
@@ -434,9 +422,9 @@
             // 
             this.txtFailedFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFailedFolder.Location = new System.Drawing.Point(16, 92);
+            this.txtFailedFolder.Location = new System.Drawing.Point(16, 81);
             this.txtFailedFolder.Name = "txtFailedFolder";
-            this.txtFailedFolder.Size = new System.Drawing.Size(540, 21);
+            this.txtFailedFolder.Size = new System.Drawing.Size(486, 21);
             this.txtFailedFolder.TabIndex = 20;
             this.txtFailedFolder.Text = "D:\\QDAS\\Backups\\Failed";
             // 
@@ -444,16 +432,16 @@
             // 
             this.txtSuccessfulFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSuccessfulFolder.Location = new System.Drawing.Point(16, 37);
+            this.txtSuccessfulFolder.Location = new System.Drawing.Point(16, 35);
             this.txtSuccessfulFolder.Name = "txtSuccessfulFolder";
-            this.txtSuccessfulFolder.Size = new System.Drawing.Size(540, 21);
+            this.txtSuccessfulFolder.Size = new System.Drawing.Size(486, 21);
             this.txtSuccessfulFolder.TabIndex = 17;
             this.txtSuccessfulFolder.Text = "D:\\QDAS\\Backups\\Success";
             // 
             // btnFailedFolder
             // 
             this.btnFailedFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFailedFolder.Location = new System.Drawing.Point(562, 92);
+            this.btnFailedFolder.Location = new System.Drawing.Point(508, 76);
             this.btnFailedFolder.Name = "btnFailedFolder";
             this.btnFailedFolder.Size = new System.Drawing.Size(61, 21);
             this.btnFailedFolder.TabIndex = 21;
@@ -468,7 +456,7 @@
             this.pgAutoTransducer.Location = new System.Drawing.Point(4, 22);
             this.pgAutoTransducer.Name = "pgAutoTransducer";
             this.pgAutoTransducer.Padding = new System.Windows.Forms.Padding(3);
-            this.pgAutoTransducer.Size = new System.Drawing.Size(682, 282);
+            this.pgAutoTransducer.Size = new System.Drawing.Size(634, 306);
             this.pgAutoTransducer.TabIndex = 5;
             this.pgAutoTransducer.Text = "自动转换";
             this.pgAutoTransducer.UseVisualStyleBackColor = true;
@@ -487,7 +475,7 @@
             this.gbAutoConfig.Enabled = false;
             this.gbAutoConfig.Location = new System.Drawing.Point(36, 36);
             this.gbAutoConfig.Name = "gbAutoConfig";
-            this.gbAutoConfig.Size = new System.Drawing.Size(640, 93);
+            this.gbAutoConfig.Size = new System.Drawing.Size(592, 93);
             this.gbAutoConfig.TabIndex = 27;
             this.gbAutoConfig.TabStop = false;
             this.gbAutoConfig.Text = "自动转换配置项";
@@ -594,7 +582,7 @@
             this.pgEncoding.Margin = new System.Windows.Forms.Padding(2);
             this.pgEncoding.Name = "pgEncoding";
             this.pgEncoding.Padding = new System.Windows.Forms.Padding(2);
-            this.pgEncoding.Size = new System.Drawing.Size(682, 282);
+            this.pgEncoding.Size = new System.Drawing.Size(634, 306);
             this.pgEncoding.TabIndex = 8;
             this.pgEncoding.Text = "编码";
             this.pgEncoding.UseVisualStyleBackColor = true;
@@ -627,6 +615,8 @@
             // 
             // pgOthers
             // 
+            this.pgOthers.Controls.Add(this.label2);
+            this.pgOthers.Controls.Add(this.label1);
             this.pgOthers.Controls.Add(this.ckTraverseSubfolders);
             this.pgOthers.Controls.Add(this.ckRunAfterStart);
             this.pgOthers.Controls.Add(this.ckAutoStart);
@@ -635,7 +625,7 @@
             this.pgOthers.Location = new System.Drawing.Point(4, 22);
             this.pgOthers.Name = "pgOthers";
             this.pgOthers.Padding = new System.Windows.Forms.Padding(3);
-            this.pgOthers.Size = new System.Drawing.Size(682, 282);
+            this.pgOthers.Size = new System.Drawing.Size(634, 306);
             this.pgOthers.TabIndex = 7;
             this.pgOthers.Text = "其他";
             this.pgOthers.UseVisualStyleBackColor = true;
@@ -653,7 +643,7 @@
             // ckRunAfterStart
             // 
             this.ckRunAfterStart.AutoSize = true;
-            this.ckRunAfterStart.Location = new System.Drawing.Point(26, 102);
+            this.ckRunAfterStart.Location = new System.Drawing.Point(26, 116);
             this.ckRunAfterStart.Name = "ckRunAfterStart";
             this.ckRunAfterStart.Size = new System.Drawing.Size(132, 16);
             this.ckRunAfterStart.TabIndex = 30;
@@ -663,7 +653,7 @@
             // ckAutoStart
             // 
             this.ckAutoStart.AutoSize = true;
-            this.ckAutoStart.Location = new System.Drawing.Point(26, 141);
+            this.ckAutoStart.Location = new System.Drawing.Point(26, 169);
             this.ckAutoStart.Name = "ckAutoStart";
             this.ckAutoStart.Size = new System.Drawing.Size(108, 16);
             this.ckAutoStart.TabIndex = 28;
@@ -675,17 +665,17 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("宋体", 8F);
-            this.label16.Location = new System.Drawing.Point(30, 160);
+            this.label16.Location = new System.Drawing.Point(43, 188);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(324, 11);
+            this.label16.Size = new System.Drawing.Size(313, 11);
             this.label16.TabIndex = 29;
-            this.label16.Text = "（注意：此项改动会影响注册表，从而可能会引起安全软件报警）";
+            this.label16.Text = "注意：此项改动会影响注册表，从而可能会引起安全软件报警。";
             this.label16.Visible = false;
             // 
             // ckConfirmClose
             // 
             this.ckConfirmClose.AutoSize = true;
-            this.ckConfirmClose.Location = new System.Drawing.Point(26, 61);
+            this.ckConfirmClose.Location = new System.Drawing.Point(26, 75);
             this.ckConfirmClose.Name = "ckConfirmClose";
             this.ckConfirmClose.Size = new System.Drawing.Size(108, 16);
             this.ckConfirmClose.TabIndex = 27;
@@ -695,7 +685,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(480, 326);
+            this.btnSave.Location = new System.Drawing.Point(426, 350);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(106, 34);
             this.btnSave.TabIndex = 1;
@@ -706,7 +696,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(592, 326);
+            this.btnCancel.Location = new System.Drawing.Point(538, 350);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(106, 34);
             this.btnCancel.TabIndex = 2;
@@ -714,22 +704,91 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(16, 110);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(108, 16);
+            this.checkBox1.TabIndex = 47;
+            this.checkBox1.Text = "保留原目录结构";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.txtTempFolder);
+            this.groupBox1.Controls.Add(this.btnTempFolder);
+            this.groupBox1.Location = new System.Drawing.Point(12, 123);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(616, 54);
+            this.groupBox1.TabIndex = 50;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "临时文件夹 （用于保存转换时的临时数据）";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.txtOutputFolder);
+            this.groupBox3.Controls.Add(this.ckKeepFolderStruct);
+            this.groupBox3.Controls.Add(this.lblKeepFolderStruct);
+            this.groupBox3.Controls.Add(this.numlblKeepFolderLevel);
+            this.groupBox3.Controls.Add(this.btOutputFolder);
+            this.groupBox3.Location = new System.Drawing.Point(12, 17);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(616, 88);
+            this.groupBox3.TabIndex = 51;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "输出文件夹 （转换好的文件输出位置）";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 8F);
+            this.label1.Location = new System.Drawing.Point(43, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(357, 11);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "开启此选项后，如果输入目录下有子目录，子目录的数据也会得到转换。";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 8F);
+            this.label2.Location = new System.Drawing.Point(43, 135);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(269, 11);
+            this.label2.TabIndex = 33;
+            this.label2.Text = "开启此选项后，程序启动后马上开始转换所有输入项。";
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("宋体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(93, 260);
+            this.label13.Font = new System.Drawing.Font("宋体", 8F);
+            this.label13.Location = new System.Drawing.Point(36, 70);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(239, 11);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "0 表示保留全部级数；> 0 表示保留指定层目录";
+            this.label13.Size = new System.Drawing.Size(258, 11);
+            this.label13.TabIndex = 49;
+            this.label13.Text = "输出文件将根据输入目录的路径结构进行分类保存。";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("宋体", 8F);
+            this.label14.Location = new System.Drawing.Point(35, 131);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(258, 11);
+            this.label14.TabIndex = 50;
+            this.label14.Text = "输出文件将根据输入目录的路径结构进行分类保存。";
             // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 372);
+            this.ClientSize = new System.Drawing.Size(666, 396);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tabControl1);
@@ -743,7 +802,6 @@
             this.Load += new System.EventHandler(this.ConfigForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.pgOutput.ResumeLayout(false);
-            this.pgOutput.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numlblKeepFolderLevel)).EndInit();
@@ -760,6 +818,10 @@
             this.pgEncoding.PerformLayout();
             this.pgOthers.ResumeLayout(false);
             this.pgOthers.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -773,10 +835,8 @@
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.TextBox txtOutputFolder;
 		private System.Windows.Forms.Button btOutputFolder;
-		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox txtTempFolder;
 		private System.Windows.Forms.Button btnTempFolder;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TabPage pgAutoTransducer;
 		private System.Windows.Forms.GroupBox gbAutoConfig;
 		private System.Windows.Forms.ComboBox cbCircleUnit;
@@ -818,6 +878,12 @@
 		private System.Windows.Forms.TabPage pgEncoding;
 		private System.Windows.Forms.ListBox lbEncodings;
 		private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }
