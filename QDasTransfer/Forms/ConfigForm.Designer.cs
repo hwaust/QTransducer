@@ -80,6 +80,7 @@
             this.ckConfirmClose = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.pgOutput.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -111,6 +112,7 @@
             // 
             // pgOutput
             // 
+            this.pgOutput.Controls.Add(this.label13);
             this.pgOutput.Controls.Add(this.groupBox2);
             this.pgOutput.Controls.Add(this.numlblKeepFolderLevel);
             this.pgOutput.Controls.Add(this.lblKeepFolderStruct);
@@ -123,7 +125,7 @@
             this.pgOutput.Controls.Add(this.btOutputFolder);
             this.pgOutput.Location = new System.Drawing.Point(4, 22);
             this.pgOutput.Name = "pgOutput";
-            this.pgOutput.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pgOutput.Padding = new System.Windows.Forms.Padding(3);
             this.pgOutput.Size = new System.Drawing.Size(682, 282);
             this.pgOutput.TabIndex = 0;
             this.pgOutput.Text = "输出选项";
@@ -248,9 +250,9 @@
             this.ckKeepFolderStruct.AutoSize = true;
             this.ckKeepFolderStruct.Location = new System.Drawing.Point(22, 209);
             this.ckKeepFolderStruct.Name = "ckKeepFolderStruct";
-            this.ckKeepFolderStruct.Size = new System.Drawing.Size(132, 16);
+            this.ckKeepFolderStruct.Size = new System.Drawing.Size(324, 16);
             this.ckKeepFolderStruct.TabIndex = 46;
-            this.ckKeepFolderStruct.Text = "是否保留原目录结构";
+            this.ckKeepFolderStruct.Text = "是否保留原目录结构（同时作用于输出目录和备份目录）";
             this.ckKeepFolderStruct.UseVisualStyleBackColor = true;
             this.ckKeepFolderStruct.Click += new System.EventHandler(this.ckKeepFolderStruct_Click);
             // 
@@ -324,7 +326,7 @@
             this.pgBackups.Controls.Add(this.gbBackupFolders);
             this.pgBackups.Location = new System.Drawing.Point(4, 22);
             this.pgBackups.Name = "pgBackups";
-            this.pgBackups.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pgBackups.Padding = new System.Windows.Forms.Padding(3);
             this.pgBackups.Size = new System.Drawing.Size(682, 282);
             this.pgBackups.TabIndex = 1;
             this.pgBackups.Text = "原文件处理方式";
@@ -465,7 +467,7 @@
             this.pgAutoTransducer.Controls.Add(this.ckAutoTransduce);
             this.pgAutoTransducer.Location = new System.Drawing.Point(4, 22);
             this.pgAutoTransducer.Name = "pgAutoTransducer";
-            this.pgAutoTransducer.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pgAutoTransducer.Padding = new System.Windows.Forms.Padding(3);
             this.pgAutoTransducer.Size = new System.Drawing.Size(682, 282);
             this.pgAutoTransducer.TabIndex = 5;
             this.pgAutoTransducer.Text = "自动转换";
@@ -589,9 +591,9 @@
             this.pgEncoding.Controls.Add(this.lbEncodings);
             this.pgEncoding.Controls.Add(this.label12);
             this.pgEncoding.Location = new System.Drawing.Point(4, 22);
-            this.pgEncoding.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pgEncoding.Margin = new System.Windows.Forms.Padding(2);
             this.pgEncoding.Name = "pgEncoding";
-            this.pgEncoding.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pgEncoding.Padding = new System.Windows.Forms.Padding(2);
             this.pgEncoding.Size = new System.Drawing.Size(682, 282);
             this.pgEncoding.TabIndex = 8;
             this.pgEncoding.Text = "编码";
@@ -608,7 +610,7 @@
             "UTF-8",
             "UTF-16"});
             this.lbEncodings.Location = new System.Drawing.Point(15, 37);
-            this.lbEncodings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lbEncodings.Margin = new System.Windows.Forms.Padding(2);
             this.lbEncodings.Name = "lbEncodings";
             this.lbEncodings.Size = new System.Drawing.Size(259, 208);
             this.lbEncodings.TabIndex = 1;
@@ -632,7 +634,7 @@
             this.pgOthers.Controls.Add(this.ckConfirmClose);
             this.pgOthers.Location = new System.Drawing.Point(4, 22);
             this.pgOthers.Name = "pgOthers";
-            this.pgOthers.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pgOthers.Padding = new System.Windows.Forms.Padding(3);
             this.pgOthers.Size = new System.Drawing.Size(682, 282);
             this.pgOthers.TabIndex = 7;
             this.pgOthers.Text = "其他";
@@ -711,6 +713,17 @@
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("宋体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(93, 260);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(239, 11);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "0 表示保留全部级数；> 0 表示保留指定层目录";
             // 
             // ConfigForm
             // 
@@ -805,5 +818,6 @@
 		private System.Windows.Forms.TabPage pgEncoding;
 		private System.Windows.Forms.ListBox lbEncodings;
 		private System.Windows.Forms.Label label12;
-	}
+        private System.Windows.Forms.Label label13;
+    }
 }
