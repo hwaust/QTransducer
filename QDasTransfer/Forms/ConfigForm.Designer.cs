@@ -30,6 +30,16 @@
 		{
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pgOutput = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtOutputFolder = new System.Windows.Forms.TextBox();
+            this.ckKeepOutFolderStruct = new System.Windows.Forms.CheckBox();
+            this.lblKeepFolderStruct = new System.Windows.Forms.Label();
+            this.numlblKeepFolderLevel = new System.Windows.Forms.NumericUpDown();
+            this.btOutputFolder = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtTempFolder = new System.Windows.Forms.TextBox();
+            this.btnTempFolder = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.rbIncrementIndex = new System.Windows.Forms.RadioButton();
@@ -37,13 +47,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.rbReplaceOld = new System.Windows.Forms.RadioButton();
             this.rbAddTimeToNew = new System.Windows.Forms.RadioButton();
-            this.numlblKeepFolderLevel = new System.Windows.Forms.NumericUpDown();
-            this.lblKeepFolderStruct = new System.Windows.Forms.Label();
-            this.ckKeepFolderStruct = new System.Windows.Forms.CheckBox();
-            this.txtTempFolder = new System.Windows.Forms.TextBox();
-            this.btnTempFolder = new System.Windows.Forms.Button();
-            this.txtOutputFolder = new System.Windows.Forms.TextBox();
-            this.btOutputFolder = new System.Windows.Forms.Button();
             this.pgBackups = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -51,6 +54,8 @@
             this.rbBackup = new System.Windows.Forms.RadioButton();
             this.rbNoChange = new System.Windows.Forms.RadioButton();
             this.gbBackupFolders = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.ckKeepBackupFolderStruct = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSuccessfulFolder = new System.Windows.Forms.Button();
@@ -71,6 +76,8 @@
             this.lbEncodings = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
             this.pgOthers = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.ckTraverseSubfolders = new System.Windows.Forms.CheckBox();
             this.ckRunAfterStart = new System.Windows.Forms.CheckBox();
             this.ckAutoStart = new System.Windows.Forms.CheckBox();
@@ -78,17 +85,13 @@
             this.ckConfirmClose = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.ckAddTimeTickToOutDFQfile = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.pgOutput.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numlblKeepFolderLevel)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.pgBackups.SuspendLayout();
             this.gbBackupFolders.SuspendLayout();
             this.pgAutoTransducer.SuspendLayout();
@@ -96,8 +99,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCircleValue)).BeginInit();
             this.pgEncoding.SuspendLayout();
             this.pgOthers.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -118,6 +119,7 @@
             // 
             // pgOutput
             // 
+            this.pgOutput.Controls.Add(this.ckAddTimeTickToOutDFQfile);
             this.pgOutput.Controls.Add(this.groupBox3);
             this.pgOutput.Controls.Add(this.groupBox1);
             this.pgOutput.Controls.Add(this.groupBox2);
@@ -129,6 +131,134 @@
             this.pgOutput.Text = "输出选项";
             this.pgOutput.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.txtOutputFolder);
+            this.groupBox3.Controls.Add(this.ckKeepOutFolderStruct);
+            this.groupBox3.Controls.Add(this.lblKeepFolderStruct);
+            this.groupBox3.Controls.Add(this.numlblKeepFolderLevel);
+            this.groupBox3.Controls.Add(this.btOutputFolder);
+            this.groupBox3.Location = new System.Drawing.Point(12, 17);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(616, 88);
+            this.groupBox3.TabIndex = 51;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "输出文件夹 （转换好的文件输出位置）";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("宋体", 8F);
+            this.label13.Location = new System.Drawing.Point(36, 70);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(258, 11);
+            this.label13.TabIndex = 49;
+            this.label13.Text = "输出文件将根据输入目录的路径结构进行分类保存。";
+            // 
+            // txtOutputFolder
+            // 
+            this.txtOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutputFolder.Location = new System.Drawing.Point(14, 19);
+            this.txtOutputFolder.Name = "txtOutputFolder";
+            this.txtOutputFolder.Size = new System.Drawing.Size(529, 21);
+            this.txtOutputFolder.TabIndex = 11;
+            this.txtOutputFolder.Text = "D:\\QDAS\\Output";
+            // 
+            // ckKeepOutFolderStruct
+            // 
+            this.ckKeepOutFolderStruct.AutoSize = true;
+            this.ckKeepOutFolderStruct.Location = new System.Drawing.Point(19, 48);
+            this.ckKeepOutFolderStruct.Name = "ckKeepOutFolderStruct";
+            this.ckKeepOutFolderStruct.Size = new System.Drawing.Size(108, 16);
+            this.ckKeepOutFolderStruct.TabIndex = 46;
+            this.ckKeepOutFolderStruct.Text = "保留原目录结构";
+            this.ckKeepOutFolderStruct.UseVisualStyleBackColor = true;
+            this.ckKeepOutFolderStruct.Click += new System.EventHandler(this.ckKeepFolderStruct_Click);
+            // 
+            // lblKeepFolderStruct
+            // 
+            this.lblKeepFolderStruct.AutoSize = true;
+            this.lblKeepFolderStruct.Location = new System.Drawing.Point(142, 49);
+            this.lblKeepFolderStruct.Name = "lblKeepFolderStruct";
+            this.lblKeepFolderStruct.Size = new System.Drawing.Size(53, 12);
+            this.lblKeepFolderStruct.TabIndex = 47;
+            this.lblKeepFolderStruct.Text = "保持级数";
+            this.lblKeepFolderStruct.Visible = false;
+            // 
+            // numlblKeepFolderLevel
+            // 
+            this.numlblKeepFolderLevel.Enabled = false;
+            this.numlblKeepFolderLevel.Location = new System.Drawing.Point(201, 46);
+            this.numlblKeepFolderLevel.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numlblKeepFolderLevel.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numlblKeepFolderLevel.Name = "numlblKeepFolderLevel";
+            this.numlblKeepFolderLevel.Size = new System.Drawing.Size(65, 21);
+            this.numlblKeepFolderLevel.TabIndex = 48;
+            this.numlblKeepFolderLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numlblKeepFolderLevel.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numlblKeepFolderLevel.Visible = false;
+            // 
+            // btOutputFolder
+            // 
+            this.btOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btOutputFolder.Location = new System.Drawing.Point(549, 18);
+            this.btOutputFolder.Name = "btOutputFolder";
+            this.btOutputFolder.Size = new System.Drawing.Size(61, 21);
+            this.btOutputFolder.TabIndex = 12;
+            this.btOutputFolder.Text = "选择...";
+            this.btOutputFolder.UseVisualStyleBackColor = true;
+            this.btOutputFolder.Click += new System.EventHandler(this.btOutputFolder_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.txtTempFolder);
+            this.groupBox1.Controls.Add(this.btnTempFolder);
+            this.groupBox1.Location = new System.Drawing.Point(12, 123);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(616, 54);
+            this.groupBox1.TabIndex = 50;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "临时文件夹 （用于保存转换时的临时数据）";
+            // 
+            // txtTempFolder
+            // 
+            this.txtTempFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTempFolder.Location = new System.Drawing.Point(14, 20);
+            this.txtTempFolder.Name = "txtTempFolder";
+            this.txtTempFolder.Size = new System.Drawing.Size(529, 21);
+            this.txtTempFolder.TabIndex = 14;
+            this.txtTempFolder.Text = "D:\\QDAS\\Temp";
+            // 
+            // btnTempFolder
+            // 
+            this.btnTempFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTempFolder.Location = new System.Drawing.Point(549, 20);
+            this.btnTempFolder.Name = "btnTempFolder";
+            this.btnTempFolder.Size = new System.Drawing.Size(61, 21);
+            this.btnTempFolder.TabIndex = 15;
+            this.btnTempFolder.Text = "选择...";
+            this.btnTempFolder.UseVisualStyleBackColor = true;
+            this.btnTempFolder.Click += new System.EventHandler(this.btnTempFolder_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -139,7 +269,7 @@
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.rbReplaceOld);
             this.groupBox2.Controls.Add(this.rbAddTimeToNew);
-            this.groupBox2.Location = new System.Drawing.Point(12, 194);
+            this.groupBox2.Location = new System.Drawing.Point(12, 216);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(616, 63);
             this.groupBox2.TabIndex = 49;
@@ -209,94 +339,6 @@
             this.rbAddTimeToNew.TabIndex = 1;
             this.rbAddTimeToNew.Text = "加时间戳";
             this.rbAddTimeToNew.UseVisualStyleBackColor = true;
-            // 
-            // numlblKeepFolderLevel
-            // 
-            this.numlblKeepFolderLevel.Enabled = false;
-            this.numlblKeepFolderLevel.Location = new System.Drawing.Point(201, 46);
-            this.numlblKeepFolderLevel.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numlblKeepFolderLevel.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numlblKeepFolderLevel.Name = "numlblKeepFolderLevel";
-            this.numlblKeepFolderLevel.Size = new System.Drawing.Size(65, 21);
-            this.numlblKeepFolderLevel.TabIndex = 48;
-            this.numlblKeepFolderLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numlblKeepFolderLevel.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numlblKeepFolderLevel.Visible = false;
-            // 
-            // lblKeepFolderStruct
-            // 
-            this.lblKeepFolderStruct.AutoSize = true;
-            this.lblKeepFolderStruct.Location = new System.Drawing.Point(142, 49);
-            this.lblKeepFolderStruct.Name = "lblKeepFolderStruct";
-            this.lblKeepFolderStruct.Size = new System.Drawing.Size(53, 12);
-            this.lblKeepFolderStruct.TabIndex = 47;
-            this.lblKeepFolderStruct.Text = "保持级数";
-            this.lblKeepFolderStruct.Visible = false;
-            // 
-            // ckKeepFolderStruct
-            // 
-            this.ckKeepFolderStruct.AutoSize = true;
-            this.ckKeepFolderStruct.Location = new System.Drawing.Point(19, 48);
-            this.ckKeepFolderStruct.Name = "ckKeepFolderStruct";
-            this.ckKeepFolderStruct.Size = new System.Drawing.Size(108, 16);
-            this.ckKeepFolderStruct.TabIndex = 46;
-            this.ckKeepFolderStruct.Text = "保留原目录结构";
-            this.ckKeepFolderStruct.UseVisualStyleBackColor = true;
-            this.ckKeepFolderStruct.Click += new System.EventHandler(this.ckKeepFolderStruct_Click);
-            // 
-            // txtTempFolder
-            // 
-            this.txtTempFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTempFolder.Location = new System.Drawing.Point(14, 20);
-            this.txtTempFolder.Name = "txtTempFolder";
-            this.txtTempFolder.Size = new System.Drawing.Size(529, 21);
-            this.txtTempFolder.TabIndex = 14;
-            this.txtTempFolder.Text = "D:\\QDAS\\Temp";
-            // 
-            // btnTempFolder
-            // 
-            this.btnTempFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTempFolder.Location = new System.Drawing.Point(549, 20);
-            this.btnTempFolder.Name = "btnTempFolder";
-            this.btnTempFolder.Size = new System.Drawing.Size(61, 21);
-            this.btnTempFolder.TabIndex = 15;
-            this.btnTempFolder.Text = "选择...";
-            this.btnTempFolder.UseVisualStyleBackColor = true;
-            this.btnTempFolder.Click += new System.EventHandler(this.btnTempFolder_Click);
-            // 
-            // txtOutputFolder
-            // 
-            this.txtOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOutputFolder.Location = new System.Drawing.Point(14, 19);
-            this.txtOutputFolder.Name = "txtOutputFolder";
-            this.txtOutputFolder.Size = new System.Drawing.Size(529, 21);
-            this.txtOutputFolder.TabIndex = 11;
-            this.txtOutputFolder.Text = "D:\\QDAS\\Output";
-            // 
-            // btOutputFolder
-            // 
-            this.btOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btOutputFolder.Location = new System.Drawing.Point(549, 18);
-            this.btOutputFolder.Name = "btOutputFolder";
-            this.btOutputFolder.Size = new System.Drawing.Size(61, 21);
-            this.btOutputFolder.TabIndex = 12;
-            this.btOutputFolder.Text = "选择...";
-            this.btOutputFolder.UseVisualStyleBackColor = true;
-            this.btOutputFolder.Click += new System.EventHandler(this.btOutputFolder_Click);
             // 
             // pgBackups
             // 
@@ -374,7 +416,7 @@
             this.gbBackupFolders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbBackupFolders.Controls.Add(this.label14);
-            this.gbBackupFolders.Controls.Add(this.checkBox1);
+            this.gbBackupFolders.Controls.Add(this.ckKeepBackupFolderStruct);
             this.gbBackupFolders.Controls.Add(this.label4);
             this.gbBackupFolders.Controls.Add(this.label3);
             this.gbBackupFolders.Controls.Add(this.btnSuccessfulFolder);
@@ -388,6 +430,26 @@
             this.gbBackupFolders.TabIndex = 39;
             this.gbBackupFolders.TabStop = false;
             this.gbBackupFolders.Text = "移动输入文件至以下文件夹";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("宋体", 8F);
+            this.label14.Location = new System.Drawing.Point(35, 131);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(258, 11);
+            this.label14.TabIndex = 50;
+            this.label14.Text = "输出文件将根据输入目录的路径结构进行分类保存。";
+            // 
+            // ckKeepBackupFolderStruct
+            // 
+            this.ckKeepBackupFolderStruct.AutoSize = true;
+            this.ckKeepBackupFolderStruct.Location = new System.Drawing.Point(16, 110);
+            this.ckKeepBackupFolderStruct.Name = "ckKeepBackupFolderStruct";
+            this.ckKeepBackupFolderStruct.Size = new System.Drawing.Size(108, 16);
+            this.ckKeepBackupFolderStruct.TabIndex = 47;
+            this.ckKeepBackupFolderStruct.Text = "保留原目录结构";
+            this.ckKeepBackupFolderStruct.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -630,6 +692,26 @@
             this.pgOthers.Text = "其他";
             this.pgOthers.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 8F);
+            this.label2.Location = new System.Drawing.Point(43, 135);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(269, 11);
+            this.label2.TabIndex = 33;
+            this.label2.Text = "开启此选项后，程序启动后马上开始转换所有输入项。";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 8F);
+            this.label1.Location = new System.Drawing.Point(43, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(357, 11);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "开启此选项后，如果输入目录下有子目录，子目录的数据也会得到转换。";
+            // 
             // ckTraverseSubfolders
             // 
             this.ckTraverseSubfolders.AutoSize = true;
@@ -704,85 +786,15 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // checkBox1
+            // ckAddTimeTickToOutDFQfile
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 110);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(108, 16);
-            this.checkBox1.TabIndex = 47;
-            this.checkBox1.Text = "保留原目录结构";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.txtTempFolder);
-            this.groupBox1.Controls.Add(this.btnTempFolder);
-            this.groupBox1.Location = new System.Drawing.Point(12, 123);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(616, 54);
-            this.groupBox1.TabIndex = 50;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "临时文件夹 （用于保存转换时的临时数据）";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.txtOutputFolder);
-            this.groupBox3.Controls.Add(this.ckKeepFolderStruct);
-            this.groupBox3.Controls.Add(this.lblKeepFolderStruct);
-            this.groupBox3.Controls.Add(this.numlblKeepFolderLevel);
-            this.groupBox3.Controls.Add(this.btOutputFolder);
-            this.groupBox3.Location = new System.Drawing.Point(12, 17);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(616, 88);
-            this.groupBox3.TabIndex = 51;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "输出文件夹 （转换好的文件输出位置）";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 8F);
-            this.label1.Location = new System.Drawing.Point(43, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(357, 11);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "开启此选项后，如果输入目录下有子目录，子目录的数据也会得到转换。";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 8F);
-            this.label2.Location = new System.Drawing.Point(43, 135);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(269, 11);
-            this.label2.TabIndex = 33;
-            this.label2.Text = "开启此选项后，程序启动后马上开始转换所有输入项。";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("宋体", 8F);
-            this.label13.Location = new System.Drawing.Point(36, 70);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(258, 11);
-            this.label13.TabIndex = 49;
-            this.label13.Text = "输出文件将根据输入目录的路径结构进行分类保存。";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("宋体", 8F);
-            this.label14.Location = new System.Drawing.Point(35, 131);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(258, 11);
-            this.label14.TabIndex = 50;
-            this.label14.Text = "输出文件将根据输入目录的路径结构进行分类保存。";
+            this.ckAddTimeTickToOutDFQfile.AutoSize = true;
+            this.ckAddTimeTickToOutDFQfile.Location = new System.Drawing.Point(12, 183);
+            this.ckAddTimeTickToOutDFQfile.Name = "ckAddTimeTickToOutDFQfile";
+            this.ckAddTimeTickToOutDFQfile.Size = new System.Drawing.Size(150, 16);
+            this.ckAddTimeTickToOutDFQfile.TabIndex = 52;
+            this.ckAddTimeTickToOutDFQfile.Text = "输出的DFQ文件加时间戳";
+            this.ckAddTimeTickToOutDFQfile.UseVisualStyleBackColor = true;
             // 
             // ConfigForm
             // 
@@ -802,9 +814,14 @@
             this.Load += new System.EventHandler(this.ConfigForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.pgOutput.ResumeLayout(false);
+            this.pgOutput.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numlblKeepFolderLevel)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numlblKeepFolderLevel)).EndInit();
             this.pgBackups.ResumeLayout(false);
             this.pgBackups.PerformLayout();
             this.gbBackupFolders.ResumeLayout(false);
@@ -818,10 +835,6 @@
             this.pgEncoding.PerformLayout();
             this.pgOthers.ResumeLayout(false);
             this.pgOthers.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -862,7 +875,7 @@
 		private System.Windows.Forms.RadioButton rbAddTimeToNew;
 		private System.Windows.Forms.NumericUpDown numlblKeepFolderLevel;
 		private System.Windows.Forms.Label lblKeepFolderStruct;
-		private System.Windows.Forms.CheckBox ckKeepFolderStruct;
+		private System.Windows.Forms.CheckBox ckKeepOutFolderStruct;
 		private System.Windows.Forms.CheckBox ckRunAfterStart;
 		private System.Windows.Forms.CheckBox ckAutoStart;
 		private System.Windows.Forms.Label label16;
@@ -878,12 +891,13 @@
 		private System.Windows.Forms.TabPage pgEncoding;
 		private System.Windows.Forms.ListBox lbEncodings;
 		private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox ckKeepBackupFolderStruct;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox ckAddTimeTickToOutDFQfile;
     }
 }

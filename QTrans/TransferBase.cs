@@ -22,7 +22,7 @@ namespace QTrans
                         select t;
 
             // return (TransferBase)Activator.CreateInstance(types.First());
-            return new Company.Y2017.T201710();
+            return new Company.Y2017.T201708_Antai_Density();
         }
 
         #region 属性
@@ -72,6 +72,9 @@ namespace QTrans
         public event TransFileCompleteEventHandler TransFileComplete;
 
         public static string appconfig;
+
+        private InputPath currentInputPath;
+
         #endregion
 
         public TransferBase()
@@ -83,6 +86,8 @@ namespace QTrans
             Initialize();
         }
 
+        #region 可重载函数
+
         /// <summary>
         ///  Initialize transducer.
         /// </summary> 
@@ -90,28 +95,25 @@ namespace QTrans
         {
 
         }
-
-        #region 可重载函数
-
         /// <summary>
         /// 转换指定目录下的所有文件。
         /// </summary>
-        /// <param name="path"></param>
-        public virtual void DealFolder(string path)
+        /// <param name="folder">Input folder that contains input files and sub folders to be processed.</param>
+        public virtual void DealFolder(string folder)
         {
-            string[] files = Directory.GetFiles(path);
+            string[] files = Directory.GetFiles(folder);
             foreach (string s in files)
             {
                 ProcessFile(s);
                 Percentage++;
             }
 
-            if (this.pd.TraverseSubfolders)
+            if (pd.TraverseSubfolders)
             {
-                String[] folders = Directory.GetDirectories(path);
-                foreach (String folder in folders)
+                String[] folders = Directory.GetDirectories(folder);
+                foreach (string subfolder in folders)
                 {
-                    DealFolder(folder);
+                    DealFolder(subfolder);
                 }
             }
         }
@@ -122,6 +124,7 @@ namespace QTrans
             LogList.Clear();
             try
             {
+                currentInputPath = ip;
                 if (ip.Type == 0)
                     ProcessFile(ip.path);
                 else
@@ -212,33 +215,13 @@ namespace QTrans
                     FileHelper.DeleteFile(infile);
                     break;
 
-                case 3: // customed.
+                case 3: // customized.
                     break;
             }
 
             return log.LogType == LogType.Success;
         }
         #endregion
-
-        /// <summary>
-        /// 根据QFile和输入路径，自动保存DFQ文件至相应的输出路径，AppendTimeStamp属性决定是否追加时间戳。
-        /// </summary>
-        /// <param name="qf">需要保存的QFile。</param>
-        /// <param name="infile">输入的文件路径。</param>
-        /// <returns></returns>
-        public bool SaveDfqByInpath(QFile qf, string infile)
-        {
-            string outdir = Path.Combine(pd.OutputFolder, FileHelper.GetOutputPath(infile, pd.OutputFolder));
-            string outfile = string.Format("{0}\\{1}.dfq", outdir, Path.GetFileNameWithoutExtension(infile));
-
-            if (pd.AppendTimeStamp)
-            {
-                outfile = FileHelper.AppendSuffix(outfile, "_" + DateTimeHelper.ToFullString(DateTime.Now));
-            }
-
-            return SaveDfq(qf, infile, outfile);
-        }
-
 
         /// <summary>
         /// 将转换好的DFQ文件进行保存。

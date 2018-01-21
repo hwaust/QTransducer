@@ -51,13 +51,26 @@ namespace QTrans.Classes
 		 ********************************************************/
         /// <summary>
         ///  Determine how to deal with files with the same name as the output file. 
-        ///  0: override.  1: reanme by adding time tick, such as 1_20120516183025.dfq
+        ///  0: override;  1: reanme by adding time tick, such as 1_20120516183025.dfq
+        ///  2: add increased index by 1.
         /// </summary>
         public int DealSameOutputFileNameType = 0;
         /// <summary>
-        /// How many original level kept for output.
+        /// How to deal with output struct. 0: do not keep structure; 1: keep all structure; otherwise: undefined.
         /// </summary>
-        public int OriginalLevelKept = 0;
+        public int KeepOutFolderStructType = 0;
+        /// <summary>
+        /// How many levels kept for output folder.
+        /// </summary>
+        public int KeepOutFolderStructLevel = 0;
+        /// <summary>
+        /// How to deal with backup struct. 0: do not keep structure; 1: keep all structure; otherwise: undefined.
+        /// </summary>
+        public int KeepBackupFolderStructType = 0;
+        /// <summary>
+        /// How many levels kept for backup folder.
+        /// </summary>
+        public int KeepBackupFolderStructLevel = 0;
         /// <summary>
         /// Show confirming dialog while closing.
         /// </summary>
@@ -120,14 +133,19 @@ namespace QTrans.Classes
         /// <summary>
         /// Whether this transducer supports automatic transduction.
         /// </summary>
-        public bool SupportAutoTransducer = false; 
+        public bool SupportAutoTransducer = false;
+
+        /// <summary>
+        /// Whether add a time tick to output file.
+        /// </summary>
+        public bool AddTimeTickToOutDFQfile = false;
 
         public static ParamaterData Load(string infile)
         {
             if (File.Exists(infile))
-            { 
+            {
                 try
-                { 
+                {
                     XmlDocument doc = new XmlDocument();
                     doc.Load(infile);
                     ParamaterData pd = WindGoes.Data.Serializer.GetObject<ParamaterData>(doc);
@@ -159,7 +177,7 @@ namespace QTrans.Classes
             TempFolder = qds + "\\Temp";
             FolderForSuccessed = qds + "\\Backups\\Success";
             FolderForFailed = qds + "\\Backups\\Failed";
-            OriginalLevelKept = 0;
+            KeepOutFolderStructLevel = 0;
             ProcessSourceFileType = 1;
             ConfirmWhileClosing = true;
             StartTransducingWhenStartup = false;
@@ -175,7 +193,7 @@ namespace QTrans.Classes
 
         public string GetOutDirectory(string infile)
         {
-            return Path.Combine(OutputFolder, FileHelper.GetLastDirectory(infile, OriginalLevelKept));
+            return Path.Combine(OutputFolder, FileHelper.GetLastDirectory(infile, KeepOutFolderStructLevel));
         }
 
         public ParamaterData Clone()
@@ -194,7 +212,11 @@ namespace QTrans.Classes
             sp.FolderForSuccessed = FolderForSuccessed;
             sp.FolderForFailed = FolderForFailed;
 
-            sp.OriginalLevelKept = OriginalLevelKept;
+            sp.KeepOutFolderStructType = KeepOutFolderStructType;
+            sp.KeepOutFolderStructLevel = KeepOutFolderStructLevel;
+            sp.KeepBackupFolderStructType = KeepBackupFolderStructType;
+            sp.KeepBackupFolderStructLevel = KeepBackupFolderStructLevel;
+
             sp.ConfirmWhileClosing = ConfirmWhileClosing;
             sp.StartTransducingWhenStartup = StartTransducingWhenStartup;
             sp.StartWithWindows = StartWithWindows;
@@ -304,7 +326,7 @@ namespace QTrans.Classes
 
         public string GetOutfileName(string infile)
         {
-            string keptfolder = FileHelper.GetLastDirectory(infile, OriginalLevelKept);
+            string keptfolder = FileHelper.GetLastDirectory(infile, KeepOutFolderStructLevel);
             return string.Format("{0}\\{1}.dfq", Path.Combine(OutputFolder, keptfolder), Path.GetFileNameWithoutExtension(infile));
         }
     }

@@ -225,5 +225,20 @@ namespace QTrans.Helpers
 
             return path.Substring(infolder.Length);
         }
+
+        /// <summary>
+        ///  infile: d:\data\2018\01\de_01.txt
+        ///  inroot: d:\data
+        ///  outdir: e:\out
+        ///  outfile: e:\out\2018\01\de_01.txt
+        /// </summary>
+        /// <param name="infile"></param>
+        /// <param name="inroot"></param>
+        /// <param name="outdir"></param>
+        /// <returns></returns>
+        public static string GetOutFolder(string infile, string inroot, string outdir)
+        { 
+            return outdir.Trim('\\')  + "\\" + infile.Substring(inroot.Length).Trim('\\'); 
+        }
     }
 }
