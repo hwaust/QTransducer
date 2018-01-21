@@ -200,9 +200,10 @@ namespace QTrans
                             outfile = FileHelper.AddIncreamentId(backupFolder + "\\" + fi.Filename + fi.Extention);
                             break;
                         case 1:
-                             outfile = FileHelper.GetOutFolder(infile,
-                                currentInputPath.Type == 0 ? "" : currentInputPath.path,
-                                backupFolder);
+                            outfile = FileHelper.GetOutFolder(infile,
+                               currentInputPath.Type == 0 ? "" : currentInputPath.path,
+                               backupFolder);
+                            Directory.CreateDirectory(Path.GetDirectoryName(outfile));
                             break;
                     }
                     // copy file. If failed, add the error to logs.
@@ -284,19 +285,27 @@ namespace QTrans
 
             return outfile;
         }
-         
+
 
 
         public void SaveDfqByFilename(QFile qf, string filename)
         {
+            // replace illegal characters in filename with '_'
+            string illegals = "\\/:?\"<>|";
+            for (int i = 0; i < illegals.Length; i++)
+            {
+                filename = filename.Replace(illegals[i], '_');
+            }
+
             switch (pd.KeepOutFolderStructType)
             {
                 case 0:
                     SaveDfq(qf, pd.OutputFolder + "\\" + filename);
                     break;
                 case 1:
-                    string infile = Path.GetDirectoryName(CurrentInFile) + "\\" + filename;
-                    string outfile = FileHelper.GetOutFolder(infile, currentInputPath.Type == 0 ? "" : currentInputPath.path, pd.OutputFolder);
+                    string inroot = currentInputPath.Type == 0 ? "" : currentInputPath.path;
+                    string indir = Path.GetDirectoryName(CurrentInFile);
+                    string outfile = FileHelper.GetOutFolder(indir + "\\" + filename, inroot, pd.OutputFolder) ;
                     SaveDfq(qf, outfile);
                     break;
             }
@@ -305,6 +314,10 @@ namespace QTrans
         public bool SaveDfq(QFile qf, string outfile)
         {
             outfile = ProcessOutputFileNameIfRepeated(outfile);
+
+            string outdir = Path.GetDirectoryName(outfile);
+            if (!Directory.Exists(outdir))
+                Directory.CreateDirectory(outdir);
 
             TransLog log = null;
             try
