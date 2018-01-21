@@ -238,11 +238,24 @@ namespace QTrans
         /// 将转换好的DFQ文件进行保存。
         /// </summary>
         /// <param name="qf">需要保存的DFQ数据。</param>
-        /// <param name="outpath">输出的DFQ文件。</param>
+        /// <param name="outfile">输出的DFQ文件。</param>
         /// <returns></returns>
-        public bool SaveDfqByInDir(QFile qf, string outpath)
+        public bool SaveDfqByInDir(QFile qf, string outfile)
         {
-            return SaveDfqByInDir(qf, CurrentInFile, outpath);
+            switch (pd.KeepOutFolderStructType)
+            {
+                case 0:
+                    SaveDfq(qf, outfile);
+                    break;
+                case 1:
+                    outfile = FileHelper.GetOutFolder(CurrentInFile,
+                        currentInputPath.Type == 0 ? "" : currentInputPath.path,
+                        pd.OutputFolder);
+                    SaveDfq(qf, outfile);
+                    break;
+            }
+
+            return SaveDfq(qf, outfile);
         }
 
         public string ProcessOutputFileNameIfRepeated(string outfile)
@@ -271,31 +284,7 @@ namespace QTrans
 
             return outfile;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="qfile"></param>
-        /// <param name="input"></param>
-        /// <param name="output"></param>
-        /// <returns></returns>
-        public bool SaveDfqByInDir(QFile qf, string infile, string outfile)
-        {
-            switch (pd.KeepOutFolderStructType)
-            {
-                case 0:
-                    SaveDfq(qf, outfile);
-                    break;
-                case 1:
-                    outfile = FileHelper.GetOutFolder(infile,
-                        currentInputPath.Type == 0 ? "" : currentInputPath.path, 
-                        pd.OutputFolder);
-                    SaveDfq(qf, outfile);
-                    break;
-            }
-
-            return SaveDfq(qf, outfile);
-        }
+         
 
 
         public void SaveDfqByFilename(QFile qf, string filename)
