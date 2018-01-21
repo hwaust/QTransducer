@@ -192,8 +192,19 @@ namespace QTrans
                         break;
                     }
 
-                    // construct outputfile with a unique file name. 
-                    string outfile = FileHelper.AddIncreamentId(backupFolder + "\\" + fi.Filename + fi.Extention);
+                    string outfile = null;
+                    switch (pd.KeepBackupFolderStructType)
+                    {
+                        case 0:
+                            // construct outputfile with a unique file name. 
+                            outfile = FileHelper.AddIncreamentId(backupFolder + "\\" + fi.Filename + fi.Extention);
+                            break;
+                        case 1:
+                             outfile = FileHelper.GetOutFolder(infile,
+                                currentInputPath.Type == 0 ? "" : currentInputPath.path,
+                                backupFolder);
+                            break;
+                    }
                     // copy file. If failed, add the error to logs.
                     if (!FileHelper.CopyFile(infile, outfile))
                     {
@@ -229,21 +240,15 @@ namespace QTrans
         /// <param name="qf">需要保存的DFQ数据。</param>
         /// <param name="outpath">输出的DFQ文件。</param>
         /// <returns></returns>
-        public bool SaveDfq(QFile qf, string outpath)
+        public bool SaveDfqByInDir(QFile qf, string outpath)
         {
-            return SaveDfq(qf, CurrentInFile, outpath);
+            return SaveDfqByInDir(qf, CurrentInFile, outpath);
         }
 
-        public bool SaveDfq(QFile, string infile, string newname, string outdir)
-        {
-
-            return true;
-        }
-
-        public string ProcessOutputFileName(string outfile)
+        public string ProcessOutputFileNameIfRepeated(string outfile)
         {
             if (pd.AddTimeTickToOutDFQfile)
-                DateTimeHelper.AppendFullDateTime(infile);
+                outfile = DateTimeHelper.AppendFullDateTime(outfile);
 
             if (File.Exists(outfile))
             {
@@ -274,9 +279,43 @@ namespace QTrans
         /// <param name="input"></param>
         /// <param name="output"></param>
         /// <returns></returns>
-        public bool SaveDfq(QFile qf, string infile, string outfile)
+        public bool SaveDfqByInDir(QFile qf, string infile, string outfile)
         {
-            outfile = ProcessOutputFileName(outfile);
+            switch (pd.KeepOutFolderStructType)
+            {
+                case 0:
+                    SaveDfq(qf, outfile);
+                    break;
+                case 1:
+                    outfile = FileHelper.GetOutFolder(infile,
+                        currentInputPath.Type == 0 ? "" : currentInputPath.path, 
+                        pd.OutputFolder);
+                    SaveDfq(qf, outfile);
+                    break;
+            }
+
+            return SaveDfq(qf, outfile);
+        }
+
+
+        public void SaveDfqByFilename(QFile qf, string filename)
+        {
+            switch (pd.KeepOutFolderStructType)
+            {
+                case 0:
+                    SaveDfq(qf, pd.OutputFolder + "\\" + filename);
+                    break;
+                case 1:
+                    string infile = Path.GetDirectoryName(CurrentInFile) + "\\" + filename;
+                    string outfile = FileHelper.GetOutFolder(infile, currentInputPath.Type == 0 ? "" : currentInputPath.path, pd.OutputFolder);
+                    SaveDfq(qf, outfile);
+                    break;
+            }
+        }
+
+        public bool SaveDfq(QFile qf, string outfile)
+        {
+            outfile = ProcessOutputFileNameIfRepeated(outfile);
 
             TransLog log = null;
             try
@@ -284,23 +323,25 @@ namespace QTrans
                 if (qf.SaveToFile(outfile))
                 {
                     LastOutputDfqFile = outfile;
-                    log = new TransLog(infile, outfile, "保存成功", LogType.Success);
+                    log = new TransLog(CurrentInFile, outfile, "保存成功", LogType.Success);
                 }
                 else
                 {
                     LastOutputDfqFile = null;
-                    log = new TransLog(infile, outfile, "保存失败，原因路径不存在，或者没有写入权限。", LogType.Fail);
+                    log = new TransLog(CurrentInFile, outfile, "保存失败，原因路径不存在，或者没有写入权限。", LogType.Fail);
                 }
             }
             catch (Exception ex)
             {
-                log = new TransLog(infile, outfile, "保存失败，原因：" + ex.Message, LogType.Fail);
+                log = new TransLog(CurrentInFile, outfile, "保存失败，原因：" + ex.Message, LogType.Fail);
             }
             if (log.LogType != LogType.Success)
                 LogList.Add(log);
 
             return log.LogType == LogType.Success;
         }
+
+
 
     }
 }
