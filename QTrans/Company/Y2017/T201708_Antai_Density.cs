@@ -65,7 +65,7 @@ namespace QTrans.Company.Y2017
                     {
                         K2110 = colN.Split('-')[0];
                         K2111 = colN.Split('-')[1];
-                    } 
+                    }
                     // 2、当密度要求值出现中横杠”≥”时,该参数只有下限K2110，
                     // 例如≥30，输出K2110 = 30，K2111为空，K2120 = 1
                     else if (colN.Contains("≥"))
@@ -141,20 +141,17 @@ namespace QTrans.Company.Y2017
             {
                 qf.ToDMode();
 
-                string outfile = qf[1001] + "_" + qf[1002] ; 
+                string outfile = qf[1001] + "_" + qf[1002];
                 for (int i = 0; i < illegals.Length; i++)
                 {
                     outfile = outfile.Replace(illegals[i], '_');
-                } 
-                outfile = outdir + "\\" + outfile + "_" + DateTimeHelper.ToFullString(DateTime.Now) + ".dfq";
-                //Console.WriteLine(outfile); 
-
-                bool done = SaveDfq(qf, outfile);
-                LogList.Add(new TransLog(infile, outfile, done ? "转换成功" : "转换失败。", done ? LogType.Success : LogType.Fail));
+                }
+                SaveDfqByFilename(qf,  outfile + ".dfq");
             }
             Console.WriteLine("Complete output...");
             return true;
         }
+
 
         private QFile getQFile(List<QFile> qfs, string k1001, string k1002)
         {
