@@ -133,22 +133,13 @@ namespace QTrans.Company.Y2017
                     Console.WriteLine(sb.ToString() + ". Error message: " + ex.Message);
                 }
             }
-
-            string illegals = "\\/:?\"<>|";
-            Console.WriteLine("Begin output...");
-            string outdir = pd.GetOutDirectory(infile);
+             
             foreach (QFile qf in qfs)
             {
                 qf.ToDMode();
-
-                string outfile = qf[1001] + "_" + qf[1002];
-                for (int i = 0; i < illegals.Length; i++)
-                {
-                    outfile = outfile.Replace(illegals[i], '_');
-                }
-                SaveDfqByFilename(qf,  outfile + ".dfq");
+                SaveDfqByFilename(qf, qf[1001] + "_" + qf[1002] + ".dfq");
             }
-            Console.WriteLine("Complete output...");
+
             return true;
         }
 
