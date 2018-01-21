@@ -237,8 +237,8 @@ namespace QTrans.Helpers
         /// <param name="outdir"></param>
         /// <returns></returns>
         public static string GetOutFolder(string infile, string inroot, string outdir)
-        { 
-            return outdir.Trim('\\')  + "\\" + infile.Substring(inroot.Length).Trim('\\'); 
+        {
+            return (outdir.Trim('\\')  + "\\" + infile.Substring(inroot.Length).Trim('\\').Replace(":", "")).Trim('\\'); 
         }
     }
 }
