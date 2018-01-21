@@ -234,15 +234,17 @@ namespace QTrans
             return SaveDfq(qf, CurrentInFile, outpath);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="qfile"></param>
-        /// <param name="input"></param>
-        /// <param name="output"></param>
-        /// <returns></returns>
-        public bool SaveDfq(QFile qf, string infile, string outfile)
+        public bool SaveDfq(QFile, string infile, string newname, string outdir)
         {
+
+            return true;
+        }
+
+        public string ProcessOutputFileName(string outfile)
+        {
+            if (pd.AddTimeTickToOutDFQfile)
+                DateTimeHelper.AppendFullDateTime(infile);
+
             if (File.Exists(outfile))
             {
                 switch (pd.DealSameOutputFileNameType)
@@ -261,6 +263,20 @@ namespace QTrans
                 }
                 Directory.CreateDirectory(Path.GetDirectoryName(outfile));
             }
+
+            return outfile;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="qfile"></param>
+        /// <param name="input"></param>
+        /// <param name="output"></param>
+        /// <returns></returns>
+        public bool SaveDfq(QFile qf, string infile, string outfile)
+        {
+            outfile = ProcessOutputFileName(outfile);
 
             TransLog log = null;
             try
