@@ -123,19 +123,77 @@ namespace QTrans.Company
                     if (m[i][F] != typeName)
                         return false;
                 }
-            } 
+            }
             return true;
         }
 
         private QCharacteristic processModel(List<string[]> list)
         {
             QCharacteristic qc = new QCharacteristic();
-            string type = list[0][F].ToUpper().Trim();
+            string[] titles = list[0];
+            string type = titles[F].ToUpper().Trim();
 
-            if (type == "BPT" || type == "KPT")
+            switch (type)
             {
-
+                //----------------------- CASE 1 -----------------------
+                case "BPT":
+                case "KPT":
+                    string k2002 = "", k2112 = "", k2113 = "";
+                    bool afagEmpty = titles[AF].ToLower().Length == 0 || titles[AG].ToLower().Length == 0;
+                    string ay = list[0][AY].ToUpper();
+                    if (ay.Contains("x"))
+                    {
+                        k2002 = "B_x";
+                        if (afagEmpty)
+                        {
+                            k2112 = titles[Z];
+                            k2113 = titles[AA];
+                        }
+                        else
+                        {
+                            k2112 = titles[AF];
+                            k2113 = titles[AG];
+                        }
+                    }
+                    else if (ay.Contains("y"))
+                    {
+                        k2002 = "B_y";
+                        if (afagEmpty)
+                        {
+                            k2112 = titles[AB];
+                            k2113 = titles[AC];
+                        }
+                        else
+                        {
+                            k2112 = titles[AF];
+                            k2113 = titles[AG];
+                        }
+                    }
+                    else if (ay.Contains("z"))
+                    {
+                        k2002 = "B_z";
+                        if (afagEmpty)
+                        {
+                            k2112 = titles[AD];
+                            k2113 = titles[AE];
+                        }
+                        else
+                        {
+                            k2112 = titles[AF];
+                            k2113 = titles[AG];
+                        }
+                    }
+                    qc[2002] = k2002;
+                    qc[2112] = k2112;
+                    qc[2113] = k2113;
+                    break;
+                //----------------------- CASE 2 -----------------------
+                default:
+                    break;
             }
+
+
+
             return null;
         }
 
