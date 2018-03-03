@@ -22,7 +22,7 @@ namespace QTrans
                         select t;
 
             // return (TransferBase)Activator.CreateInstance(types.First());
-            return new Company.Y2017.T201708_Antai_Density();
+            return new Company.T201802_HuaCheng_BMW_CSV();
         }
 
         #region 属性
@@ -287,7 +287,11 @@ namespace QTrans
         }
 
 
-
+        /// <summary>
+        /// 根据文件名保存qf。其中filename不包括路径。
+        /// </summary>
+        /// <param name="qf"></param>
+        /// <param name="filename"></param>
         public void SaveDfqByFilename(QFile qf, string filename)
         {
             // replace illegal characters in filename with '_'
@@ -305,12 +309,18 @@ namespace QTrans
                 case 1:
                     string inroot = currentInputPath.Type == 0 ? "" : currentInputPath.path;
                     string indir = Path.GetDirectoryName(CurrentInFile);
-                    string outfile = FileHelper.GetOutFolder(indir + "\\" + filename, inroot, pd.OutputFolder) ;
+                    string outfile = FileHelper.GetOutFolder(indir + "\\" + filename, inroot, pd.OutputFolder);
                     SaveDfq(qf, outfile);
                     break;
             }
         }
 
+        /// <summary>
+        /// 将一个qf保存至outfile. 其中outfile为完整路径。
+        /// </summary>
+        /// <param name="qf"></param>
+        /// <param name="outfile"></param>
+        /// <returns></returns>
         public bool SaveDfq(QFile qf, string outfile)
         {
             outfile = ProcessOutputFileNameIfRepeated(outfile);

@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Company\T201801_Chongqing_Galaxy_hdt.cs" />
+    <Compile Include="Company\T201802_HuaCheng_BMW_CSV.cs" />
     <Compile Include="Company\Y2017\T201708_Antai_Density.cs" />
     <Compile Include="Company\Y2017\T201709.cs" />
     <Compile Include="Company\Y2017\T201710.cs" />
