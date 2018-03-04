@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QTrans.Company
 {
-    public class T201802_HuaCheng_BMW_CSV : TransferBase
+    public partial class T201802_HuaCheng_BMW_CSV : TransferBase
     {
         public override void Initialize()
         {
@@ -21,82 +21,20 @@ namespace QTrans.Company
 
         int B = -1, D = -1, F = -1, Z = -1;
         int AA = -1, AB = -1, AC = -1, AD = -1, AE = -1, AF = -1, AG = -1, AH = -1, AI = -1, AJ = -1, AK = -1, AL = -1, AM = -1, AY = -1;
-        int BE = -1, BF = -1, BG= -1, BH = -1, BI = -1, BJ = -1, BK = -1, BU = -1, BV = -1;
+        int BE = -1, BF = -1, BG = -1, BH = -1, BI = -1, BJ = -1, BK = -1, BU = -1, BV = -1, CA = -1;
 
         public override bool TransferFile(string path)
         {
-            // input: a file 
-            // output: a list of string arrays
-            string[] lines = File.ReadAllLines(path, Encoding.Default);
-            List<string[]> data = new List<string[]>();
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string[] line_i = lines[i].Split(','); // remove white spaces
-                for (int j = 0; j < line_i.Length; j++)
-                {
-                    line_i[j] = line_i[j].Trim();
-                }
-                data.Add(line_i);
-            }
+            List<string[]> data = readData(path);
+            initIndices(data[0]);
+            List<List<string[]>> models = groupModels(data);
 
-            // get column indices
-            B = getIndex(data[0], "B");
-            D = getIndex(data[0], "D");
-            F = getIndex(data[0], "F");
-
-            AA = getIndex(data[0], "AA");
-            AB = getIndex(data[0], "AB");
-            AC = getIndex(data[0], "AC");
-            AD = getIndex(data[0], "AD");
-            AF = getIndex(data[0], "AF");
-            AG = getIndex(data[0], "AG");
-
-            AH = getIndex(data[0], "AH");
-            AI = getIndex(data[0], "AI");
-            AJ = getIndex(data[0], "AJ");
-            AK = getIndex(data[0], "AK");
-            AL = getIndex(data[0], "AL");
-            AM = getIndex(data[0], "AM");
-
-            AY = getIndex(data[0], "AY");
-
-            BE = getIndex(data[0], "BE");
-            BF = getIndex(data[0], "BF");
-            BG = getIndex(data[0], "BG");
-            BH = getIndex(data[0], "BH");
-            BI = getIndex(data[0], "BI");
-            BJ = getIndex(data[0], "BJ");
-            BK = getIndex(data[0], "BK");
-            BU = getIndex(data[0], "BU");
-            BV = getIndex(data[0], "BV");
-
-            // input: a list of string arrays
-            // output: N list of string arrays, where N > 1
-            List<List<string[]>> models = new List<List<string[]>>();
-            List<string[]> model = new List<string[]>();
-            string currentName = null;
-            for (int i = 1; i < lines.Length; i++)
-            {
-                if (currentName == null || data[i][D] != currentName)
-                {
-                    if (model.Count > 1) // 只有第一行参数信息的不处理。
-                        models.Add(model);
-                    currentName = data[i][D];
-                    model = new List<string[]>();
-                }
-                model.Add(data[i]);
-            }
-            if (model.Count > 1)
-                models.Add(model);
-
-            // check correctness (same type colF) of models
-
+            // check correctness (same type colF) of models 
             if (!verify(models))
             {
-                LogList.Add(new Classes.TransLog(path, "null", "输入格式错误。", Classes.LogType.Fail, "同一检测点多种不同数据类型。"));
+                LogList.Add(new Classes.TransLog(path, "无输出", "输入格式错误。", Classes.LogType.Fail, "同一检测点多种不同数据类型。"));
                 return false;
             }
-
 
 
             List<QCharacteristic> qchs = new List<QCharacteristic>();
@@ -129,6 +67,49 @@ namespace QTrans.Company
             return true;
         }
 
+
+        List<string[]> readData(string infile)
+        {
+            // input: a file 
+            // output: a list of string arrays
+            string[] lines = File.ReadAllLines(infile, Encoding.Default);
+            List<string[]> data = new List<string[]>();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string[] line_i = lines[i].Split(','); // remove white spaces
+                for (int j = 0; j < line_i.Length; j++)
+                {
+                    line_i[j] = line_i[j].Trim();
+                }
+                data.Add(line_i);
+            }
+            return data;
+        }
+
+        public List<List<string[]>> groupModels(List<string[]> data)
+        {
+            // input: a list of string arrays
+            // output: N list of string arrays, where N > 1
+            List<List<string[]>> models = new List<List<string[]>>();
+            List<string[]> model = new List<string[]>();
+            string currentName = null;
+            for (int i = 1; i < data.Count; i++)
+            {
+                if (currentName == null || data[i][D] != currentName)
+                {
+                    if (model.Count > 1) // 只有第一行参数信息的不处理。
+                        models.Add(model);
+                    currentName = data[i][D];
+                    model = new List<string[]>();
+                }
+                model.Add(data[i]);
+            }
+            if (model.Count > 1)
+                models.Add(model);
+
+            return models;
+        }
+
         private int indexOf(List<QCharacteristic> qchs, QCharacteristic qc)
         {
             for (int i = 0; i < qchs.Count; i++)
@@ -138,9 +119,9 @@ namespace QTrans.Company
                     return i;
                 }
             }
-                return -1;
+            return -1;
         }
- 
+
 
 
         /// <summary>
@@ -168,14 +149,14 @@ namespace QTrans.Company
             string[] titles = model[0];
             string type = titles[F].ToUpper().Trim();
 
-            if (type == "BPT" || type == "BPT" || type == "BPT")
+            if (type == "BPT" || type == "KPT" || type == "FPT")
             {
                 QCharacteristic qc = new QCharacteristic();
                 qc[2001] = model[0][D];
                 string k2112 = "", k2113 = "";
                 string k2002 = type == "FPT" ? "A_" : "B_";
                 bool afagEmpty = titles[AF].ToLower().Length == 0 || titles[AG].ToLower().Length == 0;
-                string ay = model[0][AY].ToUpper();
+                string ay = model[0][AY].ToLower();
                 if (ay.Contains("x"))
                 {
                     k2002 += "x";
@@ -227,7 +208,7 @@ namespace QTrans.Company
                 {
                     QDataItem qdi = new QDataItem();
                     qdi.SetValue(model[i][BH]);
-                    qdi[0004] = model[i][BV];
+                    setTime(qdi, model[i][BV]);
                     qdi[0014] = model[i][BU];
                     qc.data.Add(qdi);
                 }
@@ -258,28 +239,28 @@ namespace QTrans.Company
                 {
                     QDataItem qdix = new QDataItem();
                     qdix.SetValue(model[i][BE]);
-                    qdix[0004] = model[i][BV];
+                    setTime(qdix, model[i][BV]);
                     qdix[0014] = model[i][BU];
                     qcx.data.Add(qdix);
 
                     QDataItem qdiy = new QDataItem();
                     qdiy.SetValue(model[i][BF]);
-                    qdiy[0004] = model[i][BV];
+                    setTime(qdiy, model[i][BV]);
                     qdiy[0014] = model[i][BU];
                     qcy.data.Add(qdiy);
 
                     QDataItem qdiz = new QDataItem();
                     qdiz.SetValue(model[i][BG]);
-                    qdiz[0004] = model[i][BV];
+                    setTime(qdiz, model[i][BV]);
                     qdiz[0014] = model[i][BU];
                     qcz.data.Add(qdiz);
                 }
 
-                if (qcx[2112].ToString().Length > 0 && qcx[2013].ToString().Length > 0)
+                if (qcx[2112].ToString().Length > 0 && qcx[2113].ToString().Length > 0)
                     qcs.Add(qcx);
-                if (qcy[2112].ToString().Length > 0 && qcy[2013].ToString().Length > 0)
+                if (qcy[2112].ToString().Length > 0 && qcy[2113].ToString().Length > 0)
                     qcs.Add(qcy);
-                if (qcz[2112].ToString().Length > 0 && qcz[2013].ToString().Length > 0)
+                if (qcz[2112].ToString().Length > 0 && qcz[2113].ToString().Length > 0)
                     qcs.Add(qcz);
             }
             //----------------------- CASE 4 -----------------------
@@ -307,34 +288,88 @@ namespace QTrans.Company
                 {
                     QDataItem qdix = new QDataItem();
                     qdix.SetValue(model[i][BI]);
-                    qdix[0004] = model[i][BV];
+                    setTime(qdix, model[i][BV]);
                     qdix[0014] = model[i][BU];
                     qcx.data.Add(qdix);
 
                     QDataItem qdiy = new QDataItem();
                     qdiy.SetValue(model[i][BJ]);
-                    qdiy[0004] = model[i][BV];
+                    setTime(qdiy, model[i][BV]);
                     qdiy[0014] = model[i][BU];
                     qcy.data.Add(qdiy);
 
                     QDataItem qdiz = new QDataItem();
                     qdiz.SetValue(model[i][BK]);
-                    qdiz[0004] = model[i][BV];
+                    setTime(qdiz, model[i][BV]);
                     qdiz[0014] = model[i][BU];
                     qcz.data.Add(qdiz);
                 }
 
-                if (qcx[2112].ToString().Length > 0 && qcx[2013].ToString().Length > 0)
+                if (qcx[2112].ToString().Length > 0 && qcx[2113].ToString().Length > 0)
                     qcs.Add(qcx);
-                if (qcy[2112].ToString().Length > 0 && qcy[2013].ToString().Length > 0)
+                if (qcy[2112].ToString().Length > 0 && qcy[2113].ToString().Length > 0)
                     qcs.Add(qcy);
-                if (qcz[2112].ToString().Length > 0 && qcz[2013].ToString().Length > 0)
+                if (qcz[2112].ToString().Length > 0 && qcz[2113].ToString().Length > 0)
                     qcs.Add(qcz);
             }
 
 
             return qcs;
         }
+
+        private void setTime(QDataItem qdi, string s)
+        {
+            // 06.01.2018 19:58:00
+            // 13.01.2018 07:53:00 DD.MM.YYYY 
+            try
+            {
+                string[] ss = s.Split(' ')[0].Split('.');
+                qdi.date = DateTime.Parse(ss[2] + "/" + ss[1] + "/" + ss[0] + " " + s.Split(' ')[1]);
+            }
+            catch { }
+        }
+    }
+
+    partial class T201802_HuaCheng_BMW_CSV : TransferBase
+    {
+
+        private void initIndices(string[] titles)
+        {
+            B = getIndex(titles, "B");
+            D = getIndex(titles, "D");
+            F = getIndex(titles, "F");
+            Z = getIndex(titles, "Z");
+
+            AA = getIndex(titles, "AA");
+            AB = getIndex(titles, "AB");
+            AC = getIndex(titles, "AC");
+            AD = getIndex(titles, "AD");
+            AE = getIndex(titles, "AE");
+            AF = getIndex(titles, "AF");
+            AG = getIndex(titles, "AG");
+
+            AH = getIndex(titles, "AH");
+            AI = getIndex(titles, "AI");
+            AJ = getIndex(titles, "AJ");
+            AK = getIndex(titles, "AK");
+            AL = getIndex(titles, "AL");
+            AM = getIndex(titles, "AM");
+
+            AY = getIndex(titles, "AY");
+
+            BE = getIndex(titles, "BE");
+            BF = getIndex(titles, "BF");
+            BG = getIndex(titles, "BG");
+            BH = getIndex(titles, "BH");
+            BI = getIndex(titles, "BI");
+            BJ = getIndex(titles, "BJ");
+            BK = getIndex(titles, "BK");
+            BU = getIndex(titles, "BU");
+            BV = getIndex(titles, "BT");
+
+            // CA = getIndex(titles, "CA");
+        }
+
 
         private int getIndex(string[] strs, string key)
         {
