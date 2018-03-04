@@ -20,8 +20,8 @@ namespace QTrans.Company
         }
 
         int B = -1, D = -1, F = -1, Z = -1;
-        int AA = -1, AB = -1, AC = -1, AD = -1, AE = -1, AF = -1, AG = -1, AY = -1;
-        int BE = -1, BF = -1, BH = -1, BI = -1, BJ = -1, BK = -1;
+        int AA = -1, AB = -1, AC = -1, AD = -1, AE = -1, AF = -1, AG = -1, AH = -1, AI = -1, AJ = -1, AK = -1, AL = -1, AM = -1, AY = -1;
+        int BE = -1, BF = -1, BG= -1, BH = -1, BI = -1, BJ = -1, BK = -1, BU = -1, BV = -1;
 
         public override bool TransferFile(string path)
         {
@@ -50,15 +50,25 @@ namespace QTrans.Company
             AD = getIndex(data[0], "AD");
             AF = getIndex(data[0], "AF");
             AG = getIndex(data[0], "AG");
+
+            AH = getIndex(data[0], "AH");
+            AI = getIndex(data[0], "AI");
+            AJ = getIndex(data[0], "AJ");
+            AK = getIndex(data[0], "AK");
+            AL = getIndex(data[0], "AL");
+            AM = getIndex(data[0], "AM");
+
             AY = getIndex(data[0], "AY");
 
             BE = getIndex(data[0], "BE");
             BF = getIndex(data[0], "BF");
+            BG = getIndex(data[0], "BG");
             BH = getIndex(data[0], "BH");
             BI = getIndex(data[0], "BI");
             BJ = getIndex(data[0], "BJ");
             BK = getIndex(data[0], "BK");
-
+            BU = getIndex(data[0], "BU");
+            BV = getIndex(data[0], "BV");
 
             // input: a list of string arrays
             // output: N list of string arrays, where N > 1
@@ -89,23 +99,48 @@ namespace QTrans.Company
 
 
 
-            QFile qf = new QFile();
-
+            List<QCharacteristic> qchs = new List<QCharacteristic>();
             for (int i = 0; i < models.Count; i++)
             {
-                QCharacteristic qc = processModel(models[i]);
+                qchs.AddRange(ProcessModel(models[i]));
+            }
 
-
-
-
-
+            QFile qf = new QFile();
+            qf[1001] = data[0][B].Split('_')[0];
+            // merge characters that have the same K2001 and K2002。
+            for (int i = 0; i < qchs.Count; i++)
+            {
+                int pos = indexOf(qf.Charactericstics, qchs[i]);
+                if (pos < 0)
+                {
+                    qf.Charactericstics.Add(qchs[i]);
+                }
+                else
+                {
+                    qf.Charactericstics[i].data.AddRange(qchs[i].data);
+                }
             }
 
 
+            qf.ToDMode();
 
+            SaveDfqByFilename(qf, path);
 
-            return base.TransferFile(path);
+            return true;
         }
+
+        private int indexOf(List<QCharacteristic> qchs, QCharacteristic qc)
+        {
+            for (int i = 0; i < qchs.Count; i++)
+            {
+                if (qchs[i][2001].ToString() == qc[2001].ToString() && qchs[i][2002].ToString() == qc[2002].ToString())
+                {
+                    return i;
+                }
+            }
+                return -1;
+        }
+ 
 
 
         /// <summary>
@@ -127,74 +162,178 @@ namespace QTrans.Company
             return true;
         }
 
-        private QCharacteristic processModel(List<string[]> list)
+        private List<QCharacteristic> ProcessModel(List<string[]> model)
         {
-            QCharacteristic qc = new QCharacteristic();
-            string[] titles = list[0];
+            List<QCharacteristic> qcs = new List<QCharacteristic>();
+            string[] titles = model[0];
             string type = titles[F].ToUpper().Trim();
 
-            switch (type)
+            if (type == "BPT" || type == "BPT" || type == "BPT")
             {
-                //----------------------- CASE 1 -----------------------
-                case "BPT":
-                case "KPT":
-                    string k2002 = "", k2112 = "", k2113 = "";
-                    bool afagEmpty = titles[AF].ToLower().Length == 0 || titles[AG].ToLower().Length == 0;
-                    string ay = list[0][AY].ToUpper();
-                    if (ay.Contains("x"))
+                QCharacteristic qc = new QCharacteristic();
+                qc[2001] = model[0][D];
+                string k2112 = "", k2113 = "";
+                string k2002 = type == "FPT" ? "A_" : "B_";
+                bool afagEmpty = titles[AF].ToLower().Length == 0 || titles[AG].ToLower().Length == 0;
+                string ay = model[0][AY].ToUpper();
+                if (ay.Contains("x"))
+                {
+                    k2002 += "x";
+                    if (afagEmpty)
                     {
-                        k2002 = "B_x";
-                        if (afagEmpty)
-                        {
-                            k2112 = titles[Z];
-                            k2113 = titles[AA];
-                        }
-                        else
-                        {
-                            k2112 = titles[AF];
-                            k2113 = titles[AG];
-                        }
+                        k2112 = titles[Z];
+                        k2113 = titles[AA];
                     }
-                    else if (ay.Contains("y"))
+                    else
                     {
-                        k2002 = "B_y";
-                        if (afagEmpty)
-                        {
-                            k2112 = titles[AB];
-                            k2113 = titles[AC];
-                        }
-                        else
-                        {
-                            k2112 = titles[AF];
-                            k2113 = titles[AG];
-                        }
+                        k2112 = titles[AF];
+                        k2113 = titles[AG];
                     }
-                    else if (ay.Contains("z"))
+                }
+                else if (ay.Contains("y"))
+                {
+                    k2002 = "y";
+                    if (afagEmpty)
                     {
-                        k2002 = "B_z";
-                        if (afagEmpty)
-                        {
-                            k2112 = titles[AD];
-                            k2113 = titles[AE];
-                        }
-                        else
-                        {
-                            k2112 = titles[AF];
-                            k2113 = titles[AG];
-                        }
+                        k2112 = titles[AB];
+                        k2113 = titles[AC];
                     }
-                    qc[2002] = k2002;
-                    qc[2112] = k2112;
-                    qc[2113] = k2113;
-                    break;
-                //----------------------- CASE 2 -----------------------
-                default:
-                    break;
+                    else
+                    {
+                        k2112 = titles[AF];
+                        k2113 = titles[AG];
+                    }
+                }
+                else if (ay.Contains("z"))
+                {
+                    k2002 = "z";
+                    if (afagEmpty)
+                    {
+                        k2112 = titles[AD];
+                        k2113 = titles[AE];
+                    }
+                    else
+                    {
+                        k2112 = titles[AF];
+                        k2113 = titles[AG];
+                    }
+                }
+                qc[2002] = k2002;
+                qc[2101] = 0;
+                qc[2112] = k2112;
+                qc[2113] = k2113;
+
+                for (int i = 1; i < model.Count; i++)
+                {
+                    QDataItem qdi = new QDataItem();
+                    qdi.SetValue(model[i][BH]);
+                    qdi[0004] = model[i][BV];
+                    qdi[0014] = model[i][BU];
+                    qc.data.Add(qdi);
+                }
+
+                qcs.Add(qc);
+            }
+            else if (type == "KRE" || type == "RLO" || type == "SYP" || type == "LLO")
+            {
+                QCharacteristic qcx = new QCharacteristic();
+                qcx[2001] = model[0][D];
+                qcx[2002] = "X";
+                qcx[2112] = titles[Z];
+                qcx[2113] = titles[AA];
+
+                QCharacteristic qcy = new QCharacteristic();
+                qcy[2001] = model[0][D];
+                qcy[2002] = "Y";
+                qcy[2112] = titles[AB];
+                qcy[2113] = titles[AC];
+
+                QCharacteristic qcz = new QCharacteristic();
+                qcz[2001] = model[0][D];
+                qcz[2002] = "Z";
+                qcz[2112] = titles[AD];
+                qcz[2113] = titles[AE];
+
+                for (int i = 1; i < model.Count; i++)
+                {
+                    QDataItem qdix = new QDataItem();
+                    qdix.SetValue(model[i][BE]);
+                    qdix[0004] = model[i][BV];
+                    qdix[0014] = model[i][BU];
+                    qcx.data.Add(qdix);
+
+                    QDataItem qdiy = new QDataItem();
+                    qdiy.SetValue(model[i][BF]);
+                    qdiy[0004] = model[i][BV];
+                    qdiy[0014] = model[i][BU];
+                    qcy.data.Add(qdiy);
+
+                    QDataItem qdiz = new QDataItem();
+                    qdiz.SetValue(model[i][BG]);
+                    qdiz[0004] = model[i][BV];
+                    qdiz[0014] = model[i][BU];
+                    qcz.data.Add(qdiz);
+                }
+
+                if (qcx[2112].ToString().Length > 0 && qcx[2013].ToString().Length > 0)
+                    qcs.Add(qcx);
+                if (qcy[2112].ToString().Length > 0 && qcy[2013].ToString().Length > 0)
+                    qcs.Add(qcy);
+                if (qcz[2112].ToString().Length > 0 && qcz[2013].ToString().Length > 0)
+                    qcs.Add(qcz);
+            }
+            //----------------------- CASE 4 -----------------------
+            else if (type == "ABS")
+            {
+                QCharacteristic qcx = new QCharacteristic();
+                qcx[2001] = model[0][D];
+                qcx[2002] = "dX";
+                qcx[2112] = titles[AH];
+                qcx[2113] = titles[AI];
+
+                QCharacteristic qcy = new QCharacteristic();
+                qcy[2001] = model[0][D];
+                qcy[2002] = "dY";
+                qcy[2112] = titles[AJ];
+                qcy[2113] = titles[AK];
+
+                QCharacteristic qcz = new QCharacteristic();
+                qcz[2001] = model[0][D];
+                qcz[2002] = "dZ";
+                qcz[2112] = titles[AL];
+                qcz[2113] = titles[AM];
+
+                for (int i = 1; i < model.Count; i++)
+                {
+                    QDataItem qdix = new QDataItem();
+                    qdix.SetValue(model[i][BI]);
+                    qdix[0004] = model[i][BV];
+                    qdix[0014] = model[i][BU];
+                    qcx.data.Add(qdix);
+
+                    QDataItem qdiy = new QDataItem();
+                    qdiy.SetValue(model[i][BJ]);
+                    qdiy[0004] = model[i][BV];
+                    qdiy[0014] = model[i][BU];
+                    qcy.data.Add(qdiy);
+
+                    QDataItem qdiz = new QDataItem();
+                    qdiz.SetValue(model[i][BK]);
+                    qdiz[0004] = model[i][BV];
+                    qdiz[0014] = model[i][BU];
+                    qcz.data.Add(qdiz);
+                }
+
+                if (qcx[2112].ToString().Length > 0 && qcx[2013].ToString().Length > 0)
+                    qcs.Add(qcx);
+                if (qcy[2112].ToString().Length > 0 && qcy[2013].ToString().Length > 0)
+                    qcs.Add(qcy);
+                if (qcz[2112].ToString().Length > 0 && qcz[2013].ToString().Length > 0)
+                    qcs.Add(qcz);
             }
 
 
-
-            return null;
+            return qcs;
         }
 
         private int getIndex(string[] strs, string key)
