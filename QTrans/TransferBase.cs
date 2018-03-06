@@ -353,7 +353,21 @@ namespace QTrans
             return log.LogType == LogType.Success;
         }
 
-
+        /// <summary>
+        /// 这个应该是最终形态了。需要三个参数，分别有以下作用。
+        /// 1、QF 必需的，用于输出的对象。
+        /// 2、inpath，是输入文件的路径，包括文件名，在需要保存输入路径时使用。
+        /// 3、文件名本身，不包括后缀。
+        /// 如果需要修改后缀，可以依照此函数重新实现。
+        /// </summary>
+        /// <param name="qf"></param>
+        /// <param name="inpath"></param>
+        /// <param name="outfilename"></param>
+        /// <returns></returns>
+        public bool SaveDfq(QFile qf, string inpath, string outfilename)
+        {
+            return SaveDfq(qf, string.Format("{0}\\{1}.dfq", pd.GetOutDirectory(inpath), outfilename));
+        }
 
     }
 }

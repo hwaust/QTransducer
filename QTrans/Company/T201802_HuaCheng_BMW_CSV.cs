@@ -1,9 +1,11 @@
 ﻿using QDAS;
+using QTrans.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace QTrans.Company
@@ -44,7 +46,8 @@ namespace QTrans.Company
             }
 
             QFile qf = new QFile();
-            qf[1001] = data[0][B].Split('_')[0];
+            qf[1001] = data[1][B].Split('_')[0];
+
             // merge characters that have the same K2001 and K2002。
             for (int i = 0; i < qchs.Count; i++)
             {
@@ -58,13 +61,11 @@ namespace QTrans.Company
                     qf.Charactericstics[i].data.AddRange(qchs[i].data);
                 }
             }
-
-
+             
             qf.ToDMode();
+            Thread.Sleep(1000);
 
-            SaveDfqByFilename(qf, path);
-
-            return true;
+            return SaveDfq(qf, path, qf[1001].ToString());
         }
 
 
