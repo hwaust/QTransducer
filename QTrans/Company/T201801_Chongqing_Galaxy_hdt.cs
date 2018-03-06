@@ -55,7 +55,7 @@ namespace QTrans.Company
             int testtype = int.Parse(K2202);
 
             QFile qf = new QFile();
-            qf[1202] = boxtypes[boxtype]; 
+            qf[1202] = boxtypeNames[boxtype]; 
             qf[1204] = K1204;
 
             for (int i = 0; i < 4; i++)
@@ -93,7 +93,7 @@ namespace QTrans.Company
                 }
             }
             qf.ToDMode();
-
+            
             return SaveDfq(qf, string.Format("{0}\\yinhe_{1}.dfq",
                     pd.GetOutDirectory(path), // output directory 
                     DateTimeHelper.ToFullString(DateTime.Now))); // time stamp. 
