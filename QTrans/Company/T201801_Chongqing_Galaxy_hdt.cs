@@ -24,7 +24,7 @@ namespace QTrans.Company
             CompanyName = "重庆银河 转换器";
             VertionInfo = "1.0 alpha";
             pd.SupportAutoTransducer = true;
-            pd.AddExt(".hdt"); 
+            pd.AddExt(".hdt");
             testtypeNames = new string[7][];
             testtypeNames[0] = new string[] { "恒温试验", "温度程序试验", "恒定湿热试验", "湿热程序试验" };
             testtypeNames[1] = new string[] { "恒温试验", "温度程序试验", "未使用", "未使用", "温度气压试验", "恒定气压试验", "气压交变试验" };
@@ -51,11 +51,11 @@ namespace QTrans.Company
             string K0012_1202 = list[1][0].Split('=')[1];
             string K2202 = list[2][0].Split('=')[1];
 
-            int boxtype = boxtypes[int.Parse(K0012_1202)];
+            int boxtype = int.Parse(K0012_1202);
             int testtype = int.Parse(K2202);
 
             QFile qf = new QFile();
-            qf[1202] = boxtype;
+            qf[1202] = boxtypes[boxtype]; 
             qf[1204] = K1204;
 
             for (int i = 0; i < 4; i++)
@@ -80,13 +80,13 @@ namespace QTrans.Company
 
             for (int i = 0; i < list.Count; i++)
             {
-                string[] ss = list[i]; 
+                string[] ss = list[i];
                 DateTime dt = DateTime.Parse(ss[0]);
 
                 for (int j = 0; j < 4; j++)
                 {
                     QDataItem qdi = new QDataItem();
-                    qdi[0012] = K0012_1202;
+                    qdi["K0012"] = boxtypes[boxtype];
                     qdi.date = dt;
                     qdi.SetValue(ss[j + 1]);
                     qf.Charactericstics[j].data.Add(qdi);
