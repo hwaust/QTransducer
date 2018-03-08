@@ -150,6 +150,7 @@ namespace QTrans.Company
             string[] titles = model[0];
             string type = titles[F].ToUpper().Trim();
 
+            // ----------------------------- Case 1 & 2 -----------------------------
             if (type == "BPT" || type == "KPT" || type == "FPT")
             {
                 QCharacteristic qc = new QCharacteristic();
@@ -366,7 +367,7 @@ namespace QTrans.Company
             BJ = getIndex(titles, "BJ");
             BK = getIndex(titles, "BK");
             BU = getIndex(titles, "BU");
-            BV = getIndex(titles, "BT");
+            BV = getIndex(titles, "BV");
 
             // CA = getIndex(titles, "CA");
         }
@@ -468,8 +469,8 @@ namespace QTrans.Company
             {"BR", "QC.Tolerance.Description"},
             {"BS", "Component.ID"},
             {"BT", "History.DateTime"},
-            {"BU", "InspectionCategories"},
-            {"BV", "Production.Device"},
+            {"BU", "Component.ID"}, // InspectionCategories
+            {"BV", "History.DateTime"}, // Production.Device
             {"BW", "Production.State"},
             {"BX", "InspectionGroup"},
             {"BY", "Component.Variant"},
