@@ -22,7 +22,7 @@ namespace QTrans
                         select t;
 
             // return (TransferBase)Activator.CreateInstance(types.First());
-            return new Company.T201802_HuaCheng_BMW_CSV();
+            return new Company.T201801_Chongqing_Galaxy_hdt();
         }
 
         #region 属性
