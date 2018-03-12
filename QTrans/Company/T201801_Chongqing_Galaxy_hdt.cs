@@ -13,9 +13,8 @@ namespace QTrans.Company
     {
         string[] boxtypeNames = { "湿热试验箱", "低气压试验箱", "两箱温度冲击箱　", "三箱温度冲击试验箱", "光照试验箱", "温度试验箱", "低气压湿热试验箱" };
         string[][] testtypeNames;
-        string[] table2 = { "温度检测值", "湿度检测值", "箱壁温度检测值", "箱内压力检测值" }; // table2
-        string[] cspvs = { "温度设定值", "湿度设定值", "箱壁温度设定值", "箱内压力设定值" };
-
+        string[] k2002s = { "温度检测值", "湿度检测值", "箱壁温度检测值", "箱内压力检测值", "温度设定值", "湿度设定值", "箱壁温度设定值", "箱内压力设定值" }; // table2
+        
         int[] boxtypes = { 1, -1, -1, -1, -1, 3, 2 };
 
         public override void Initialize()
@@ -55,22 +54,22 @@ namespace QTrans.Company
             int testtype = int.Parse(K2202);
 
             QFile qf = new QFile();
-            qf[1202] = boxtypeNames[boxtype]; 
+            qf[1202] = boxtypeNames[boxtype];
             qf[1204] = K1204;
 
-            for (int i = 0; i < 4; i++)
+            // cpv0 -- cpv3 and cspv0 -- cspv3
+            for (int i = 0; i < 8; i++)
             {
                 QCharacteristic qc = new QCharacteristic();
                 qc[2001] = i + 1;
-                qc[2002] = testtypeNames[boxtype][testtype] + " " + table2[i];
+                qc[2002] = testtypeNames[boxtype][testtype] + " " + k2002s[i];
                 qc[2022] = 3;
-                qc[2101] = cspvs[i];
                 qc[8500] = 5;
                 qc[8501] = 0;
                 qf.Charactericstics.Add(qc);
             }
 
-
+            // 有两种行要去掉。分别是以分号开头和以\0开头的。
             for (int i = list.Count - 1; i >= 0; i--)
             {
                 if (list[i][0].StartsWith(";") || list[i][0].StartsWith("\0"))
@@ -83,7 +82,7 @@ namespace QTrans.Company
                 string[] ss = list[i];
                 DateTime dt = DateTime.Parse(ss[0]);
 
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 8; j++)
                 {
                     QDataItem qdi = new QDataItem();
                     qdi["K0012"] = boxtypes[boxtype];
@@ -93,7 +92,7 @@ namespace QTrans.Company
                 }
             }
             qf.ToDMode();
-            
+
             return SaveDfq(qf, string.Format("{0}\\yinhe_{1}.dfq",
                     pd.GetOutDirectory(path), // output directory 
                     DateTimeHelper.ToFullString(DateTime.Now))); // time stamp. 
