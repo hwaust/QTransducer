@@ -25,8 +25,22 @@ namespace QTrans.Company.Y2017
             QCatalog qlog = QCatalog.GetCatlog(@"Z:\Projects\QTransducer\2017年\2017_10_重庆_Nemak\20180112_Problems");
             COMReader reader = new COMReader(infile);
 
-            /************ 从Excel文件读取标题K域 **************/
-            string K1001 = reader.GetCell("B8");
+            /************ 内容检测，有空不转换 **************/
+            // 检测内容：Date (D4)/Time(D7)/Order(F4)/ Operator(B10)/ CMM(D10)/Part NO(F7)/Product(F10)
+            if (reader.GetCell("D4").Trim().Length == 0 || reader.GetCell("D7").Trim().Length == 0 ||
+                reader.GetCell("F4").Trim().Length == 0 || reader.GetCell("B10").Trim().Length == 0 ||
+                reader.GetCell("D10").Trim().Length == 0 || reader.GetCell("F7").Trim().Length == 0 ||
+                reader.GetCell("F10").Trim().Length == 0 )
+            {
+                LogList.Add(new Classes.TransLog(infile, "无", "表头有空值，无法转换。", 
+                    Classes.LogType.Fail, "根据需求，以下表头禁止为空：Date /time/order/ operator/ CMM/Part NO/Product。"));
+                return false;
+            }
+
+
+
+                /************ 从Excel文件读取标题K域 **************/
+                string K1001 = reader.GetCell("B8");
             string K0008 = reader.GetCell("B11");
 
             double days = double.Parse(reader.GetCell("D5"));
