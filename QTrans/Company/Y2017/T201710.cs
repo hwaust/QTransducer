@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace QTrans.Company.Y2017
@@ -27,10 +28,10 @@ namespace QTrans.Company.Y2017
 
             /************ 内容检测，有空不转换 **************/
             // 检测内容：Date (D4)/Time(D7)/Order(F4)/ Operator(B10)/ CMM(D10)/Part NO(F7)/Product(F10)
-            if (reader.GetCell("D4").Trim().Length == 0 || reader.GetCell("D7").Trim().Length == 0 ||
-                reader.GetCell("F4").Trim().Length == 0 || reader.GetCell("B10").Trim().Length == 0 ||
-                reader.GetCell("D10").Trim().Length == 0 || reader.GetCell("F7").Trim().Length == 0 ||
-                reader.GetCell("F10").Trim().Length == 0 )
+            if (reader.GetCell("D5").Trim().Length == 0 || reader.GetCell("D8").Trim().Length == 0 ||
+                reader.GetCell("F5").Trim().Length == 0 || reader.GetCell("B11").Trim().Length == 0 ||
+                reader.GetCell("D11").Trim().Length == 0 || reader.GetCell("F8").Trim().Length == 0 ||
+                reader.GetCell("F11").Trim().Length == 0 )
             {
                 LogList.Add(new Classes.TransLog(infile, "无", "表头有空值，无法转换。", 
                     Classes.LogType.Fail, "根据需求，以下表头禁止为空：Date /time/order/ operator/ CMM/Part NO/Product。"));
@@ -126,10 +127,14 @@ namespace QTrans.Company.Y2017
 
             qf.ToDMode();
 
-            return SaveDfq(qf, string.Format("{0}\\{1}_{2}.dfq",
+            bool result = SaveDfq(qf, string.Format("{0}\\{1}_{2}.dfq",
                 pd.GetOutDirectory(infile), // output directory
                 K0014,   // filename from all info.
                 DateTimeHelper.ToFullString(DateTime.Now))); // time stamp. 
+
+            Thread.Sleep(1000);
+
+            return result;
         }
     }
 }

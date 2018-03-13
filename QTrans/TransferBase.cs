@@ -22,7 +22,7 @@ namespace QTrans
                         select t;
 
             // return (TransferBase)Activator.CreateInstance(types.First());
-            return new Company.Y2017.T201710();
+            return new Company.T201802_HuaCheng_BMW_CSV();
         }
 
         #region 属性
@@ -162,18 +162,25 @@ namespace QTrans
             try
             {
                 if (TransferFile(infile))
-                    log = new TransLog(infile, LastOutputDfqFile, "转换成功", LogType.Success);
+                { 
+                    log =  new TransLog(infile, LastOutputDfqFile, "转换成功", LogType.Success);
+                } 
+                else
+                {
+                    log = new TransLog(infile, LastOutputDfqFile, "转换失败，原因：未定义。", LogType.Unknown);
+                }
+                LogList.Add(log);
             }
             catch (Exception ex)
             {
                 log = new TransLog(infile, LastOutputDfqFile, "转换失败，原因：" + ex.Message, LogType.Fail);
-            }
-
-            if (log != null)
                 LogList.Add(log);
+            }
+             
 
             // invoke the TransFileComplete event. Note ? denotes nullable.
             TransFileComplete.Invoke(this, log);
+
 
             // Processes input file.
             switch (pd.ProcessSourceFileType)
