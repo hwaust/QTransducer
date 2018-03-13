@@ -79,6 +79,9 @@ namespace QDasTransfer
 
         private void Trans_TransFileComplete(object sender, QTrans.Classes.TransLog e)
         {
+            if (e == null)
+                return;
+
             if (e.LogType == LogType.Success)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { e.Date.ToString(), e.Input, e.LogType.ToString(), e.Output, e.Message });

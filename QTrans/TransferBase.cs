@@ -22,7 +22,7 @@ namespace QTrans
                         select t;
 
             // return (TransferBase)Activator.CreateInstance(types.First());
-            return new Company.T201801_Chongqing_Galaxy_hdt();
+            return new Company.Y2017.T201710();
         }
 
         #region 属性
@@ -161,14 +161,16 @@ namespace QTrans
             TransLog log = null;
             try
             {
-                TransferFile(infile);
-                log = new TransLog(infile, LastOutputDfqFile, "转换成功", LogType.Success);
+                if (TransferFile(infile))
+                    log = new TransLog(infile, LastOutputDfqFile, "转换成功", LogType.Success);
             }
             catch (Exception ex)
             {
                 log = new TransLog(infile, LastOutputDfqFile, "转换失败，原因：" + ex.Message, LogType.Fail);
             }
-            LogList.Add(log);
+
+            if (log != null)
+                LogList.Add(log);
 
             // invoke the TransFileComplete event. Note ? denotes nullable.
             TransFileComplete.Invoke(this, log);
@@ -231,7 +233,7 @@ namespace QTrans
                     break;
             }
 
-            return log.LogType == LogType.Success;
+            return log != null && log.LogType == LogType.Success;
         }
         #endregion
 
