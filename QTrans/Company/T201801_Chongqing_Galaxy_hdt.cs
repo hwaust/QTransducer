@@ -1,11 +1,14 @@
 ﻿using QDAS;
 using QTrans.Helpers;
+using QTrans.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using WindGoes.IO;
 
 namespace QTrans.Company
 {
@@ -14,8 +17,15 @@ namespace QTrans.Company
         string[] boxtypeNames = { "湿热试验箱", "低气压试验箱", "两箱温度冲击箱　", "三箱温度冲击试验箱", "光照试验箱", "温度试验箱", "低气压湿热试验箱" };
         string[][] testtypeNames;
         string[] k2002s = { "温度检测值", "湿度检测值", "箱壁温度检测值", "箱内压力检测值", "温度设定值", "湿度设定值", "箱壁温度设定值", "箱内压力设定值" }; // table2
-        
+        T2018ConfigPage page;
         int[] boxtypes = { 1, -1, -1, -1, -1, 3, 2 };
+        IniAccess ia = new IniAccess("T201801.ini");
+
+        public override UserControl ConfigPage
+        {
+            get => this.page;
+            set => this.page = (T2018ConfigPage)value;
+        }
 
         public override void Initialize()
         {
@@ -24,6 +34,7 @@ namespace QTrans.Company
             VertionInfo = "1.0 alpha";
             pd.SupportAutoTransducer = true;
             pd.AddExt(".hdt");
+            page = new Models.T2018ConfigPage();
             testtypeNames = new string[7][];
             testtypeNames[0] = new string[] { "恒温试验", "温度程序试验", "恒定湿热试验", "湿热程序试验" };
             testtypeNames[1] = new string[] { "恒温试验", "温度程序试验", "未使用", "未使用", "温度气压试验", "恒定气压试验", "气压交变试验" };
@@ -53,8 +64,14 @@ namespace QTrans.Company
             int boxtype = int.Parse(K0012_1202);
             int testtype = int.Parse(K2202);
 
+            string[] fnames = Path.GetFileNameWithoutExtension(path).Split('_');
+            string[] dirnames = Path.GetDirectoryName(path).Split('\\').Last().Split('_');
+
             QFile qf = new QFile();
-            qf[1202] = boxtypeNames[boxtype];
+            qf[1001] = fnames[0];
+            qf[1002] = fnames.Length > 1 ? fnames[1] : "unknown";
+            qf[1201] = dirnames[0];
+            qf[1202] = dirnames.Length > 1 ? dirnames[0] : "unknown"; //boxtypeNames[boxtype];
             qf[1204] = K1204;
 
             // cpv0 -- cpv3 and cspv0 -- cspv3
@@ -76,11 +93,12 @@ namespace QTrans.Company
                     list.RemoveAt(i);
             }
 
+            DateTime dateTime = page.K0004;
 
             for (int i = 0; i < list.Count; i++)
             {
                 string[] ss = list[i];
-                DateTime dt = DateTime.Parse(ss[0]);
+                DateTime dt = dateTime;// DateTime.Parse(ss[0]);
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -97,5 +115,21 @@ namespace QTrans.Company
                     pd.GetOutDirectory(path), // output directory 
                     DateTimeHelper.ToFullString(DateTime.Now))); // time stamp. 
         }
+
+        public override void LoadConfig()
+        {
+            try
+            {
+                page.K0004 = DateTime.Parse(ia.ReadValue("datetime"));
+            }
+            catch { page.K0004 = DateTime.Now; }
+
+        }
+
+        public override void SaveConfig()
+        {
+            ia.WriteValue("datetime", page.K0004.ToString("yyyy-MM-dd HH:mm:ss"));
+        }
+
     }
 }
