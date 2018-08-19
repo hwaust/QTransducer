@@ -1,6 +1,6 @@
 ﻿namespace QTrans.Models
 {
-    partial class T2018ConfigPage
+    partial class T201801_ConfigPage
     {
         /// <summary> 
         /// 必需的设计器变量。

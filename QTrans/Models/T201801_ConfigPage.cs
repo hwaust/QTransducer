@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QTrans.Models
 {
-    public partial class T2018ConfigPage : UserControl
+    public partial class T201801_ConfigPage : UserControl
     {
-        public T2018ConfigPage()
+        public T201801_ConfigPage()
         {
             InitializeComponent();
         }

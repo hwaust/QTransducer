@@ -17,14 +17,14 @@ namespace QTrans.Company
         string[] boxtypeNames = { "湿热试验箱", "低气压试验箱", "两箱温度冲击箱　", "三箱温度冲击试验箱", "光照试验箱", "温度试验箱", "低气压湿热试验箱" };
         string[][] testtypeNames;
         string[] k2002s = { "温度检测值", "湿度检测值", "箱壁温度检测值", "箱内压力检测值", "温度设定值", "湿度设定值", "箱壁温度设定值", "箱内压力设定值" }; // table2
-        T2018ConfigPage page;
+        T201801_ConfigPage page;
         int[] boxtypes = { 1, -1, -1, -1, -1, 3, 2 };
         IniAccess ia = new IniAccess("T201801.ini");
 
         public override UserControl ConfigPage
         {
             get => this.page;
-            set => this.page = (T2018ConfigPage)value;
+            set => this.page = (T201801_ConfigPage)value;
         }
 
         public override void Initialize()
@@ -34,7 +34,7 @@ namespace QTrans.Company
             VertionInfo = "1.0 alpha";
             pd.SupportAutoTransducer = true;
             pd.AddExt(".hdt");
-            page = new Models.T2018ConfigPage();
+            page = new Models.T201801_ConfigPage();
             testtypeNames = new string[7][];
             testtypeNames[0] = new string[] { "恒温试验", "温度程序试验", "恒定湿热试验", "湿热程序试验" };
             testtypeNames[1] = new string[] { "恒温试验", "温度程序试验", "未使用", "未使用", "温度气压试验", "恒定气压试验", "气压交变试验" };
@@ -57,7 +57,7 @@ namespace QTrans.Company
                 list.Add(s.Split('\t'));
             }
 
-            string K1204 = list[0][0].Split('=')[1];
+            string K1204 = page.K0004.ToString("yyyy-MM-dd HH:mm:ss");// list[0][0].Split('=')[1];
             string K0012_1202 = list[1][0].Split('=')[1];
             string K2202 = list[2][0].Split('=')[1];
 
@@ -93,12 +93,12 @@ namespace QTrans.Company
                     list.RemoveAt(i);
             }
 
-            DateTime dateTime = page.K0004;
+          
 
             for (int i = 0; i < list.Count; i++)
             {
                 string[] ss = list[i];
-                DateTime dt = dateTime;// DateTime.Parse(ss[0]);
+                DateTime dt = DateTime.Parse(ss[0]);
 
                 for (int j = 0; j < 8; j++)
                 {

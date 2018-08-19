@@ -80,11 +80,11 @@
     <Compile Include="Classes\Events.cs" />
     <Compile Include="Classes\TransLog.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
-    <Compile Include="Models\T2018ConfigPage.cs">
+    <Compile Include="Models\T201801_ConfigPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Models\T2018ConfigPage.Designer.cs">
-      <DependentUpon>T2018ConfigPage.cs</DependentUpon>
+    <Compile Include="Models\T201801_ConfigPage.Designer.cs">
+      <DependentUpon>T201801_ConfigPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -108,8 +108,8 @@
     <Compile Include="TransferBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Models\T2018ConfigPage.resx">
-      <DependentUpon>T2018ConfigPage.cs</DependentUpon>
+    <EmbeddedResource Include="Models\T201801_ConfigPage.resx">
+      <DependentUpon>T201801_ConfigPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
