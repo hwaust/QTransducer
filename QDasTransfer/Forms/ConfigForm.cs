@@ -29,6 +29,13 @@ namespace QDasTransfer.Forms
         private void ConfigForm_Load(object sender, EventArgs e)
         {
             this.Text += "  (当前配置文件: " + new FileInfo(QTrans.TransferBase.appconfig).FullName + ")";
+            if (values.transducer?.ConfigPage != null)
+            {
+                TabPage page = new TabPage(values.transducer.CompanyName);
+                page.Controls.Add(values.transducer.ConfigPage);
+                this.tabControl1.TabPages.Add(page);
+                values.transducer.LoadConfig();
+            }
 
             // pgOutput
             txtOutputFolder.Text = pd.OutputFolder;
@@ -154,6 +161,8 @@ namespace QDasTransfer.Forms
 
             /****** Encoding page ******/
             pd.EncodingID = lbEncodings.SelectedIndex;
+
+            values.transducer.SaveConfig();
 
             Close();
         }

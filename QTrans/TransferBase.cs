@@ -22,7 +22,7 @@ namespace QTrans
                         select t;
 
             // return (TransferBase)Activator.CreateInstance(types.First());
-            return new Company.T201802_HuaCheng_BMW_CSV();
+            return new Company.T201801_Chongqing_Galaxy_hdt();
         }
 
         #region 属性
@@ -74,6 +74,11 @@ namespace QTrans
         public static string appconfig;
 
         private InputPath currentInputPath;
+
+        /// <summary>
+        /// 用于专用的Table页属性配置。
+        /// </summary>
+        public virtual UserControl ConfigPage { get; set; }
 
         #endregion
 
@@ -241,6 +246,22 @@ namespace QTrans
             }
 
             return log != null && log.LogType == LogType.Success;
+        }
+
+        /// <summary>
+        /// 用于加载配置页的信息
+        /// </summary>
+        public virtual void LoadConfig()
+        {
+           
+        }
+
+        /// <summary>
+        /// 用于保存配置页的信息
+        /// </summary>
+        public virtual void SaveConfig()
+        {
+
         }
         #endregion
 
