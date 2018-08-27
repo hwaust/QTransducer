@@ -71,7 +71,7 @@ namespace QTrans.Company
             qf[1001] = fnames[0];
             qf[1002] = fnames.Length > 1 ? fnames[1] : "unknown";
             qf[1201] = dirnames[0];
-            qf[1202] = dirnames.Length > 1 ? dirnames[0] : "unknown"; //boxtypeNames[boxtype];
+            qf[1202] = dirnames.Length > 1 ? dirnames[1] : "unknown"; //boxtypeNames[boxtype];
             qf[1204] = K1204;
 
             // cpv0 -- cpv3 and cspv0 -- cspv3
@@ -92,8 +92,6 @@ namespace QTrans.Company
                 if (list[i][0].StartsWith(";") || list[i][0].StartsWith("\0"))
                     list.RemoveAt(i);
             }
-
-          
 
             for (int i = 0; i < list.Count; i++)
             {
