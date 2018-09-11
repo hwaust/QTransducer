@@ -8,14 +8,13 @@ using System.Text.RegularExpressions;
 
 namespace QTrans.Company
 {
-    public class T201805_Tongyong : TransferBase
+    public class T201805_Tongyong:TransferBase
     {
 
         private HSSFWorkbook wb;
         private ISheet sheet;
         private QFile qfile;
         private FileStream file;
-        string catalogPath = @"D:\GitHub\QTransducer\data\AT&M.dfd";
 
         public T201805_Tongyong()
         {
@@ -28,20 +27,18 @@ namespace QTrans.Company
             CompanyName = "EXCEL 通用转换器";
             VertionInfo = "1.0 Alpha";
             pd.SupportAutoTransducer = true;
-            pd.AddExt(".xls");
-            pd.AddExt(".xlsx");
+            pd.AddExt(".csv");
         }
 
-        private String CellString(int row, int cell)
+        private String CellString(int row,int cell)
         {
-            if (sheet != null)
+            if(sheet!= null)
             {
                 ICell c = sheet.GetRow(row).GetCell(cell);
                 if (c != null)
                 {
                     return c.ToString();
-                }
-                else
+                } else
                 {
                     return null;
                 }
@@ -53,16 +50,17 @@ namespace QTrans.Company
         public override bool TransferFile(string path)
         {
 
+            string catalogPath = "D:AT&M.dfd";
 
             file = new FileStream(path, FileMode.Open, FileAccess.Read);
             wb = new HSSFWorkbook(file);
-
+            
             sheet = wb.GetSheet("Sheet1");
             // K1xxx 表示零件层信息 ->QFile
             // K2xxx 表示参数层信息 ->QCharacteristic 
             // K0xxx 表示测量数据　-> QDataItem
             int lineNumber = 0;
-            while (true)
+            while(true)
             {
                 IRow row = sheet.GetRow(lineNumber);
                 if (row != null)
@@ -77,7 +75,7 @@ namespace QTrans.Company
 
             int rowValue = 7;
             int col = 0;
-            while (true)
+            while(true)
             {
                 col = col + 1;
                 if (CellString(2, rowValue) != null)
@@ -89,18 +87,18 @@ namespace QTrans.Company
                     }
                 }
             }
-
-            for (int i = 2; i < lineNumber; i++)
+            
+            for(int i = 2;i < lineNumber;i++)
             {
-                qfile = GeneterQfFor(i, col, catalogPath);
+                qfile = GeneterQfFor(i, col,catalogPath);
                 string name = Convert.ToString(qfile[1001]);
                 qfile.ToDMode();
                 Regex reg = new Regex("[\\\\/:*?\"<>|]");
                 string modified = reg.Replace(name, "_");
-                qfile.SaveToFile("d:\\" + modified + "_" + GetTimeStamp() + ".dfq");
+                qfile.SaveToFile("d:\\"+ modified + "_"+ GetTimeStamp() + ".dfq");
                 Thread.Sleep(1000);
             }
-
+            
             file.Close();
             return true;
         }
@@ -112,22 +110,21 @@ namespace QTrans.Company
             return Convert.ToInt64(ts.TotalSeconds).ToString();
         }
 
-        private QFile GeneterQfFor(int LineNumber, int col, String catalogPath)
+        private QFile GeneterQfFor(int LineNumber,int col, String catalogPath)
         {
             QFile qf = new QFile();
             if (CellString(LineNumber, 0) != null) { qf[1001] = CellString(LineNumber, 0); }
             if (CellString(LineNumber, 1) != null) { qf[1002] = CellString(LineNumber, 1); }
 
-
-            QCatalog catalog = QCatalog.load(catalogPath);
-            for (int i = 0; i < col; i++)
+            
+            for (int i = 0; i< col; i++)
             {
                 QCharacteristic qc = new QCharacteristic();
-                qc[2001] = i + 1;
                 if (CellString(1, 7 + i) != null) { qc[2002] = CellString(1, 7 + i); }
                 QDataItem dataItem = new QDataItem();
 
-                int value = catalog.getCatalogPID("K4073", CellString(0, 0));
+                QCatalog catalog = QCatalog.load(catalogPath);
+                int value = catalog.getCatalogPID("K4073", CellString(0,0));
                 dataItem[0012] = value;
                 dataItem.SetValue(CellString(LineNumber, 7 + i));
                 dataItem.date = DateTime.ParseExact(CellString(LineNumber, 2) + " " + CellString(LineNumber, 3), "M/d/yy H:m:s", null);
@@ -137,7 +134,7 @@ namespace QTrans.Company
                 qc.data.Add(dataItem);
                 qf.Charactericstics.Add(qc);
             }
-
+            
             return qf;
         }
 

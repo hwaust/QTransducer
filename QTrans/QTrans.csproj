@@ -41,6 +41,9 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Z:\Projects\QTransducer\相关文档\一个很好的EXCEL读写类\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI">
+      <HintPath>C:\Users\hao\Documents\WeChat Files\wxid_4pr907srrqdo22\Files\NPOI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Deployment" />

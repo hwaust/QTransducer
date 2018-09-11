@@ -15,14 +15,7 @@ namespace QTrans
     {
         public static TransferBase getTransducer()
         {
-            // Return the latest transducer ordered by name 
-            var types = from t in Assembly.LoadFile(Application.StartupPath + "\\QTrans.dll").GetTypes()
-                        where t.FullName.StartsWith("QTrans.Company.")
-                        orderby t.Name descending
-                        select t;
-
-            // return (TransferBase)Activator.CreateInstance(types.First());
-            return new Company.T201801_Chongqing_Galaxy_hdt();
+            return new Company.T201805_Tongyong();
         }
 
         #region 属性
