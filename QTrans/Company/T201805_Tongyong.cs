@@ -5,21 +5,21 @@ using System.IO;
 using NPOI.SS.UserModel;
 using System.Threading;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+ 
 
 namespace QTrans.Company
 {
     public class T201805_Tongyong : TransferBase
     {
-
-        private HSSFWorkbook wb;
-        private ISheet sheet;
-        private QFile qfile;
-        private FileStream file;
-        string catalogPath = @"D:\GitHub\QTransducer\data\AT&M.dfd";
+        ISheet sheet; // 当前的EXCEL表单
+        List<QFile> qfs = new List<QFile>();  // 对应的DFQ输出文件列表。
+        string catalogPath = @"D:\GitHub\QTransducer\data\AT&M.dfd";  //  Catalog配件文件的路径。
+        QCatalog catalog;
 
         public T201805_Tongyong()
         {
-
+            catalog = QCatalog.load(catalogPath);
         }
 
         public override void Initialize()
@@ -31,6 +31,7 @@ namespace QTrans.Company
             pd.AddExt(".xls");
             pd.AddExt(".xlsx");
         }
+
 
         private String CellString(int row, int cell)
         {
@@ -49,78 +50,76 @@ namespace QTrans.Company
             return null;
         }
 
+       
 
+        // K1xxx 表示零件层信息 ->QFile
+        // K2xxx 表示参数层信息 ->QCharacteristic 
+        // K0xxx 表示测量数据　-> QDataItem 
         public override bool TransferFile(string path)
         {
+            // 初始化，加载Excel数据
+            FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read);
+            HSSFWorkbook wb = new HSSFWorkbook(file);
+            ISheet sheet = wb.GetSheet("Sheet1");
 
-
-            file = new FileStream(path, FileMode.Open, FileAccess.Read);
-            wb = new HSSFWorkbook(file);
-
-            sheet = wb.GetSheet("Sheet1");
-            // K1xxx 表示零件层信息 ->QFile
-            // K2xxx 表示参数层信息 ->QCharacteristic 
-            // K0xxx 表示测量数据　-> QDataItem
-            int lineNumber = 0;
+            int rowCount = 0; // 表示数据行数。 
             while (true)
-            {
-                IRow row = sheet.GetRow(lineNumber);
-                if (row != null)
-                {
-                    lineNumber++;
-                }
-                else
-                {
+                if (sheet.GetRow(rowCount++) == null)
                     break;
-                }
-            }
 
-            int rowValue = 7;
-            int col = 0;
+            // 查询总列数（即参数个数）
+            int currentColumn = 7; // 从第7列开始，向右查询列。
+            int totalColumn = 0; // 表示总共有多少列
             while (true)
             {
-                col = col + 1;
-                if (CellString(2, rowValue) != null)
+                if (CellString(2, currentColumn) != null)
                 {
-                    rowValue = rowValue + 1;
-                    if (CellString(2, rowValue) == null)
+                    totalColumn++;
+                    currentColumn++;
+                    if (CellString(2, currentColumn) == null)
                     {
                         break;
                     }
                 }
             }
 
-            for (int i = 2; i < lineNumber; i++)
+
+            QFile qfile = new QFile(); 
+
+            // 从第2行开始处理参数和数据
+
+            for (int i = 2; i < rowCount; i++)
             {
-                qfile = GeneterQfFor(i, col, catalogPath);
-                string name = Convert.ToString(qfile[1001]);
+                qfile = GeneterQfFor(i, totalColumn); 
                 qfile.ToDMode();
-                Regex reg = new Regex("[\\\\/:*?\"<>|]");
-                string modified = reg.Replace(name, "_");
-                qfile.SaveToFile("d:\\" + modified + "_" + GetTimeStamp() + ".dfq");
+
+                string name = Convert.ToString(qfile[1001]);
+                string modified = new Regex("[\\\\/:*?\"<>|]").Replace(name, "_");
+                string time = DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                qfile.SaveToFile($"d:\\{modified}_{time}.dfq");
                 Thread.Sleep(1000);
             }
 
-            file.Close();
+            file.Close(); 
             return true;
         }
-
-
-        public static string GetTimeStamp()
-        {
-            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            return Convert.ToInt64(ts.TotalSeconds).ToString();
-        }
-
-        private QFile GeneterQfFor(int LineNumber, int col, String catalogPath)
+ 
+ 
+        private QFile GeneterQfFor(int currentColumn, int totalColumn)
         {
             QFile qf = new QFile();
-            if (CellString(LineNumber, 0) != null) { qf[1001] = CellString(LineNumber, 0); }
-            if (CellString(LineNumber, 1) != null) { qf[1002] = CellString(LineNumber, 1); }
+            string k1001 = qf[1001].ToString();
+            bool isNew = false;
 
+            // 做判断，查询在qfs中对应的K1001和K1002是否完全相同
+            // 若有相同，则从qfs中获得qf. 然后逐一加到  qf.Charactericstics对应的data中
+            // qf.Charactericstics[0].data.Add(new QDataItem());
 
-            QCatalog catalog = QCatalog.load(catalogPath);
-            for (int i = 0; i < col; i++)
+            if (CellString(currentColumn, 0) != null) { qf[1001] = CellString(currentColumn, 0); }
+            if (CellString(currentColumn, 1) != null) { qf[1002] = CellString(currentColumn, 1); }
+
+            for (int i = 0; i < totalColumn; i++)
             {
                 QCharacteristic qc = new QCharacteristic();
                 qc[2001] = i + 1;
@@ -129,11 +128,11 @@ namespace QTrans.Company
 
                 int value = catalog.getCatalogPID("K4073", CellString(0, 0));
                 dataItem[0012] = value;
-                dataItem.SetValue(CellString(LineNumber, 7 + i));
-                dataItem.date = DateTime.ParseExact(CellString(LineNumber, 2) + " " + CellString(LineNumber, 3), "M/d/yy H:m:s", null);
-                if (CellString(LineNumber, 4) != null) { dataItem[0006] = CellString(LineNumber, 4); }
-                if (CellString(LineNumber, 5) != null) { dataItem[0016] = CellString(LineNumber, 5); }
-                if (CellString(LineNumber, 6) != null) { dataItem[0014] = CellString(LineNumber, 6); }
+                dataItem.SetValue(CellString(currentColumn, 7 + i));
+                dataItem.date = DateTime.ParseExact(CellString(currentColumn, 2) + " " + CellString(currentColumn, 3), "M/d/yy H:m:s", null);
+                if (CellString(currentColumn, 4) != null) { dataItem[0006] = CellString(currentColumn, 4); }
+                if (CellString(currentColumn, 5) != null) { dataItem[0016] = CellString(currentColumn, 5); }
+                if (CellString(currentColumn, 6) != null) { dataItem[0014] = CellString(currentColumn, 6); }
                 qc.data.Add(dataItem);
                 qf.Charactericstics.Add(qc);
             }
