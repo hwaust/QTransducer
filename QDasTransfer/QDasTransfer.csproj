@@ -63,7 +63,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindGoes">
-      <HintPath>..\DLLs\WindGoes.dll</HintPath>
+      <HintPath>..\data\WindGoes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
