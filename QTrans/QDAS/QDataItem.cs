@@ -219,7 +219,7 @@ namespace QDAS
 					case "K0002": this.p1 = v == "0" ? 0 : 255; break;
 					case "K0004": this.date = DateTime.Parse(v); break;
 					case "K0005": p3event = v; break;
-					case "K0006": p4pici = v[0] == '#' ? v : "#" + v; break;
+					case "K0006": p4pici = v.Length == 0 || v[0] == '#' ? v : "#" + v; break;
 					case "K0007": p5caoxue = v; break;
 					case "K0008": p6operator = v; break;
 					case "K0010": p7machine = v; break;

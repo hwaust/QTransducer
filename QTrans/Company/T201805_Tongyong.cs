@@ -104,32 +104,36 @@ namespace QTrans.Company
             qfs.Clear();
             // 从第2行开始处理参数和数据
             for (int i = 2; i < rowCount; i++)
-                try { processRow(i, totalColumn); } catch (Exception ex) { Console.WriteLine(ex.Message); }
+                try
+                {
+                    processRow(i, totalColumn);
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
 
 
             for (int i = 0; i < qfs.Count; i++)
             {
                 qfs[i].ToDMode();
                 string dfqname = new Regex("[\\\\/:*?\"<>|]").Replace(qfs[i][1001] + "_" + qfs[i][1002] + ".dfq", "_");
-                qfs[i].SaveToFile(Path.Combine(pd.GetOutDirectory(path), dfqname));
+                SaveDfqByFilename(qfs[i], dfqname);
             }
+
 
             file.Close();
             return true;
         }
 
-        private void processRow(int currentColumn, int totalColumn)
+        private void processRow(int row, int totalColumn)
         {
             QFile qf = new QFile(); // 每行对应一个QFile实例
-            bool existed = false; // 表示这个QFile实例是否已存在 
-
+            bool existed = false; // 表示这个QFile实例是否已存在  
 
             // 做判断，查询在qfs中对应的K1001和K1002是否完全相同
             // 若有相同，则从qfs中获得qf. 然后逐一加到  qf.Charactericstics对应的data中
             // qf.Charactericstics[i].data.Add(new QDataItem());
             // 查找QFile        
-            if (CellString(currentColumn, 0) != null) { qf[1001] = CellString(currentColumn, 0); }
-            if (CellString(currentColumn, 1) != null) { qf[1002] = CellString(currentColumn, 1); }
+            if (CellString(row, 0) != null) { qf[1001] = CellString(row, 0); }
+            if (CellString(row, 1) != null) { qf[1002] = CellString(row, 1); }
             foreach (QFile q in qfs)
             {
                 if (q[1001].ToString().Equals(qf[1001].ToString()) && q[1002].ToString().Equals(qf[1002].ToString()))
@@ -143,26 +147,27 @@ namespace QTrans.Company
             // 如果为新建, 则加入至qfs列表中
             if (!existed)
                 qfs.Add(qf);
-
-
+            int cataid = catalog.getCatalogPID("K4073", CellString(0, 0));
+            if (cataid == -1) // 待处理: 找不到的情况要提示.
+                System.Windows.Forms.MessageBox.Show("catelog值读取错误。", "catelog值有误",
+                    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 
             for (int i = 0; i < totalColumn; i++)
             {
                 // 获取数据
-                QDataItem dataItem = new QDataItem();
-                int cataid = catalog.getCatalogPID("K4073", CellString(0, 0));
-                dataItem[0007] = cataid; // 待处理: 找不到的情况要提示.
-                dataItem[0012] = cataid;
-                dataItem.SetValue(CellString(currentColumn, 7 + i));
-                dataItem.date = DateTime.ParseExact(CellString(currentColumn, 2) + " " + CellString(currentColumn, 3), "M/d/yy H:m:s", null);
-                if (CellString(currentColumn, 4) != null) { dataItem[0006] = CellString(currentColumn, 4); }
-                if (CellString(currentColumn, 5) != null) { dataItem[0016] = CellString(currentColumn, 5); }
-                if (CellString(currentColumn, 6) != null) { dataItem[0014] = CellString(currentColumn, 6); }
+                QDataItem qdi = new QDataItem();
+                qdi[0007] = cataid;
+                qdi[0012] = cataid;
+                qdi.SetValue(CellString(row, 7 + i));
+                qdi.date = DateTime.ParseExact(CellString(row, 2) + " " + CellString(row, 3), "M/d/yy H:m:s", null);
+                if (CellString(row, 4) != null) { qdi["K0006"] = CellString(row, 4); }
+                if (CellString(row, 5) != null) { qdi["K0016"] = CellString(row, 5); }
+                if (CellString(row, 6) != null) { qdi["K0014"] = CellString(row, 6); }
 
-
+                // 添加数据
                 if (existed)
                 {
-                    qf.Charactericstics[i].data.Add(dataItem);
+                    qf.Charactericstics[i].data.Add(qdi);
                 }
                 else
                 {
@@ -172,12 +177,11 @@ namespace QTrans.Company
                     qc[8500] = 5;
                     qc[8501] = 0;
                     if (CellString(1, 7 + i) != null) { qc[2002] = CellString(1, 7 + i); }
-                    qc.data.Add(dataItem);
+                    qc.data.Add(qdi);
                     qf.Charactericstics.Add(qc);
                 }
             }
 
-            Console.WriteLine();
 
         }
 
