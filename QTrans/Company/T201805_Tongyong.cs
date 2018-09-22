@@ -3,10 +3,7 @@ using System;
 using NPOI.HSSF.UserModel;
 using System.IO;
 using NPOI.SS.UserModel;
-using System.Threading;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
-using System.Linq;
 using WindGoes.IO;
 using System.Windows.Forms;
 
@@ -61,12 +58,15 @@ namespace QTrans.Company
 
                 int cataid = catalog.getCatalogPID("K4073", data[0, 0]);
                 if (cataid == -1) // 待处理: 找不到的情况要提示.
-                    MessageBox.Show("catelog值读取错误。", "catelog值有误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine("row = " + row);
+                {
+                    LogList.Add(new Classes.TransLog(path, "", "未找到对应的catlog的值。", Classes.LogType.Fail));
+                }
+
+
                 for (int col = startColumn; col < data.GetLength(1); col++)
                 {
                     // 获得值，可能为空。
-                    string value = data[row,  col];
+                    string value = data[row, col];
 
                     // 空值跳过
                     if (value == null || value.ToString().Trim().Length == 0)
@@ -77,15 +77,14 @@ namespace QTrans.Company
                     qdi[0007] = cataid;
                     qdi[0012] = cataid;
                     qdi.SetValue(value);
-                    qdi.date = parseDatetime( data[row, 2], data[row, 3]);
+                    qdi.date = parseDatetime(data[row, 2], data[row, 3]);
                     qdi["K0006"] = data[row, 4];
                     qdi["K0016"] = data[row, 5];
                     qdi["K0014"] = data[row, 6];
-                    Console.WriteLine("col = " + col);
                     // 添加数据
                     qf.Charactericstics[col - startColumn].data.Add(qdi);
                 }
-             
+
             }
 
             // 输出数据
@@ -99,17 +98,20 @@ namespace QTrans.Company
             return true;
         }
 
+        // Date time format:  yyyy/MM/ss
         private DateTime parseDatetime(string date, string time)
         {
             DateTime datetime = DateTime.Now;
             try
             {
-                string[] dt = date.Split('/');
-                string[] tm = time == null || time.Trim().Length == 0 ? new string[] { "0", "0", "0" } : time.Split(':');
-                datetime = new DateTime(int.Parse(dt[2]), int.Parse(dt[0]), int.Parse(dt[1]),
-                    int.Parse(tm[0]), int.Parse(tm[0]), int.Parse(tm[0])); 
+                string[] dt = date.Split(' ')[0].Split('/', '-');
+                string[] tm = time == null || time.Trim().Length == 0 ? new string[] { "0", "0", "0" } : time.Split(' ')[1].Split(':');
+                datetime = new DateTime(int.Parse(dt[0]), int.Parse(dt[1]), int.Parse(dt[2]), int.Parse(tm[0]), int.Parse(tm[1]), int.Parse(tm[2]));
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             return datetime;
         }
 
@@ -120,19 +122,18 @@ namespace QTrans.Company
                 if (q[1001] + "<-|->" + q[1002] == key)
                     return q;
 
-
             // 新建并加入至qfs列表
             QFile qf = new QFile();
             qfs.Add(qf);
 
             // 查找QFile        
             qf[1001] = data[row, 0];
-            qf[1002] = data[row, 1]; 
+            qf[1002] = data[row, 1];
             for (int i = startColumn; i < data.GetLength(1); i++)
             {
                 QCharacteristic qc = new QCharacteristic();
-                qc[2001] = i + 1;
-                qc[2002] = data[1,   i];
+                qc[2001] = i - startColumn + 1;
+                qc[2002] = data[1, i];
                 qc[2202] = 4;
                 qc[8500] = 5;
                 qc[8501] = 0;
@@ -149,12 +150,21 @@ namespace QTrans.Company
             FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read);
             HSSFWorkbook wb = new HSSFWorkbook(file);
             ISheet sheet = wb.GetSheetAt(sheetid);
-            string[,] data = new string[sheet.LastRowNum, sheet.GetRow(0).LastCellNum];
+            string[,] data = new string[sheet.LastRowNum + 1, sheet.GetRow(0).LastCellNum];
             for (int row = 0, rows = data.GetLength(0); row < rows; row++)
             {
                 for (int col = 0, cols = data.GetLength(1); col < cols; col++)
                 {
-                    data[row, col] = sheet.GetRow(row).GetCell(col)?.ToString();
+                    ICell cell = sheet.GetRow(row).GetCell(col);
+                    if (cell == null)
+                    {
+                        data[row, col] = null;
+                        continue;
+                    }
+                    else
+                    {
+                        data[row, col] = (cell.CellType == CellType.Numeric && DateUtil.IsCellDateFormatted(cell)) ? cell.DateCellValue.ToString() : cell.ToString();
+                    }
                 }
             }
             file.Close();
