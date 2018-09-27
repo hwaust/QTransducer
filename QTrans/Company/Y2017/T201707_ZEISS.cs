@@ -1,17 +1,25 @@
-﻿using QDAS;
-using QDasTransfer.Classes;
-using QTrans.Classes;
+﻿/**
+ *  2018-9-26 客户变更如下
+ *  原写入 K0006 的值，现在写入  K0008
+ *  原写入 K0008 的值，现在写入  K0007
+ *  原写入 K0014 的值，现在写入  K0006
+ *  原写入 K0015 的值，现在写入  K0005
+ *  原写入 K1086 的值，现在写入  K1001
+ *  原写入 K1001 的值，现在写入  K1002
+ * 
+ */
+
+using QDAS;
 using QTrans.Excel;
 using QTrans.Helpers;
 using System;
-using System.IO;
 
 namespace QTrans.Company.Y2017
 {
     public class T201707_ZEISS : TransferBase
-    {  
+    {
         public override void Initialize()
-        { 
+        {
             CompanyName = "ZEISS";
             VertionInfo = "1.0.1";
             pd.SupportAutoTransducer = true;
@@ -27,29 +35,29 @@ namespace QTrans.Company.Y2017
             double time = double.Parse(reader.GetCell("F5"));
             DateTime dt = new DateTime(1900, 1, 1).AddDays(-2).AddDays(days + time);
             string allinfo = reader.GetCell("B8");
-            string K1001 = reader.GetCell("F8");
-            string K1086 = allinfo.Split('_')[1];
-            string K0006 = reader.GetCell("D8");
-            string K0008 = reader.GetCell("B11");
+            string K1001 = allinfo.Split('_')[1]; // modified
+            string K1002 = reader.GetCell("F8"); // modified
+            string K0006 = allinfo.Split('_')[0]; // modified
+            string K0007 = reader.GetCell("B11"); // modified
+            string K0008 = reader.GetCell("D8"); // modified
             string K0010 = reader.GetCell("F11");
             string K0012 = reader.GetCell("D11");
-            string K0014 = allinfo.Split('_')[0];
-            string K0061 = allinfo.Split('_')[2]; 
+            string K0061 = allinfo.Split('_')[2];
 
             QDataItem qdi = new QDataItem();
-            qdi[0006] = K0006;
-            qdi[0008] = qlog.GetCatalogPIDString("K4092", K0008);
+            qdi[0006] = K0006; // modified
+            qdi[0007] = qlog.GetCatalogPIDString("K4092", K0007); // modified
+            qdi[0008] = K0008; // modified
             qdi[0010] = qlog.GetCatalogPIDString("K4062", K0010);
             qdi[0012] = qlog.GetCatalogPIDString("K4072", K0012);
-            qdi[K0061] = qlog.GetCatalogPIDString("K4272", K0061); 
-            qdi[0014] = K0014; 
+            qdi[0061] = qlog.GetCatalogPIDString("K4272", K0061);
 
             // The first row of data. If it is not fixed, modify this variable.
-            int startrow = 13; 
+            int startrow = 13;
             QFile qf = new QFile();
-            qf[1001] = K1001;
-            qf[1086] = K1086;
-           
+            qf[1001] = K1001; // modified
+            qf[1002] = K1002;  // modified
+
 
             for (int i = startrow; i < reader.GetRowCount(); i++)
             {
@@ -82,8 +90,8 @@ namespace QTrans.Company.Y2017
             }
 
             qf.ToDMode();
-              
-            return SaveDfq(qf, string.Format("{0}\\{1}_{2}.dfq", 
+
+            return SaveDfq(qf, string.Format("{0}\\{1}_{2}.dfq",
                 pd.GetOutDirectory(infile), // output directory
                 allinfo,   // filename from all info.
                 DateTimeHelper.ToFullString(DateTime.Now))); // time stamp.
