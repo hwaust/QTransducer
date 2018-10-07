@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Excel.4.5">
-      <HintPath>Z:\Projects\QTransducer\相关文档\一个很好的EXCEL读写类\Excel.4.5.dll</HintPath>
+      <HintPath>F:\Projects\QTransducer\2017年\2017_07_Zeiss\18092701\Excel.4.5.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>F:\Projects\QTransducer\Project\QDasTransfer\bin\Debug\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -44,12 +44,6 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Spire.XLS">
-      <HintPath>D:\data\spire.xls\Spire.XLS.dll</HintPath>
-    </Reference>
-    <Reference Include="Spring.Core">
-      <HintPath>D:\data\Spring.NET\bin\net\4.0\release\Spring.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
