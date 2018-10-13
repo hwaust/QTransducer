@@ -46,14 +46,8 @@
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Spire.License">
-      <HintPath>..\DLLs\Spire.License.dll</HintPath>
-    </Reference>
-    <Reference Include="Spire.Pdf">
-      <HintPath>..\DLLs\Spire.Pdf.dll</HintPath>
-    </Reference>
-    <Reference Include="Spire.XLS">
-      <HintPath>..\DLLs\Spire.XLS.dll</HintPath>
+    <Reference Include="NPOI">
+      <HintPath>..\DLLs\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,6 +68,7 @@
     <Compile Include="Company\T201801_Chongqing_Galaxy_hdt.cs" />
     <Compile Include="Company\T201802_HuaCheng_BMW_CSV.cs" />
     <Compile Include="Company\T201805_Tongyong.cs" />
+    <Compile Include="Company\T201806_Zhonghang_Excel.cs" />
     <Compile Include="Company\Y2017\T201708_Antai_Density.cs" />
     <Compile Include="Company\Y2017\T201709.cs" />
     <Compile Include="Company\Y2017\T201710.cs" />

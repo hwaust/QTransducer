@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace QTrans.Company
 {
-    class T201806_Zhonghang_Excel
+    public class T201806_Zhonghang_Excel: TransferBase
     {
+        public override void Initialize()
+        {
+            base.Initialize(); 
+            CompanyName = "中航Excel转换器";
+            VertionInfo = "1.0 alpha";
+            pd.SupportAutoTransducer = true;
+            pd.AddExt(".xlsx");
+        }
+
+
     }
 }
