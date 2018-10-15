@@ -22,7 +22,7 @@ namespace QTrans
                         select t;
 
             // return (TransferBase)Activator.CreateInstance(types.First());
-            return new Company.Y2017.T201707_ZEISS();
+            return new Company.T201806_Zhonghang_Excel();
         }
 
         #region 属性

@@ -89,19 +89,16 @@ namespace QDasTransfer.Classes
 
 
         public void Load(string path, MSOfficeVersion versin = MSOfficeVersion.Office2003)
-        { 
-            FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read);
+        {  
             IExcelDataReader excelReader = versin == MSOfficeVersion.Office2003 ? 
-                                                            ExcelReaderFactory.CreateBinaryReader(stream) :
-                                                            ExcelReaderFactory.CreateOpenXmlReader(stream);
-            DataSet ds = excelReader.AsDataSet(); 
-
+                                                            ExcelReaderFactory.CreateBinaryReader(File.Open(path, FileMode.Open, FileAccess.Read)) :
+                                                            ExcelReaderFactory.CreateOpenXmlReader(File.Open(path, FileMode.Open, FileAccess.Read));
+            DataSet ds = excelReader.AsDataSet();
             Tables = new DataTable[ds.Tables.Count];
             for (int i = 0; i < ds.Tables.Count; i++)
                 Tables[i] = ds.Tables[i];
-
+             
             excelReader.Close();
-            stream.Close();
         }
 
         /// <summary>
