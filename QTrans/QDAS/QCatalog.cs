@@ -32,6 +32,12 @@ namespace QDAS
             return null;
         }
 
+        /// <summary>
+        /// 根据指定的key （例如 “K4092”）分析输入的值（value）对应的索引值。 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public int getCatalogPID(string key, string value)
         {
             foreach (QLineInfo qline in qlines)
