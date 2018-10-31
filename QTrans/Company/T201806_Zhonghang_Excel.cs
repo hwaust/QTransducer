@@ -70,7 +70,7 @@ namespace QTrans.Company
                 QDataItem di = new QDataItem();
                 di.SetValue(sheet[rowid, 6].Value);
                 di.date = sheet[3, 10].DateTimeValue;
-                di[0006] = sheet[rowid, 3].Value;
+                di[0006] = sheet[3, 3].Value;
                 di[0008] = catalog.getCatalogPID("K4093", sheet[3, 11].Value);
                 di[0010] = catalog.getCatalogPID("K4063", sheet[rowid, 11].Value);
                 di[0011] = sheet[rowid, 10].Value;
